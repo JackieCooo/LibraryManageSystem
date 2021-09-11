@@ -10,16 +10,16 @@ import java.io.*;
 import java.util.EnumMap;
 
 /**
- *  该类主要解析二维码
- *      步骤：
- *          1.读取二维码图片
- *          2.读取二维码图片中的二维码
- *          3.读取二维码中的信息
+ * @brief 该类主要解析二维码
+ *        步骤：
+ *        1.读取二维码图片
+ *        2.读取二维码图片中的二维码
+ *        3.读取二维码中的信息
  */
 public class scanTest {
 
     //二维码格式参数集合
-    private static final EnumMap<DecodeHintType,Object> hints = new EnumMap<DecodeHintType, Object>(DecodeHintType.class);
+    private static final EnumMap<DecodeHintType,Object> hints = new EnumMap<>(DecodeHintType.class);
 
     static {
         //设置解析二维码后信息的字符集
@@ -27,7 +27,7 @@ public class scanTest {
     }
 
     /**
-     *  解析二维码
+     * @brief 解析二维码
      * @param path 二维码图片路径
      * @return 二维码中的文本内容
      */
@@ -46,7 +46,7 @@ public class scanTest {
     }
 
     /**
-     *  解析二维码
+     * @brief 解析二维码
      * @param ins 读取二维码图片的流
      * @return 二维码中的文本内容
      */
@@ -73,8 +73,8 @@ public class scanTest {
     }
 
     /**
-     *  主方法测试二维码解析
-     * @param args
+     * @brief 主方法测试二维码解析
+     * @param args args
      */
     public static void main(String[] args) {
         String res = decodeQRCodeForPath("testFile/test1.jpg");

@@ -1,6 +1,7 @@
 package GUI;
 
 import java.awt.*;
+import javax.swing.*;
 
 public class MainWindow {
     Frame mainWindow = new Frame("测试窗口");
