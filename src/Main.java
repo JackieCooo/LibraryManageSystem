@@ -1,4 +1,3 @@
-import java.awt.*;
 import GUI.*;
 
 public class Main {
