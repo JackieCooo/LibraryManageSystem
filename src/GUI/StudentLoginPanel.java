@@ -43,6 +43,14 @@ public class StudentLoginPanel {
 
         switch2AdminBtn.setPreferredSize(new Dimension(180, 45));
         switch2AdminBtn.setText("管理员登录");
+
+        // 处理转到管理员登录界面的按钮事件
+        switch2AdminBtn.addActionListener(e -> {
+            Container p = studentLoginPanel.getParent();
+            p.getComponent(0).setVisible(false);
+            p.getComponent(1).setVisible(true);
+        });
+
         studentLoginPanel.add(switch2AdminBtn, cc.xy(1, 11, CellConstraints.DEFAULT, CellConstraints.CENTER));
         loginMessage.setHorizontalAlignment(0);
         loginMessage.setHorizontalTextPosition(0);
