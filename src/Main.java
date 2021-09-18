@@ -2,7 +2,7 @@ import GUI.*;
 
 public class Main {
     public static void main(String[] args) {
-        MainWindow app = new MainWindow();
+        LoginWindow app = new LoginWindow();
         app.init();
     }
 }

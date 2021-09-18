@@ -4,10 +4,9 @@ import java.awt.*;
 import javax.swing.*;
 
 public class MainWindow {
-    Frame mainWindow = new Frame("测试窗口");
-
-    public void init() {
-        mainWindow.setBounds(0, 0, 800, 600);
+    public static void main(String[] args) {
+        Frame mainWindow = new Frame("测试窗口");
+        mainWindow.setBounds(0, 0, 400, 300);
         mainWindow.setVisible(true);
     }
 }

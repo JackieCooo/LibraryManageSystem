@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="GUI.login_window_design">
+  <grid id="27dc6" binding="loginWindow" layout-manager="CardLayout" hgap="0" vgap="0">
+    <constraints>
+      <xy x="20" y="20" width="330" height="500"/>
+    </constraints>
+    <properties>
+      <opaque value="true"/>
+      <preferredSize width="400" height="300"/>
+      <visible value="true"/>
+    </properties>
+    <border type="none"/>
+    <children>
+      <grid id="61907" binding="studentLoginPage" layout-manager="FormLayout">
+        <rowspec value="center:max(d;4px):noGrow"/>
+        <rowspec value="fill:20px:noGrow"/>
+        <rowspec value="center:43px:noGrow"/>
+        <rowspec value="fill:10px:noGrow"/>
+        <rowspec value="center:max(d;4px):noGrow"/>
+        <rowspec value="top:4dlu:noGrow"/>
+        <rowspec value="center:max(d;4px):noGrow"/>
+        <rowspec value="top:4dlu:noGrow"/>
+        <rowspec value="center:d:grow"/>
+        <rowspec value="top:4dlu:noGrow"/>
+        <rowspec value="center:max(d;4px):noGrow"/>
+        <colspec value="fill:d:grow"/>
+        <constraints>
+          <card name="studentLoginPage"/>
+        </constraints>
+        <properties>
+          <preferredSize width="400" height="300"/>
+          <visible value="false"/>
+        </properties>
+        <border type="empty">
+          <size top="10" left="10" bottom="10" right="10"/>
+        </border>
+        <children>
+          <component id="288a8" class="javax.swing.JLabel" binding="loginLabel">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+              <forms defaultalign-horz="false"/>
+            </constraints>
+            <properties>
+              <enabled value="true"/>
+              <font name="Microsoft YaHei" size="24" style="1"/>
+              <horizontalAlignment value="10"/>
+              <horizontalTextPosition value="11"/>
+              <opaque value="true"/>
+              <text value="登录"/>
+            </properties>
+          </component>
+          <component id="72a67" class="javax.swing.JTextField" binding="studentNumField">
+            <constraints>
+              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+              <forms defaultalign-horz="false"/>
+            </constraints>
+            <properties>
+              <margin top="2" left="6" bottom="2" right="6"/>
+              <preferredSize width="250" height="30"/>
+              <text value="test"/>
+            </properties>
+          </component>
+          <component id="c8324" class="javax.swing.JPasswordField" binding="passwordField">
+            <constraints>
+              <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+              <forms defaultalign-horz="false"/>
+            </constraints>
+            <properties>
+              <margin top="2" left="6" bottom="2" right="6"/>
+              <preferredSize width="250" height="30"/>
+              <text value="1234"/>
+            </properties>
+          </component>
+          <grid id="50797" binding="btnSet1" layout-manager="FormLayout">
+            <rowspec value="center:d:grow"/>
+            <colspec value="fill:103px:grow"/>
+            <colspec value="left:50px:noGrow"/>
+            <colspec value="fill:d:grow"/>
+            <constraints>
+              <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="3" anchor="1" fill="0" indent="0" use-parent-layout="false"/>
+              <forms defaultalign-horz="false" defaultalign-vert="false"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="cf5d2" class="javax.swing.JButton" binding="studentSignInBtn">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                  <forms defaultalign-horz="false"/>
+                </constraints>
+                <properties>
+                  <horizontalTextPosition value="0"/>
+                  <preferredSize width="100" height="40"/>
+                  <text value="登录"/>
+                </properties>
+              </component>
+              <component id="e4b55" class="javax.swing.JButton" binding="studentSignUpBtn">
+                <constraints>
+                  <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                  <forms defaultalign-horz="false"/>
+                </constraints>
+                <properties>
+                  <horizontalTextPosition value="0"/>
+                  <preferredSize width="100" height="40"/>
+                  <text value="注册"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <component id="7ff5a" class="javax.swing.JButton" binding="switch2AdminBtn">
+            <constraints>
+              <grid row="10" column="0" row-span="1" col-span="1" vsize-policy="4" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <forms defaultalign-vert="false"/>
+            </constraints>
+            <properties>
+              <preferredSize width="180" height="45"/>
+              <text value="管理员登录"/>
+            </properties>
+          </component>
+          <component id="26a83" class="javax.swing.JLabel" binding="loginMessage">
+            <constraints>
+              <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+              <forms defaultalign-horz="false"/>
+            </constraints>
+            <properties>
+              <focusable value="true"/>
+              <font name="Consolas" size="12" style="0"/>
+              <horizontalAlignment value="0"/>
+              <horizontalTextPosition value="0"/>
+              <preferredSize width="300" height="25"/>
+              <text value="test"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <grid id="2bd48" binding="adminLoginPage" layout-manager="FormLayout">
+        <rowspec value="center:34px:noGrow"/>
+        <rowspec value="fill:20px:noGrow"/>
+        <rowspec value="center:43px:noGrow"/>
+        <rowspec value="fill:10px:noGrow"/>
+        <rowspec value="center:43px:noGrow"/>
+        <rowspec value="fill:10px:noGrow"/>
+        <rowspec value="center:18px:noGrow"/>
+        <rowspec value="fill:10px:noGrow"/>
+        <rowspec value="center:d:grow"/>
+        <colspec value="fill:d:grow"/>
+        <constraints>
+          <card name="adminLoginPage"/>
+        </constraints>
+        <properties>
+          <preferredSize width="400" height="300"/>
+          <visible value="false"/>
+        </properties>
+        <border type="empty">
+          <size top="10" left="10" bottom="10" right="10"/>
+        </border>
+        <children>
+          <component id="66933" class="javax.swing.JLabel" binding="adminLoginLabel">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+              <forms defaultalign-horz="false"/>
+            </constraints>
+            <properties>
+              <font name="Microsoft YaHei" size="24" style="1"/>
+              <text value="管理员登录"/>
+            </properties>
+          </component>
+          <component id="b1d1a" class="javax.swing.JTextField" binding="adminNumField">
+            <constraints>
+              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+              <forms defaultalign-horz="false"/>
+            </constraints>
+            <properties>
+              <margin top="2" left="6" bottom="2" right="6"/>
+              <preferredSize width="250" height="30"/>
+            </properties>
+          </component>
+          <component id="f4ba3" class="javax.swing.JPasswordField" binding="adminPasswordField">
+            <constraints>
+              <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+              <forms defaultalign-horz="false"/>
+            </constraints>
+            <properties>
+              <preferredSize width="250" height="30"/>
+            </properties>
+          </component>
+          <grid id="ebe5b" binding="btnSet2" layout-manager="FormLayout">
+            <rowspec value="fill:d:grow"/>
+            <colspec value="fill:d:grow"/>
+            <colspec value="fill:50px:noGrow"/>
+            <colspec value="fill:d:grow"/>
+            <constraints>
+              <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="1" fill="0" indent="0" use-parent-layout="false"/>
+              <forms defaultalign-horz="false" defaultalign-vert="false"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="19f4a" class="javax.swing.JButton" binding="adminSignInBtn">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                  <forms defaultalign-horz="false"/>
+                </constraints>
+                <properties>
+                  <margin top="0" left="0" bottom="0" right="0"/>
+                  <preferredSize width="100" height="40"/>
+                  <text value="登录"/>
+                </properties>
+              </component>
+              <component id="96b0c" class="javax.swing.JButton" binding="switch2StudentBtn">
+                <constraints>
+                  <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                  <forms defaultalign-horz="false"/>
+                </constraints>
+                <properties>
+                  <horizontalTextPosition value="0"/>
+                  <preferredSize width="100" height="40"/>
+                  <text value="学生登录"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <component id="f995a" class="javax.swing.JLabel" binding="adminLoginMessage">
+            <constraints>
+              <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+              <forms defaultalign-horz="false"/>
+            </constraints>
+            <properties>
+              <font name="Consolas" size="12" style="0"/>
+              <horizontalAlignment value="0"/>
+              <horizontalTextPosition value="0"/>
+              <preferredSize width="250" height="25"/>
+              <text value="test"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <grid id="55dd3" binding="signUpPage" layout-manager="FormLayout">
+        <rowspec value="center:38px:noGrow"/>
+        <rowspec value="fill:20px:noGrow"/>
+        <rowspec value="center:d:noGrow"/>
+        <rowspec value="fill:10px:noGrow"/>
+        <rowspec value="center:d:noGrow"/>
+        <rowspec value="fill:10px:noGrow"/>
+        <rowspec value="center:d:noGrow"/>
+        <rowspec value="fill:10px:noGrow"/>
+        <rowspec value="center:d:noGrow"/>
+        <rowspec value="fill:10px:noGrow"/>
+        <rowspec value="center:d:grow"/>
+        <rowspec value="fill:10px:noGrow"/>
+        <rowspec value="center:d:noGrow"/>
+        <colspec value="fill:d:grow"/>
+        <constraints>
+          <card name="signUpPage"/>
+        </constraints>
+        <properties>
+          <preferredSize width="400" height="300"/>
+        </properties>
+        <border type="empty">
+          <size top="10" left="10" bottom="10" right="10"/>
+        </border>
+        <children>
+          <component id="bdb0d" class="javax.swing.JButton" binding="signUpBtn">
+            <constraints>
+              <grid row="10" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="1" fill="0" indent="0" use-parent-layout="false"/>
+              <forms defaultalign-horz="false" defaultalign-vert="false"/>
+            </constraints>
+            <properties>
+              <preferredSize width="250" height="40"/>
+              <text value="注册"/>
+            </properties>
+          </component>
+          <component id="13f4c" class="javax.swing.JLabel" binding="signUpLabel">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+              <forms defaultalign-horz="false"/>
+            </constraints>
+            <properties>
+              <alignmentX value="0.0"/>
+              <font name="Microsoft YaHei" size="24" style="1"/>
+              <horizontalAlignment value="0"/>
+              <horizontalTextPosition value="0"/>
+              <opaque value="false"/>
+              <text value="注册"/>
+            </properties>
+          </component>
+          <component id="9a864" class="javax.swing.JButton" binding="signUp2Login">
+            <constraints>
+              <grid row="12" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="2" fill="0" indent="0" use-parent-layout="false"/>
+              <forms defaultalign-horz="false" defaultalign-vert="false"/>
+            </constraints>
+            <properties>
+              <preferredSize width="250" height="40"/>
+              <text value="学生登录页面"/>
+            </properties>
+          </component>
+          <component id="eb32c" class="javax.swing.JLabel" binding="signUpMessage">
+            <constraints>
+              <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+              <forms defaultalign-horz="false"/>
+            </constraints>
+            <properties>
+              <font name="Consolas" size="12" style="0"/>
+              <horizontalAlignment value="0"/>
+              <horizontalTextPosition value="0"/>
+              <preferredSize width="250" height="25"/>
+              <text value="test"/>
+            </properties>
+          </component>
+          <grid id="ede36" binding="signUpStudentNumPanel" layout-manager="FormLayout">
+            <rowspec value="center:max(d;4px):noGrow"/>
+            <colspec value="fill:max(d;4px):noGrow"/>
+            <colspec value="fill:10px:noGrow"/>
+            <colspec value="fill:max(d;4px):noGrow"/>
+            <constraints>
+              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+              <forms defaultalign-horz="false"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="88512" class="javax.swing.JTextField" binding="signUpStudentNumField">
+                <constraints>
+                  <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="-1"/>
+                  </grid>
+                  <forms defaultalign-horz="false"/>
+                </constraints>
+                <properties>
+                  <preferredSize width="250" height="30"/>
+                </properties>
+              </component>
+              <component id="156ac" class="javax.swing.JLabel" binding="signUpStudentNumLabel">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                  <forms defaultalign-horz="false"/>
+                </constraints>
+                <properties>
+                  <font name="Consolas" size="14" style="0"/>
+                  <horizontalAlignment value="0"/>
+                  <horizontalTextPosition value="0"/>
+                  <text value="学号"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <grid id="9019f" binding="signUpPasswordPanel" layout-manager="FormLayout">
+            <rowspec value="center:d:grow"/>
+            <rowspec value="center:d:noGrow"/>
+            <colspec value="fill:32px:noGrow"/>
+            <colspec value="fill:10px:noGrow"/>
+            <colspec value="fill:d:grow"/>
+            <constraints>
+              <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+              <forms defaultalign-horz="false"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="dada" class="javax.swing.JLabel" binding="signUpPasswordLabel">
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                  <forms defaultalign-horz="false"/>
+                </constraints>
+                <properties>
+                  <font name="Consolas" size="14" style="0"/>
+                  <horizontalAlignment value="0"/>
+                  <horizontalTextPosition value="0"/>
+                  <text value="密码"/>
+                </properties>
+              </component>
+              <component id="860bc" class="javax.swing.JPasswordField" binding="signUpPasswordField">
+                <constraints>
+                  <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="-1"/>
+                  </grid>
+                  <forms defaultalign-horz="false"/>
+                </constraints>
+                <properties>
+                  <preferredSize width="250" height="30"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <grid id="5f574" binding="signUpPasswordConfirmPanel" layout-manager="FormLayout">
+            <rowspec value="center:max(d;4px):noGrow"/>
+            <colspec value="fill:61px:noGrow"/>
+            <colspec value="fill:10px:noGrow"/>
+            <colspec value="fill:max(d;4px):noGrow"/>
+            <constraints>
+              <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+              <forms top="0" left="0" bottom="0" right="25" defaultalign-horz="false"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="e7d38" class="javax.swing.JLabel" binding="signUpPasswordConfirmLabel">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                  <forms defaultalign-horz="false"/>
+                </constraints>
+                <properties>
+                  <font name="Consolas" size="14" style="0"/>
+                  <horizontalAlignment value="0"/>
+                  <horizontalTextPosition value="0"/>
+                  <text value="确认密码"/>
+                </properties>
+              </component>
+              <component id="8007" class="javax.swing.JPasswordField" binding="signUpPasswordConfirmField">
+                <constraints>
+                  <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="-1"/>
+                  </grid>
+                  <forms defaultalign-horz="false"/>
+                </constraints>
+                <properties>
+                  <preferredSize width="250" height="30"/>
+                  <text value=""/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+        </children>
+      </grid>
+    </children>
+  </grid>
+</form>
