@@ -30,20 +30,29 @@ public class StudentSignUpPanel {
         signUpLabel.setAlignmentX(0.0f);
         signUpLabel.setHorizontalAlignment(0);
         signUpLabel.setHorizontalTextPosition(0);
+        signUpLabel.setFont(new Font("黑体", Font.BOLD, 24));
         signUpLabel.setText("注册");
         signUpPanel.add(signUpLabel, cc.xy(1, 1, CellConstraints.CENTER, CellConstraints.DEFAULT));
         signUp2Login.setPreferredSize(new Dimension(250, 40));
         signUp2Login.setText("学生登录页面");
+
+        signUp2Login.addActionListener(e -> {
+            Container p = signUpPanel.getParent();
+            p.getComponent(2).setVisible(false);
+            p.getComponent(0).setVisible(true);
+        });
+
         signUpPanel.add(signUp2Login, cc.xy(1, 13, CellConstraints.CENTER, CellConstraints.BOTTOM));
         signUpMessage.setHorizontalAlignment(0);
         signUpMessage.setHorizontalTextPosition(0);
         signUpMessage.setPreferredSize(new Dimension(250, 25));
+        signUpMessage.setFont(new Font("微软雅黑", Font.PLAIN, 12));
         signUpMessage.setText("test");
         signUpPanel.add(signUpMessage, cc.xy(1, 9, CellConstraints.CENTER, CellConstraints.DEFAULT));
         
         signUpPanel.add(studentNumPanel.getSignUpStudentNumPanel(), cc.xy(1, 3, CellConstraints.CENTER, CellConstraints.DEFAULT));
         signUpPanel.add(passwordPanel.getSignUpPasswordPanel(), cc.xy(1, 5, CellConstraints.CENTER, CellConstraints.DEFAULT));
-        signUpPanel.add(passwordConfirmPanel.getSignUpPasswordConfirmPanel(), new CellConstraints(1, 7, 1, 1, CellConstraints.CENTER, CellConstraints.DEFAULT, new Insets(0, 0, 0, 25)));
+        signUpPanel.add(passwordConfirmPanel.getSignUpPasswordConfirmPanel(), cc.xy(1, 7, CellConstraints.CENTER, CellConstraints.DEFAULT));
     }
     
     JPanel getSignUpPanel(){
