@@ -6,6 +6,5 @@ public class Main {
 //        app.init();
 
         StudentMainWindow app = new StudentMainWindow();
-        app.init();
     }
 }
