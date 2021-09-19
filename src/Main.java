@@ -1,10 +1,9 @@
-import GUI.*;
+import gui.user.window.StudentMainWindow;
+import gui.login.window.LoginWindow;
 
 public class Main {
     public static void main(String[] args) {
-//        LoginWindow app = new LoginWindow();
-//        app.init();
-
-        StudentMainWindow app = new StudentMainWindow();
+//        new LoginWindow();
+        new StudentMainWindow();
     }
 }
