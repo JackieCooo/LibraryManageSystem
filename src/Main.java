@@ -1,9 +1,16 @@
-import gui.user.window.StudentMainWindow;
-import gui.login.window.LoginWindow;
+import gui.frames.UserFrame;
 
+/**
+ * 程序入口类
+ * @author Jackie
+ */
 public class Main {
+
+    /**
+     * main函数
+     * @param args args
+     */
     public static void main(String[] args) {
-//        new LoginWindow();
-        new StudentMainWindow();
+        new UserFrame();
     }
 }

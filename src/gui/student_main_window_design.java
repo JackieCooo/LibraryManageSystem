@@ -32,6 +32,8 @@ public class student_main_window_design {
     private JPanel recommendPanel;
     private JPanel bookChartPanel;
     private JPanel latestBookPanel;
+    private JButton button1;
+    private JButton button2;
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("student_main_window_design");
@@ -120,8 +122,16 @@ public class student_main_window_design {
         recommendPage = new JScrollPane();
         centrePanel.addTab("Untitled", recommendPage);
         recommendPanel = new JPanel();
-        recommendPanel.setLayout(new FormLayout("", ""));
+        recommendPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 30, 45));
         recommendPage.setViewportView(recommendPanel);
+        button1 = new JButton();
+        button1.setPreferredSize(new Dimension(150, 200));
+        button1.setText("Button");
+        recommendPanel.add(button1);
+        button2 = new JButton();
+        button2.setPreferredSize(new Dimension(150, 200));
+        button2.setText("Button");
+        recommendPanel.add(button2);
         bookChartPage = new JScrollPane();
         centrePanel.addTab("Untitled", bookChartPage);
         bookChartPanel = new JPanel();
@@ -162,4 +172,5 @@ public class student_main_window_design {
     public JComponent $$$getRootComponent$$$() {
         return userMainWindow;
     }
+
 }

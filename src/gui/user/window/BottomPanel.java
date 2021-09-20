@@ -11,9 +11,8 @@ import java.awt.*;
  * 底部板块类
  * @author Jackie
  */
-public class BottomPanel {
+public class BottomPanel extends JPanel{
 
-    private JPanel bottomPanel;
     private FuncBtn bookRepoBtn;
     private FuncBtn myCollectBtn;
     private FuncBtn myBorrowBtn;
@@ -23,31 +22,30 @@ public class BottomPanel {
      * 初始化界面
      */
     public BottomPanel(){
-        bottomPanel = new JPanel();
-        bottomPanel.setLayout(new FormLayout("fill:d:grow,left:10px:noGrow,fill:d:grow,left:10px:noGrow,fill:d:grow,left:10px:noGrow,fill:d:grow", "center:d:grow"));
-        bottomPanel.setPreferredSize(new Dimension(900, 275));
-        bottomPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10), null, TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
-
-        CellConstraints cc = new CellConstraints();
-        bookRepoBtn = new FuncBtn("书库");
-        bottomPanel.add(bookRepoBtn, cc.xy(1, 1, CellConstraints.CENTER, CellConstraints.DEFAULT));
-
-        myCollectBtn = new FuncBtn("我的收藏");
-        bottomPanel.add(myCollectBtn, cc.xy(3, 1, CellConstraints.CENTER, CellConstraints.DEFAULT));
-
-        myBorrowBtn = new FuncBtn("我的借阅");
-        bottomPanel.add(myBorrowBtn, cc.xy(5, 1, CellConstraints.CENTER, CellConstraints.DEFAULT));
-
-        mySpaceBtn = new FuncBtn("我的空间");
-        bottomPanel.add(mySpaceBtn, cc.xy(7, 1, CellConstraints.CENTER, CellConstraints.DEFAULT));
+        super();
+        setupUI();
     }
 
     /**
-     * 获取底部板块部件
-     * @return JPanel
+     * 初始化界面属性
      */
-    public JPanel getBottomPanel(){
-        return bottomPanel;
+    private void setupUI(){
+        this.setLayout(new FormLayout("fill:d:grow,left:10px:noGrow,fill:d:grow,left:10px:noGrow,fill:d:grow,left:10px:noGrow,fill:d:grow", "center:d:grow"));
+        this.setPreferredSize(new Dimension(900, 275));
+        this.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10), null, TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
+
+        CellConstraints cc = new CellConstraints();
+        bookRepoBtn = new FuncBtn("书库");
+        this.add(bookRepoBtn, cc.xy(1, 1, CellConstraints.CENTER, CellConstraints.DEFAULT));
+
+        myCollectBtn = new FuncBtn("我的收藏");
+        this.add(myCollectBtn, cc.xy(3, 1, CellConstraints.CENTER, CellConstraints.DEFAULT));
+
+        myBorrowBtn = new FuncBtn("我的借阅");
+        this.add(myBorrowBtn, cc.xy(5, 1, CellConstraints.CENTER, CellConstraints.DEFAULT));
+
+        mySpaceBtn = new FuncBtn("我的空间");
+        this.add(mySpaceBtn, cc.xy(7, 1, CellConstraints.CENTER, CellConstraints.DEFAULT));
     }
 
 }

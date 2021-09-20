@@ -7,10 +7,8 @@ import java.awt.*;
  * 用户界面类
  * @author Jackie
  */
-public class StudentMainWindow {
-    private JFrame frame;
-    private JPanel userMainWindow;
-
+public class StudentMainWindow extends JPanel{
+    
     private TopPanel topPanel;
     private CentrePanel centrePanel;
     private BottomPanel bottomPanel;
@@ -19,26 +17,25 @@ public class StudentMainWindow {
      * 初始化界面
      */
     public StudentMainWindow(){
-        frame = new JFrame();
-        frame.setBounds(100, 100, 900, 675);
+        super();
+        setupUI();
+    }
 
-        userMainWindow = new JPanel();
-        userMainWindow.setLayout(new BorderLayout(0, 0));
-        userMainWindow.setPreferredSize(new Dimension(900, 675));
+    /**
+     * 初始化界面属性
+     */
+    private void setupUI(){
+        this.setLayout(new BorderLayout(0, 0));
+        this.setPreferredSize(new Dimension(900, 675));
 
         topPanel = new TopPanel();
-        userMainWindow.add(topPanel.getTopPanel(), BorderLayout.NORTH);
+        this.add(topPanel, BorderLayout.NORTH);
 
         centrePanel = new CentrePanel();
-        userMainWindow.add(centrePanel.getCentrePanel(), BorderLayout.CENTER);
+        this.add(centrePanel, BorderLayout.CENTER);
 
         bottomPanel = new BottomPanel();
-        userMainWindow.add(bottomPanel.getBottomPanel(), BorderLayout.SOUTH);
-
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.add(userMainWindow);
-        frame.pack();
-        frame.setVisible(true);
+        this.add(bottomPanel, BorderLayout.SOUTH);
     }
 
 }

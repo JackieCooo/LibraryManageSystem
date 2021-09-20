@@ -175,11 +175,26 @@
             <properties/>
             <border type="none"/>
             <children>
-              <grid id="60c1d" binding="recommendPanel" layout-manager="FormLayout">
+              <grid id="60c1d" binding="recommendPanel" layout-manager="FlowLayout" hgap="30" vgap="45" flow-align="0">
                 <constraints/>
                 <properties/>
                 <border type="none"/>
-                <children/>
+                <children>
+                  <component id="6f34" class="javax.swing.JButton" binding="button1" default-binding="true">
+                    <constraints/>
+                    <properties>
+                      <preferredSize width="150" height="200"/>
+                      <text value="Button"/>
+                    </properties>
+                  </component>
+                  <component id="ac437" class="javax.swing.JButton" binding="button2" default-binding="true">
+                    <constraints/>
+                    <properties>
+                      <preferredSize width="150" height="200"/>
+                      <text value="Button"/>
+                    </properties>
+                  </component>
+                </children>
               </grid>
             </children>
           </scrollpane>

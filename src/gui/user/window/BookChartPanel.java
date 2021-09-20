@@ -3,29 +3,31 @@ package gui.user.window;
 import com.jgoodies.forms.layout.FormLayout;
 
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * 排行榜板块类
  * @author Jackie
  */
-public class BookChartPanel {
-
-    private JPanel bookChartPanel;
+public class BookChartPanel extends JPanel{
 
     /**
      * 初始化页面
      */
     public BookChartPanel(){
-        bookChartPanel = new JPanel();
-        bookChartPanel.setLayout(new FormLayout("", ""));
+        super();
+        setupUI();
     }
 
     /**
-     * 获取排行榜板块部件
-     * @return JPanel
+     * 设置界面属性
      */
-    public JPanel getBookChartPanel(){
-        return bookChartPanel;
+    private void setupUI(){
+        this.setLayout(new FlowLayout(FlowLayout.LEFT, 30, 45));
+        for (int i = 0; i < 10; i++) {
+            BookChartDisplay b = new BookChartDisplay();
+            this.add(b);
+        }
     }
 
 }

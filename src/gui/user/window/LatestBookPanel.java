@@ -8,24 +8,21 @@ import javax.swing.*;
  * 新书板块类
  * @author Jackie
  */
-public class LatestBookPanel {
-    
-    private JPanel latestBookPanel;
+public class LatestBookPanel extends JPanel{
 
     /**
      * 初始化界面
      */
     public LatestBookPanel(){
-        latestBookPanel = new JPanel();
-        latestBookPanel.setLayout(new FormLayout("", ""));
+        super();
+        setupUI();
     }
 
     /**
-     * 获取新书板块部件
-     * @return JPanel
+     * 初始化界面
      */
-    public JPanel getLatestBookPanel(){
-        return latestBookPanel;
+    private void setupUI(){
+        this.setLayout(new FormLayout("", ""));
     }
 
 }

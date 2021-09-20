@@ -1,31 +1,28 @@
 package gui.user.window;
 
-import com.jgoodies.forms.layout.FormLayout;
-
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * 推荐板块类
  * @author Jackie
  */
-public class RecommendPanel {
-
-    private JPanel recommendPanel;
+public class RecommendPanel extends JPanel{
 
     /**
      * 初始化界面
      */
     public RecommendPanel(){
-        recommendPanel = new JPanel();
-        recommendPanel.setLayout(new FormLayout("", ""));
+        super();
+        setupUI();
     }
 
-    /**
-     * 获取推荐板块部件
-     * @return JPanel
-     */
-    public JPanel getRecommendPanel(){
-        return recommendPanel;
+    private void setupUI(){
+        this.setLayout(new FlowLayout(FlowLayout.LEFT, 30, 45));
+        for (int i = 0; i < 10; i++) {
+            BookDisplay b = new BookDisplay(i + "");
+            this.add(b);
+        }
     }
 
 }
