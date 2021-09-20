@@ -7,12 +7,12 @@ import java.awt.*;
  * 自定义功能按钮类
  * @author Jackie
  */
-public class FuncBtn extends JButton {
+public class BottomFuncBtn extends JButton {
 
     /**
      * 初始化界面
      */
-    public FuncBtn(){
+    public BottomFuncBtn(){
         super();
         setupUI();
     }
@@ -21,7 +21,7 @@ public class FuncBtn extends JButton {
      * 初始化界面
      * @param label 要在按钮上显示的文字
      */
-    public FuncBtn(String label){
+    public BottomFuncBtn(String label){
         super(label);
         setupUI();
     }

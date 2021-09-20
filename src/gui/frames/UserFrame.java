@@ -1,8 +1,10 @@
 package gui.frames;
 
-import gui.user.window.StudentMainWindow;
+import gui.user.window.MainWindow;
+import gui.user.window.TopPanel;
 
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * 用户窗户类
@@ -10,7 +12,8 @@ import javax.swing.*;
  */
 public class UserFrame extends JFrame {
 
-    StudentMainWindow studentMainWindow;
+    MainWindow mainWindow;
+    TopPanel topPanel;
 
     /**
      * 初始化界面
@@ -25,9 +28,13 @@ public class UserFrame extends JFrame {
      */
     private void setupUI(){
         this.setBounds(100, 100, 900, 675);
-        studentMainWindow = new StudentMainWindow();
-        this.add(studentMainWindow);
+        topPanel = new TopPanel();
+        this.add(topPanel, BorderLayout.NORTH);
+        mainWindow = new MainWindow();
+        this.add(mainWindow);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        this.setResizable(false);
+        this.setUndecorated(true);
         this.pack();
         this.setVisible(true);
     }

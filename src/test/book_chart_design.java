@@ -1,4 +1,4 @@
-package gui;
+package test;
 
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;

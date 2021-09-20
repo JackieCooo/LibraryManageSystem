@@ -14,13 +14,12 @@ import java.awt.*;
 public class TopPanel extends JPanel{
 
     private JLabel softwareLabel;
-    private JButton cancelBtn;
-    private JButton undoBtn;
-    private JButton mailboxBtn;
-    private JButton settingBtn;
-    private JButton minimiseBtn;
-    private JButton closeBtn;
-
+    private TopFuncBtn cancelBtn;
+    private TopFuncBtn undoBtn;
+    private TopFuncBtn mailboxBtn;
+    private TopFuncBtn settingBtn;
+    private TopWinFuncBtn minimiseBtn;
+    private TopWinFuncBtn closeBtn;
     private AccountPanel accountPanel;
 
     /**
@@ -30,7 +29,10 @@ public class TopPanel extends JPanel{
         super();
         setupUI();
     }
-    
+
+    /**
+     * 初始化界面属性
+     */
     private void setupUI(){
         this.setLayout(new FormLayout("center:d:noGrow,left:20px:noGrow,fill:d:noGrow,left:10px:noGrow,fill:d:noGrow,left:10px:noGrow,right:p:grow,left:20px:noGrow,center:33px:noGrow,left:10px:noGrow,center:d:noGrow,left:20px:noGrow,center:d:noGrow,left:10px:noGrow,center:d:noGrow", "center:d:grow"));
         this.setPreferredSize(new Dimension(900, 75));
@@ -42,32 +44,23 @@ public class TopPanel extends JPanel{
         softwareLabel.setText("test");
         CellConstraints cc = new CellConstraints();
         this.add(softwareLabel, cc.xy(1, 1, CellConstraints.CENTER, CellConstraints.CENTER));
-        cancelBtn = new JButton();
-        cancelBtn.setMargin(new Insets(0, 0, 0, 0));
-        cancelBtn.setPreferredSize(new Dimension(30, 30));
-        cancelBtn.setText("Button");
+        cancelBtn = new TopFuncBtn();
         this.add(cancelBtn, cc.xy(3, 1, CellConstraints.CENTER, CellConstraints.CENTER));
-        undoBtn = new JButton();
-        undoBtn.setPreferredSize(new Dimension(30, 30));
-        undoBtn.setText("Button");
+        undoBtn = new TopFuncBtn();
         this.add(undoBtn, cc.xy(5, 1, CellConstraints.CENTER, CellConstraints.CENTER));
         accountPanel = new AccountPanel();
         this.add(accountPanel.getAccountPanel(), cc.xy(7, 1));
-        mailboxBtn = new JButton();
-        mailboxBtn.setPreferredSize(new Dimension(30, 30));
-        mailboxBtn.setText("Button");
+        mailboxBtn = new TopFuncBtn();
         this.add(mailboxBtn, cc.xy(9, 1, CellConstraints.CENTER, CellConstraints.DEFAULT));
-        settingBtn = new JButton();
-        settingBtn.setPreferredSize(new Dimension(30, 30));
-        settingBtn.setText("Button");
+        settingBtn = new TopFuncBtn();
         this.add(settingBtn, cc.xy(11, 1, CellConstraints.CENTER, CellConstraints.DEFAULT));
-        minimiseBtn = new JButton();
-        minimiseBtn.setPreferredSize(new Dimension(20, 20));
-        minimiseBtn.setText("Button");
+        minimiseBtn = new TopWinFuncBtn();
         this.add(minimiseBtn, cc.xy(13, 1, CellConstraints.DEFAULT, CellConstraints.CENTER));
-        closeBtn = new JButton();
-        closeBtn.setPreferredSize(new Dimension(20, 20));
-        closeBtn.setText("Button");
+        closeBtn = new TopWinFuncBtn();
+        // 设置关闭窗口事件
+        closeBtn.addActionListener(e -> {
+            System.exit(0);
+        });
         this.add(closeBtn, cc.xy(15, 1, CellConstraints.DEFAULT, CellConstraints.CENTER));
     }
 

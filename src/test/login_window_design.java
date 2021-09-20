@@ -1,4 +1,4 @@
-package gui;
+package test;
 
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
@@ -123,7 +123,7 @@ public class login_window_design {
         studentLoginPage = new JPanel();
         studentLoginPage.setLayout(new FormLayout("fill:d:grow", "center:max(d;4px):noGrow,fill:20px:noGrow,center:43px:noGrow,fill:10px:noGrow,center:max(d;4px):noGrow,top:4dlu:noGrow,center:max(d;4px):noGrow,top:4dlu:noGrow,center:d:grow,top:4dlu:noGrow,center:max(d;4px):noGrow"));
         studentLoginPage.setPreferredSize(new Dimension(400, 300));
-        studentLoginPage.setVisible(false);
+        studentLoginPage.setVisible(true);
         loginWindow.add(studentLoginPage, "studentLoginPage");
         studentLoginPage.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10), null, TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
         loginLabel = new JLabel();
