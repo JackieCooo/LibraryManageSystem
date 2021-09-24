@@ -4,17 +4,17 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * 我的借阅窗口类
+ * 结果表格类
  * @author Jackie
  */
-public class MyBorrowPanel extends JScrollPane {
+public class OperateTable extends JScrollPane {
 
     private JTable table;
 
     /**
      * 初始化界面
      */
-    public MyBorrowPanel(){
+    public OperateTable(){
         super();
         setupUI();
     }
@@ -23,11 +23,10 @@ public class MyBorrowPanel extends JScrollPane {
      * 初始化界面属性
      */
     private void setupUI(){
-        this.setPreferredSize(new Dimension(900, 600));
+        this.setPreferredSize(new Dimension(880, 530));
         table = new JTable();
-        table.setPreferredSize(new Dimension(900, 600));
-        table.setPreferredScrollableViewportSize(new Dimension(900, 600));
+        table.setPreferredSize(new Dimension(880, 530));
+        table.setPreferredScrollableViewportSize(new Dimension(880, 530));
         this.add(table);
     }
-
 }

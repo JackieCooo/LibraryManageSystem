@@ -1,7 +1,10 @@
-package gui.user.window;
+package gui.shared;
 
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
+import gui.user.window.AccountPanel;
+import gui.user.window.TopFuncBtn;
+import gui.user.window.TopWinFuncBtn;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;

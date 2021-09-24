@@ -1,3 +1,4 @@
+import gui.frames.AdminFrame;
 import gui.frames.UserFrame;
 
 /**
@@ -11,6 +12,6 @@ public class Main {
      * @param args args
      */
     public static void main(String[] args) {
-        new UserFrame();
+        new AdminFrame();
     }
 }

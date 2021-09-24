@@ -1,20 +1,20 @@
-package gui.user.window;
+package gui.admin.window;
 
 import javax.swing.*;
 import java.awt.*;
 
 /**
- * 结果表格类
+ * 图书管理表格类
  * @author Jackie
  */
-public class ResultTable extends JScrollPane {
+public class OperateTable extends JScrollPane {
 
     private JTable table;
 
     /**
      * 初始化界面
      */
-    public ResultTable(){
+    public OperateTable(){
         super();
         setupUI();
     }
@@ -23,10 +23,11 @@ public class ResultTable extends JScrollPane {
      * 初始化界面属性
      */
     private void setupUI(){
-        this.setPreferredSize(new Dimension(880, 530));
+        this.setPreferredSize(new Dimension(700, 550));
         table = new JTable();
-        table.setPreferredSize(new Dimension(880, 530));
-        table.setPreferredScrollableViewportSize(new Dimension(880, 530));
+        table.setPreferredSize(new Dimension(700, 550));
+        table.setPreferredScrollableViewportSize(new Dimension(700, 550));
         this.add(table);
     }
+
 }

@@ -1,4 +1,4 @@
-package gui.user.window;
+package gui.shared;
 
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
@@ -27,7 +27,6 @@ public class SearchPanel extends JPanel {
      * 初始化界面属性
      */
     private void setupUI(){
-        this.setPreferredSize(new Dimension(900, 50));
         this.setLayout(new FormLayout("center:d:Grow,center:d:Grow", "center:d:noGrow"));
         CellConstraints cc = new CellConstraints();
         searchBox = new JTextField();

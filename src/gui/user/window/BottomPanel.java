@@ -36,7 +36,7 @@ public class BottomPanel extends JPanel{
 
         CellConstraints cc = new CellConstraints();
         bookRepoBtn = new BottomFuncBtn("书库");
-        // 设置转到书库事件
+        // 设置转到书库按钮事件
         bookRepoBtn.addActionListener(e -> {
             Container p = bookRepoBtn.getParent().getParent().getParent();
             p.getComponent(0).setVisible(false);
@@ -44,13 +44,31 @@ public class BottomPanel extends JPanel{
         });
         this.add(bookRepoBtn, cc.xy(1, 1, CellConstraints.CENTER, CellConstraints.DEFAULT));
 
+        // 设置转到我的收藏按钮事件
         myCollectBtn = new BottomFuncBtn("我的收藏");
+        myCollectBtn.addActionListener(e -> {
+            Container p = myCollectBtn.getParent().getParent().getParent();
+            p.getComponent(0).setVisible(false);
+            p.getComponent(2).setVisible(true);
+        });
         this.add(myCollectBtn, cc.xy(3, 1, CellConstraints.CENTER, CellConstraints.DEFAULT));
 
+        // 设置转到我的借阅按钮事件
         myBorrowBtn = new BottomFuncBtn("我的借阅");
+        myBorrowBtn.addActionListener(e -> {
+            Container p = myBorrowBtn.getParent().getParent().getParent();
+            p.getComponent(0).setVisible(false);
+            p.getComponent(3).setVisible(true);
+        });
         this.add(myBorrowBtn, cc.xy(5, 1, CellConstraints.CENTER, CellConstraints.DEFAULT));
 
+        // 设置转到我的空间按钮事件
         mySpaceBtn = new BottomFuncBtn("我的空间");
+        mySpaceBtn.addActionListener(e -> {
+            Container p = mySpaceBtn.getParent().getParent().getParent();
+            p.getComponent(0).setVisible(false);
+            p.getComponent(4).setVisible(true);
+        });
         this.add(mySpaceBtn, cc.xy(7, 1, CellConstraints.CENTER, CellConstraints.DEFAULT));
     }
 
