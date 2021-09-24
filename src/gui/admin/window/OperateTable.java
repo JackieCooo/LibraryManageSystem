@@ -23,10 +23,10 @@ public class OperateTable extends JScrollPane {
      * 初始化界面属性
      */
     private void setupUI(){
-        this.setPreferredSize(new Dimension(700, 550));
+        this.setPreferredSize(new Dimension(680, 520));
         table = new JTable();
-        table.setPreferredSize(new Dimension(700, 550));
-        table.setPreferredScrollableViewportSize(new Dimension(700, 550));
+        table.setPreferredSize(new Dimension(680, 520));
+        table.setPreferredScrollableViewportSize(new Dimension(680, 520));
         this.add(table);
     }
 
