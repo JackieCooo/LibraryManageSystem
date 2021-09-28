@@ -12,6 +12,7 @@ public class Main {
      * @param args args
      */
     public static void main(String[] args) {
-        new AdminFrame();
+//        new AdminFrame();
+        new UserFrame();
     }
 }
