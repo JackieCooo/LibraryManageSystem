@@ -2,6 +2,7 @@ package test;
 
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicScrollBarUI;
+import javax.swing.plaf.basic.BasicSliderUI;
 import javax.swing.table.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -135,10 +136,16 @@ class MyTable extends JTable {
 
                 borrowBtn = new JButton();
                 borrowBtn.setPreferredSize(new Dimension(30, 30));
+                borrowBtn.addActionListener(e -> {
+                    System.out.println("按钮点击");
+                });
                 this.add(borrowBtn);
 
                 collectBtn = new JButton();
                 collectBtn.setPreferredSize(new Dimension(30, 30));
+                collectBtn.addActionListener(e -> {
+                    System.out.println("按钮点击");
+                });
                 this.add(collectBtn);
             }
 
@@ -194,7 +201,7 @@ class MyTable extends JTable {
                     case 1 -> this.setPreferredSize(new Dimension(100, 40));
                     case 2 -> this.setPreferredSize(new Dimension(200, 40));
                     case 3, 4 -> this.setPreferredSize(new Dimension(180, 40));
-                    case 5 -> this.setPreferredSize(new Dimension(150, 40));
+                    case 5 -> this.setPreferredSize(new Dimension(157, 40));
                     default -> {}
                 }
 
@@ -235,6 +242,8 @@ class MyTable extends JTable {
         this.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);  // 设置不拉伸
         this.setFocusable(true);
         this.setOpaque(true);
+        this.setShowGrid(false);
+        this.setIntercellSpacing(new Dimension(0, 1));  // 设置只保留水平网格线
 
         // 定制鼠标事件
         this.addMouseListener(new MouseAdapter() {
@@ -284,7 +293,6 @@ class MyTable extends JTable {
         this.setForeground(Color.BLACK);  // 字体颜色
         this.setBackground(Color.WHITE);
         this.setFont(new Font("微软雅黑", Font.PLAIN, 14));  // 字体样式
-        this.setGridColor(new Color(255, 255, 255, 0));  // 网格颜色
 
         // 设置表头
         MyHeaderRenderer myHeaderRenderer = new MyHeaderRenderer();
@@ -304,7 +312,7 @@ class MyTable extends JTable {
         this.getColumnModel().getColumn(2).setPreferredWidth(200);
         this.getColumnModel().getColumn(3).setPreferredWidth(180);
         this.getColumnModel().getColumn(4).setPreferredWidth(180);
-        this.getColumnModel().getColumn(5).setPreferredWidth(150);
+        this.getColumnModel().getColumn(5).setPreferredWidth(157);
 
         // 设置滚动面板视口大小（超过该大小的行数据，需要拖动滚动条才能看到）
         this.setPreferredScrollableViewportSize(new Dimension(880, 530));
@@ -321,7 +329,77 @@ class MyScrollPane extends JScrollPane {
 
     private MyTable myTable;
 
+    /**
+     * 滚动条UI类
+     * @author Jackie
+     */
     class MyScrollBarUI extends BasicScrollBarUI {
+
+        /**
+         * 滚动条监听器类
+         * @author Jackie
+         */
+        class MyScrollBarListener extends TrackListener {
+
+            /**
+             * 处理鼠标释放事件
+             * @param e 鼠标事件对象
+             */
+            @Override
+            public void mouseReleased(MouseEvent e) {
+//                System.out.println("鼠标释放");
+                super.mouseReleased(e);
+                Rectangle r = getThumbBounds();
+                // 如果鼠标释放时，鼠标在滑块内，视为鼠标悬停；否则，视为鼠标未进入窗口
+                if (getThumbBounds().contains(e.getPoint())){
+                    thumbColor = Color.GRAY;
+                }
+                else {
+                    thumbColor = Color.LIGHT_GRAY;
+                }
+                scrollbar.repaint(r);
+            }
+
+            /**
+             * 处理鼠标按下事件
+             * @param e 鼠标事件对象
+             */
+            @Override
+            public void mousePressed(MouseEvent e) {
+//                System.out.println("鼠标按下");
+                thumbColor = Color.DARK_GRAY;
+                super.mousePressed(e);
+            }
+
+            /**
+             * 处理鼠标进入事件
+             * @param e 鼠标事件对象
+             */
+            @Override
+            public void mouseEntered(MouseEvent e) {
+//                System.out.println("鼠标进入");
+                Rectangle r = getThumbBounds();
+                // 如果鼠标进入时不在滑块范围内，不变色
+                if (getThumbBounds().contains(e.getPoint())){
+                    thumbColor = Color.GRAY;
+                    scrollbar.repaint(r);
+                }
+            }
+
+            /**
+             * 处理鼠标退出事件
+             * @param e 鼠标事件对象
+             */
+            @Override
+            public void mouseExited(MouseEvent e) {
+//                System.out.println("鼠标退出");
+                super.mouseExited(e);
+                if (isDragging) return;  // 鼠标拖动时移出窗口不变颜色
+                Rectangle r = getThumbBounds();
+                thumbColor = Color.LIGHT_GRAY;
+                scrollbar.repaint(r);
+            }
+        }
 
         /**
          * 初始化控件颜色
@@ -330,7 +408,7 @@ class MyScrollPane extends JScrollPane {
         protected void configureScrollBarColors() {
             super.configureScrollBarColors();
             trackColor = Color.WHITE;
-            thumbColor = Color.GRAY;
+            thumbColor = Color.LIGHT_GRAY;
             thumbHighlightColor = Color.WHITE;
             thumbLightShadowColor = Color.WHITE;
             thumbDarkShadowColor = Color.WHITE;
@@ -370,17 +448,12 @@ class MyScrollPane extends JScrollPane {
         public void installUI(JComponent c) {
             super.installUI(c);
 
-            // 隐藏上下按钮，并注销监听器
-            decrButton.setVisible(false);
-//            decrButton.setOpaque(true);
-            decrButton.setBackground(Color.WHITE);
-            decrButton.repaint();
-            decrButton.removeMouseListener(buttonListener);
-            incrButton.setVisible(false);
-//            incrButton.setOpaque(true);
-            incrButton.setBackground(Color.WHITE);
-            incrButton.repaint();
-            incrButton.removeMouseListener(buttonListener);
+            // 去掉按钮
+            scrollbar.remove(decrButton);
+            scrollbar.remove(incrButton);
+            scrollbar.setOpaque(true);
+            scrollbar.setBackground(Color.WHITE);
+            scrollbar.repaint();
         }
 
         /**
@@ -393,6 +466,14 @@ class MyScrollPane extends JScrollPane {
             scrollBarWidth = 10;
         }
 
+        /**
+         * 创建滑轨监听器
+         * @return 返回滑轨监听器对象
+         */
+        @Override
+        protected TrackListener createTrackListener() {
+            return new MyScrollBarListener();
+        }
     }
 
     /**
