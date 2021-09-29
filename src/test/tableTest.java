@@ -1,6 +1,9 @@
 package test;
 
 import javax.swing.*;
+import javax.swing.event.CellEditorListener;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.EventListenerList;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 import javax.swing.plaf.basic.BasicSliderUI;
 import javax.swing.table.*;
@@ -9,6 +12,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.util.Comparator;
+import java.util.EventObject;
 
 /**
  * 表格类
@@ -64,7 +68,7 @@ class MyTable extends JTable {
              */
             @Override
             public boolean isCellEditable(int row, int column) {
-                return false;
+                return column == 5;
             }
         }
 
@@ -113,7 +117,13 @@ class MyTable extends JTable {
         }
 
         // 操作面板
-        class OperatePanelRenderer extends JPanel implements TableCellRenderer{
+        class OperatePanelRendererAndEditor extends JPanel implements TableCellRenderer, TableCellEditor{
+
+            protected EventListenerList listenerList = new EventListenerList();
+            /**
+             * The change event.
+             */
+            protected transient ChangeEvent changeEvent = null;
 
             private JButton borrowBtn;
             private JButton collectBtn;
@@ -121,7 +131,7 @@ class MyTable extends JTable {
             /**
              * 初始化界面
              */
-            public OperatePanelRenderer(){
+            public OperatePanelRendererAndEditor(){
                 super();
                 setupUI();
             }
@@ -138,6 +148,7 @@ class MyTable extends JTable {
                 borrowBtn.setPreferredSize(new Dimension(30, 30));
                 borrowBtn.addActionListener(e -> {
                     System.out.println("按钮点击");
+                    stopCellEditing();
                 });
                 this.add(borrowBtn);
 
@@ -145,6 +156,7 @@ class MyTable extends JTable {
                 collectBtn.setPreferredSize(new Dimension(30, 30));
                 collectBtn.addActionListener(e -> {
                     System.out.println("按钮点击");
+                    stopCellEditing();
                 });
                 this.add(collectBtn);
             }
@@ -161,6 +173,133 @@ class MyTable extends JTable {
              */
             @Override
             public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+
+                if (currentRow == row){
+                    this.setBackground(focusColor);
+                }
+                else{
+                    this.setBackground(table.getBackground());
+                }
+
+                return this;
+            }
+
+            // Force this to be implemented.
+            // public Object  getCellEditorValue()
+
+            @Override
+            public Object getCellEditorValue() {
+                return null;
+            }
+
+            /**
+             * Returns true.
+             * @param e  an event object
+             * @return true
+             */
+            public boolean isCellEditable(EventObject e) {
+                return true;
+            }
+
+            /**
+             * Returns true.
+             * @param anEvent  an event object
+             * @return true
+             */
+            public boolean shouldSelectCell(EventObject anEvent) {
+                return true;
+            }
+
+            /**
+             * Calls <code>fireEditingStopped</code> and returns true.
+             * @return true
+             */
+            public boolean stopCellEditing() {
+                fireEditingStopped();
+                return true;
+            }
+
+            /**
+             * Calls <code>fireEditingCanceled</code>.
+             */
+            public void  cancelCellEditing() {
+                fireEditingCanceled();
+            }
+
+            /**
+             * Adds a <code>CellEditorListener</code> to the listener list.
+             * @param l  the new listener to be added
+             */
+            public void addCellEditorListener(CellEditorListener l) {
+                listenerList.add(CellEditorListener.class, l);
+            }
+
+            /**
+             * Removes a <code>CellEditorListener</code> from the listener list.
+             * @param l  the listener to be removed
+             */
+            public void removeCellEditorListener(CellEditorListener l) {
+                listenerList.remove(CellEditorListener.class, l);
+            }
+
+            /**
+             * Returns an array of all the <code>CellEditorListener</code>s added
+             * to this AbstractCellEditor with addCellEditorListener().
+             *
+             * @return all of the <code>CellEditorListener</code>s added or an empty
+             *         array if no listeners have been added
+             * @since 1.4
+             */
+            public CellEditorListener[] getCellEditorListeners() {
+                return listenerList.getListeners(CellEditorListener.class);
+            }
+
+            /**
+             * Notifies all listeners that have registered interest for
+             * notification on this event type.  The event instance
+             * is created lazily.
+             *
+             * @see EventListenerList
+             */
+            protected void fireEditingStopped() {
+                // Guaranteed to return a non-null array
+                Object[] listeners = listenerList.getListenerList();
+                // Process the listeners last to first, notifying
+                // those that are interested in this event
+                for (int i = listeners.length-2; i>=0; i-=2) {
+                    if (listeners[i]==CellEditorListener.class) {
+                        // Lazily create the event:
+                        if (changeEvent == null)
+                            changeEvent = new ChangeEvent(this);
+                        ((CellEditorListener)listeners[i+1]).editingStopped(changeEvent);
+                    }
+                }
+            }
+
+            /**
+             * Notifies all listeners that have registered interest for
+             * notification on this event type.  The event instance
+             * is created lazily.
+             *
+             * @see EventListenerList
+             */
+            protected void fireEditingCanceled() {
+                // Guaranteed to return a non-null array
+                Object[] listeners = listenerList.getListenerList();
+                // Process the listeners last to first, notifying
+                // those that are interested in this event
+                for (int i = listeners.length-2; i>=0; i-=2) {
+                    if (listeners[i]==CellEditorListener.class) {
+                        // Lazily create the event:
+                        if (changeEvent == null)
+                            changeEvent = new ChangeEvent(this);
+                        ((CellEditorListener)listeners[i+1]).editingCanceled(changeEvent);
+                    }
+                }
+            }
+
+            @Override
+            public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
 
                 if (currentRow == row){
                     this.setBackground(focusColor);
@@ -276,10 +415,13 @@ class MyTable extends JTable {
 
         // 设置单元格渲染模式
         MyTableCellRenderer myTableCellRenderer = new MyTableCellRenderer();
-        OperatePanelRenderer operatePanelRenderer = new OperatePanelRenderer();
+        OperatePanelRendererAndEditor operatePanelRendererAndEditor = new OperatePanelRendererAndEditor();
         for (int i = 0; i < 6; i++) {
             TableColumn tableColumn = this.getColumnModel().getColumn(i);
-            if (i == 5) tableColumn.setCellRenderer(operatePanelRenderer);
+            if (i == 5) {
+                tableColumn.setCellRenderer(operatePanelRendererAndEditor);
+                tableColumn.setCellEditor(operatePanelRendererAndEditor);
+            }
             else tableColumn.setCellRenderer(myTableCellRenderer);
         }
 
