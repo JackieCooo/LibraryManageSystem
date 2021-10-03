@@ -8,11 +8,10 @@ import javax.swing.plaf.basic.BasicScrollBarUI;
 import javax.swing.plaf.basic.BasicSliderUI;
 import javax.swing.table.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionAdapter;
+import java.awt.event.*;
 import java.util.Comparator;
 import java.util.EventObject;
+import java.util.Vector;
 
 /**
  * 表格类
@@ -21,9 +20,9 @@ import java.util.EventObject;
 class MyTable extends JTable {
 
     private int currentRow = -1;  // 记录鼠标当前悬停的行
+    private int currentCol = -1;  // 记录鼠标当前悬停的列
+    private Point currentPoint = null;
     private final Color focusColor = Color.LIGHT_GRAY;  // 鼠标悬停颜色
-    private final int WIDTH = 880;
-    private final int HEIGHT = 530;
 
     /**
      * 初始化界面
@@ -61,7 +60,7 @@ class MyTable extends JTable {
             }
 
             /**
-             * 设置单元格内容不可编辑
+             * 设置单元格内容除最后一列外不可编辑
              * @param row 行
              * @param column 列
              * @return false（不能编辑）
@@ -72,7 +71,7 @@ class MyTable extends JTable {
             }
         }
 
-        // 定制单元格渲染模式
+        // 定制普通单元格渲染模式
         class MyTableCellRenderer extends JLabel implements TableCellRenderer {
 
             /**
@@ -116,24 +115,19 @@ class MyTable extends JTable {
             }
         }
 
-        // 操作面板
-        class OperatePanelRendererAndEditor extends JPanel implements TableCellRenderer, TableCellEditor{
+        // 定制控制面板
+        abstract class MyControlPanel extends JPanel {
 
-            protected EventListenerList listenerList = new EventListenerList();
-            /**
-             * The change event.
-             */
-            protected transient ChangeEvent changeEvent = null;
-
-            private JButton borrowBtn;
-            private JButton collectBtn;
+            private MyButton borrowBtn;
+            private MyButton collectBtn;
 
             /**
              * 初始化界面
              */
-            public OperatePanelRendererAndEditor(){
+            public MyControlPanel(){
                 super();
                 setupUI();
+                setupListener();
             }
 
             /**
@@ -144,21 +138,61 @@ class MyTable extends JTable {
                 this.setPreferredSize(new Dimension(150, 30));
                 this.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 5));
 
-                borrowBtn = new JButton();
-                borrowBtn.setPreferredSize(new Dimension(30, 30));
-                borrowBtn.addActionListener(e -> {
-                    System.out.println("按钮点击");
-                    stopCellEditing();
-                });
-                this.add(borrowBtn);
-
-                collectBtn = new JButton();
-                collectBtn.setPreferredSize(new Dimension(30, 30));
-                collectBtn.addActionListener(e -> {
-                    System.out.println("按钮点击");
-                    stopCellEditing();
-                });
+                collectBtn = new MyButton("icons/Uncollected.png", "icons/Collected.png");
                 this.add(collectBtn);
+
+                borrowBtn = new MyButton("icons/Unborrowed.png", "icons/Borrowed.png");
+                this.add(borrowBtn);
+            }
+
+            public MyButton getBorrowBtn() {
+                return borrowBtn;
+            }
+
+            public MyButton getCollectBtn() {
+                return collectBtn;
+            }
+
+            abstract void setupListener();
+        }
+
+        // 定制操作面板渲染及编辑模式
+        class OperatePanelRendererAndEditor extends AbstractCellEditor implements TableCellRenderer, TableCellEditor{
+
+            private Vector<MyControlPanel> controlPanels;
+
+            /**
+             * 初始化属性
+             */
+            public OperatePanelRendererAndEditor(){
+                super();
+                setupUI();
+            }
+
+            /**
+             * 初始化所有操作按钮
+             */
+            private void setupUI(){
+                controlPanels = new Vector<>();
+                for (int i = 0; i < 20; i++) {
+                    this.controlPanels.add(new MyControlPanel() {
+                        @Override
+                        void setupListener() {
+                            this.getBorrowBtn().addActionListener(e -> {
+                                System.out.println("借阅按钮按下");
+                                getBorrowBtn().toggleStatus();
+                                stopCellEditing();
+                                System.out.println(getBorrowBtn().isHasBeenSet());
+                            });
+                            this.getCollectBtn().addActionListener(e -> {
+                                System.out.println("收藏按钮按下");
+                                getCollectBtn().toggleStatus();
+                                stopCellEditing();
+                                System.out.println(getCollectBtn().isHasBeenSet());
+                            });
+                        }
+                    });
+                }
             }
 
             /**
@@ -174,141 +208,50 @@ class MyTable extends JTable {
             @Override
             public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
 
+                MyControlPanel thisPanel = this.controlPanels.get(row);
+
+                // 设置行悬停特效
                 if (currentRow == row){
-                    this.setBackground(focusColor);
+                    thisPanel.setBackground(focusColor);
                 }
                 else{
-                    this.setBackground(table.getBackground());
+                    thisPanel.setBackground(table.getBackground());
                 }
 
-                return this;
-            }
-
-            // Force this to be implemented.
-            // public Object  getCellEditorValue()
-
-            @Override
-            public Object getCellEditorValue() {
-                return null;
+                return thisPanel;
             }
 
             /**
-             * Returns true.
-             * @param e  an event object
-             * @return true
+             * 定制编辑状态时的模式
+             * @param table 表格对象
+             * @param value 单元格内容
+             * @param isSelected 单元格是否被选择
+             * @param row 该行
+             * @param column 该列
+             * @return 该组件对象
              */
-            public boolean isCellEditable(EventObject e) {
-                return true;
-            }
-
-            /**
-             * Returns true.
-             * @param anEvent  an event object
-             * @return true
-             */
-            public boolean shouldSelectCell(EventObject anEvent) {
-                return true;
-            }
-
-            /**
-             * Calls <code>fireEditingStopped</code> and returns true.
-             * @return true
-             */
-            public boolean stopCellEditing() {
-                fireEditingStopped();
-                return true;
-            }
-
-            /**
-             * Calls <code>fireEditingCanceled</code>.
-             */
-            public void  cancelCellEditing() {
-                fireEditingCanceled();
-            }
-
-            /**
-             * Adds a <code>CellEditorListener</code> to the listener list.
-             * @param l  the new listener to be added
-             */
-            public void addCellEditorListener(CellEditorListener l) {
-                listenerList.add(CellEditorListener.class, l);
-            }
-
-            /**
-             * Removes a <code>CellEditorListener</code> from the listener list.
-             * @param l  the listener to be removed
-             */
-            public void removeCellEditorListener(CellEditorListener l) {
-                listenerList.remove(CellEditorListener.class, l);
-            }
-
-            /**
-             * Returns an array of all the <code>CellEditorListener</code>s added
-             * to this AbstractCellEditor with addCellEditorListener().
-             *
-             * @return all of the <code>CellEditorListener</code>s added or an empty
-             *         array if no listeners have been added
-             * @since 1.4
-             */
-            public CellEditorListener[] getCellEditorListeners() {
-                return listenerList.getListeners(CellEditorListener.class);
-            }
-
-            /**
-             * Notifies all listeners that have registered interest for
-             * notification on this event type.  The event instance
-             * is created lazily.
-             *
-             * @see EventListenerList
-             */
-            protected void fireEditingStopped() {
-                // Guaranteed to return a non-null array
-                Object[] listeners = listenerList.getListenerList();
-                // Process the listeners last to first, notifying
-                // those that are interested in this event
-                for (int i = listeners.length-2; i>=0; i-=2) {
-                    if (listeners[i]==CellEditorListener.class) {
-                        // Lazily create the event:
-                        if (changeEvent == null)
-                            changeEvent = new ChangeEvent(this);
-                        ((CellEditorListener)listeners[i+1]).editingStopped(changeEvent);
-                    }
-                }
-            }
-
-            /**
-             * Notifies all listeners that have registered interest for
-             * notification on this event type.  The event instance
-             * is created lazily.
-             *
-             * @see EventListenerList
-             */
-            protected void fireEditingCanceled() {
-                // Guaranteed to return a non-null array
-                Object[] listeners = listenerList.getListenerList();
-                // Process the listeners last to first, notifying
-                // those that are interested in this event
-                for (int i = listeners.length-2; i>=0; i-=2) {
-                    if (listeners[i]==CellEditorListener.class) {
-                        // Lazily create the event:
-                        if (changeEvent == null)
-                            changeEvent = new ChangeEvent(this);
-                        ((CellEditorListener)listeners[i+1]).editingCanceled(changeEvent);
-                    }
-                }
-            }
-
             @Override
             public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
 
+                MyControlPanel thisPanel = this.controlPanels.get(row);
+
                 if (currentRow == row){
-                    this.setBackground(focusColor);
+                    thisPanel.setBackground(focusColor);
                 }
                 else{
-                    this.setBackground(table.getBackground());
+                    thisPanel.setBackground(table.getBackground());
                 }
 
-                return this;
+                return thisPanel;
+            }
+
+            /**
+             * 返回当前单元格的内容
+             * @return 空对象
+             */
+            @Override
+            public Object getCellEditorValue() {
+                return null;
             }
         }
 
@@ -395,6 +338,8 @@ class MyTable extends JTable {
             public void mouseExited(MouseEvent e) {
 //                System.out.println("鼠标退出");
                 currentRow = -1;
+                currentCol = -1;
+                currentPoint = null;
                 repaint();
             }
         });
@@ -407,7 +352,9 @@ class MyTable extends JTable {
              */
             @Override
             public void mouseMoved(MouseEvent e) {
-                currentRow = rowAtPoint(e.getPoint());
+                currentPoint = e.getPoint();
+                currentRow = rowAtPoint(currentPoint);
+                currentCol = columnAtPoint(currentPoint);
 //                System.out.println("鼠标在第" + currentRow + "行");
                 repaint();
             }
@@ -664,6 +611,79 @@ class MyPanel extends JPanel {
         this.add(myScrollPane);
     }
 
+}
+
+class MyButton extends JButton {
+
+    private boolean hasBeenSet = false;  // 按钮是否被按下
+    private ImageIcon setIcon;
+    private ImageIcon unsetIcon;
+
+    /**
+     * 初始化按钮
+     * @param unsetIconUrl 未被按下按钮的图标路径
+     * @param setIconUrl 被按下按钮的图标路径
+     */
+    public MyButton(String unsetIconUrl, String setIconUrl){
+        super();
+        setupIcons(unsetIconUrl, setIconUrl);
+        setupUI();
+    }
+
+    /**
+     * 初始化图标
+     */
+    private void setupIcons(String unsetIconUrl, String setIconUrl){
+        if (setIconUrl != null) this.setIcon = new ImageIcon(setIconUrl);
+        if (unsetIconUrl != null) this.unsetIcon = new ImageIcon(unsetIconUrl);
+    }
+
+    /**
+     * 重绘按钮
+     */
+    @Override
+    public void repaint() {
+        if (hasBeenSet) {
+            this.setIcon(setIcon);
+        }
+        else{
+            this.setIcon(unsetIcon);
+        }
+    }
+
+    /**
+     * 初始化按钮属性
+     */
+    private void setupUI(){
+        this.setPreferredSize(new Dimension(30, 30));
+        this.setText(null);
+        this.setBorderPainted(false);
+        this.setContentAreaFilled(false);
+
+        if (hasBeenSet) {
+            this.setIcon(setIcon);
+        }
+        else{
+            this.setIcon(unsetIcon);
+        }
+    }
+
+    /**
+     * 获取按钮状态
+     * @return true 被按下
+     *         false 未被按下
+     */
+    public boolean isHasBeenSet() {
+        return hasBeenSet;
+    }
+
+    /**
+     * 反转按钮状态并重绘
+     */
+    public void toggleStatus() {
+        this.hasBeenSet = !this.hasBeenSet;
+        repaint();
+    }
 }
 
 public class tableTest {
