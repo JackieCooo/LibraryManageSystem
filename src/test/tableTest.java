@@ -1,16 +1,11 @@
 package test;
 
 import javax.swing.*;
-import javax.swing.event.CellEditorListener;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.EventListenerList;
 import javax.swing.plaf.basic.BasicScrollBarUI;
-import javax.swing.plaf.basic.BasicSliderUI;
 import javax.swing.table.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Comparator;
-import java.util.EventObject;
 import java.util.Vector;
 
 /**
@@ -20,8 +15,7 @@ import java.util.Vector;
 class MyTable extends JTable {
 
     private int currentRow = -1;  // 记录鼠标当前悬停的行
-    private int currentCol = -1;  // 记录鼠标当前悬停的列
-    private Point currentPoint = null;
+    private Point currentPoint = null;  // 记录当前鼠标所在点
     private final Color focusColor = Color.LIGHT_GRAY;  // 鼠标悬停颜色
 
     /**
@@ -145,14 +139,25 @@ class MyTable extends JTable {
                 this.add(borrowBtn);
             }
 
+            /**
+             * 获取借阅按钮
+\             * @return 按钮对象
+             */
             public MyButton getBorrowBtn() {
                 return borrowBtn;
             }
 
+            /**
+             * 获取收藏按钮
+             * @return 按钮对象
+             */
             public MyButton getCollectBtn() {
                 return collectBtn;
             }
 
+            /**
+             * 初始化监听器
+             */
             abstract void setupListener();
         }
 
@@ -179,16 +184,16 @@ class MyTable extends JTable {
                         @Override
                         void setupListener() {
                             this.getBorrowBtn().addActionListener(e -> {
-                                System.out.println("借阅按钮按下");
+//                                System.out.println("借阅按钮按下");
                                 getBorrowBtn().toggleStatus();
                                 stopCellEditing();
-                                System.out.println(getBorrowBtn().isHasBeenSet());
+//                                System.out.println(getBorrowBtn().isHasBeenSet());
                             });
                             this.getCollectBtn().addActionListener(e -> {
-                                System.out.println("收藏按钮按下");
+//                                System.out.println("收藏按钮按下");
                                 getCollectBtn().toggleStatus();
                                 stopCellEditing();
-                                System.out.println(getCollectBtn().isHasBeenSet());
+//                                System.out.println(getCollectBtn().isHasBeenSet());
                             });
                         }
                     });
@@ -338,7 +343,6 @@ class MyTable extends JTable {
             public void mouseExited(MouseEvent e) {
 //                System.out.println("鼠标退出");
                 currentRow = -1;
-                currentCol = -1;
                 currentPoint = null;
                 repaint();
             }
@@ -354,7 +358,6 @@ class MyTable extends JTable {
             public void mouseMoved(MouseEvent e) {
                 currentPoint = e.getPoint();
                 currentRow = rowAtPoint(currentPoint);
-                currentCol = columnAtPoint(currentPoint);
 //                System.out.println("鼠标在第" + currentRow + "行");
                 repaint();
             }
