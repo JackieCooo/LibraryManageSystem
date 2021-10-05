@@ -1,26 +1,37 @@
 package gui.components;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
-/**
- * 最小化按钮类
- * @author Jackie
- */
-public class MinimizeBtn extends JButton {
+public class SettingBtn extends JButton {
 
-    private final int WIDTH = 20;
-    private final int HEIGHT = 20;
+    private BufferedImage normalIcon;
+    private BufferedImage focusIcon;
+    private final int WIDTH = 30;
+    private final int HEIGHT = 30;
     private boolean isFocus = false;
 
     /**
      * 初始化按钮
      */
-    public MinimizeBtn() {
+    public SettingBtn() throws IOException {
         super();
+        setupIcon();
         setupUI();
+    }
+
+    /**
+     * 初始化按钮图标
+     */
+    private void setupIcon() throws IOException {
+        normalIcon = ImageIO.read(new File("icons/SettingBtnNormal.png"));
+        focusIcon = ImageIO.read(new File("icons/SettingBtnFocus.png"));
     }
 
     /**
@@ -31,12 +42,11 @@ public class MinimizeBtn extends JButton {
     public void paint(Graphics g) {
         Graphics2D g2d = (Graphics2D)g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2d.setColor(new Color(88, 255, 228));
-        g2d.fillOval(0, 0, WIDTH, HEIGHT);
         if (isFocus) {
-            g2d.setColor(Color.WHITE);
-            g2d.setStroke(new BasicStroke(2, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
-            g2d.drawLine(6, 10, 14, 10);
+            g2d.drawImage(focusIcon, null, 0, 0);
+        }
+        else {
+            g2d.drawImage(normalIcon, null, 0, 0);
         }
     }
 
