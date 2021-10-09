@@ -1,5 +1,7 @@
 package gui.components;
 
+import gui.shared.LayoutColors;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -26,7 +28,7 @@ public class CancelBtn extends JButton {
     public void paint(Graphics g) {
         Graphics2D g2d = (Graphics2D)g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2d.setColor(new Color(254, 140, 130));
+        g2d.setColor(LayoutColors.DARKEST_BLUE);
         g2d.fillOval(0, 0, WIDTH, HEIGHT);
         g2d.setColor(Color.WHITE);
         g2d.setStroke(new BasicStroke(2, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
