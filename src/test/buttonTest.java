@@ -27,11 +27,11 @@ public class buttonTest {
         panel.setPreferredSize(new Dimension(900, 75));
 
         // 定制消息框关闭按钮
-        class MyBtn extends JButton {
+        class MessageCloseBtn extends JButton {
 
             private boolean isFocus = false;
 
-            public MyBtn(){
+            public MessageCloseBtn(){
                 super();
                 setupUI();
             }
@@ -90,31 +90,41 @@ public class buttonTest {
 
         }
 
-        class MyMessageContent extends JTextArea {
+        // 定制消息内容框
+        class MessageContent extends JTextArea {
 
-            public MyMessageContent(String mes){
+            public MessageContent(String mes){
                 super();
                 setupUI(mes);
             }
 
             private void setupUI(String displayText){
-                this.setPreferredSize(new Dimension(200, 100));
+                this.setPreferredSize(new Dimension(220, 100));
                 this.setFont(new Font("微软雅黑", Font.PLAIN, 12));
                 this.setText(displayText);
                 this.setEditable(false);
-                this.setOpaque(false);
+                this.setOpaque(true);
                 this.setBorder(null);
+                UIDefaults messageContentDefault = new UIDefaults();
+                messageContentDefault.put("TextArea.contentMargins", new Insets(10, 10, 10, 10));
+                messageContentDefault.put("TextArea[Enabled].backgroundPainter", (Painter<JComponent>)(g2d, c, width, height) -> {
+                    g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                    g2d.setColor(LayoutColors.BLUE);
+                    g2d.fillRoundRect(0, 0, width, height, 10, 10);
+                });
+                this.putClientProperty("Nimbus.Overrides", messageContentDefault);
+                this.putClientProperty("Nimbus.Overrides.InheritDefaults", false);
             }
 
         }
 
         // 定制消息框
-        class MyMessageBox extends JPanel {
+        class MessageBox extends JPanel {
 
-            private MyBtn closeBtn;
-            private MyMessageContent messageContent;
+            private MessageCloseBtn closeBtn;
+            private MessageContent messageContent;
 
-            public MyMessageBox(){
+            public MessageBox(){
                 super();
                 setupUI();
             }
@@ -133,9 +143,20 @@ public class buttonTest {
                 this.setBackground(LayoutColors.LIGHT_BLUE);
                 this.setLayout(new FormLayout("center:5px:noGrow,center:d:grow,center:5px:noGrow", "center:5px:noGrow,center:d:noGrow,center:10px:noGrow,center:d:noGrow,center:10px:noGrow"));
                 CellConstraints cc = new CellConstraints();
-                closeBtn = new MyBtn();
+
+                for (UIManager.LookAndFeelInfo laf : UIManager.getInstalledLookAndFeels()) {
+                    if ("Nimbus".equals(laf.getName())) {
+                        try {
+                            UIManager.setLookAndFeel(laf.getClassName());
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+
+                closeBtn = new MessageCloseBtn();
                 this.add(closeBtn, cc.xy(2, 2, CellConstraints.RIGHT, CellConstraints.DEFAULT));
-                messageContent = new MyMessageContent("这是消息");
+                messageContent = new MessageContent("这是消息");
                 this.add(messageContent, cc.xy(2, 4, CellConstraints.CENTER, CellConstraints.DEFAULT));
             }
         }
@@ -143,7 +164,7 @@ public class buttonTest {
         // 定制滚动面板内面板
         class MyPanel extends JPanel {
 
-            private LinkedList<MyMessageBox> mesList;  // 信息列表，存放每个消息框对象
+            private LinkedList<MessageBox> mesList;  // 信息列表，存放每个消息框对象
             private FormLayout formLayout;  // 信息界面布局
 
             public MyPanel(){
@@ -159,7 +180,7 @@ public class buttonTest {
                 this.setLayout(formLayout);
                 CellConstraints cc = new CellConstraints();
                 for (int i = 0, j = 2; i < 20; i++, j += 2) {
-                    MyMessageBox b = new MyMessageBox();
+                    MessageBox b = new MessageBox();
                     mesList.add(b);  // 加入列表
                     formLayout.appendRow(RowSpec.decode("center:d:noGrow"));
                     this.add(b, cc.xy(2, j, CellConstraints.CENTER, CellConstraints.DEFAULT));
