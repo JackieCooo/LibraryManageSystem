@@ -25,11 +25,17 @@ public class SearchPanelTest {
         // 定制文本输入框
         class SearchBox extends JTextField {
 
+            /**
+             * 初始化界面
+             */
             public SearchBox(){
                 super();
                 setupUI();
             }
 
+            /**
+             * 初始化界面属性
+             */
             private void setupUI(){
                 this.setPreferredSize(new Dimension(400, 40));
                 this.setFont(new Font("微软雅黑", Font.PLAIN, 14));
@@ -50,9 +56,13 @@ public class SearchPanelTest {
         // 定制搜索按钮
         class SearchBtn extends JButton {
 
+            private boolean isFocus = false;
             private BufferedImage focusIcon;
             private BufferedImage normalIcon;
 
+            /**
+             * 初始化界面
+             */
             public SearchBtn(){
                 super();
                 setupIcon();
@@ -60,6 +70,9 @@ public class SearchPanelTest {
                 setupListener();
             }
 
+            /**
+             * 初始化按钮图标
+             */
             private void setupIcon(){
                 try {
                     normalIcon = ImageIO.read(new File("icons/SearchBtnNormal.png"));
@@ -70,6 +83,10 @@ public class SearchPanelTest {
                 }
             }
 
+            /**
+             * 绘制按钮样式
+             * @param g 画笔对象
+             */
             @Override
             public void paint(Graphics g) {
                 Graphics2D g2d = (Graphics2D)g;
@@ -78,13 +95,25 @@ public class SearchPanelTest {
                 g2d.setColor(LayoutColors.LIGHT_BLUE);
                 g2d.fillRoundRect(0, 0, 40, 40, 20, 20);
                 g2d.fillRect(0, 0, 10, 40);
-                g2d.drawImage(normalIcon, 5, 5, null);
+                if (isFocus) g2d.drawImage(focusIcon, 10, 10, null);
+                else g2d.drawImage(normalIcon, 10, 10, null);
             }
 
+            public void toggleState(){
+                isFocus = !isFocus;
+                repaint();
+            }
+
+            /**
+             * 初始化界面属性
+             */
             private void setupUI(){
                 this.setPreferredSize(new Dimension(40, 40));
             }
 
+            /**
+             * 初始化监听器
+             */
             private void setupListener(){
                 this.addMouseListener(new MouseAdapter() {
                     @Override
@@ -94,18 +123,21 @@ public class SearchPanelTest {
 
                     @Override
                     public void mouseEntered(MouseEvent e) {
-
+                        setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+                        toggleState();
                     }
 
                     @Override
                     public void mouseExited(MouseEvent e) {
-
+                        setCursor(Cursor.getDefaultCursor());
+                        toggleState();
                     }
                 });
             }
 
         }
 
+        // 定制搜索面板
         class SearchPanel extends JPanel {
 
             private SearchBox searchBox;
