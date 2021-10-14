@@ -7,10 +7,7 @@ import java.awt.*;
  * @brief 登录窗口类
  * @author Jackie
  */
-public class LoginWindow {
-
-    private JFrame frame;
-    private JPanel loginWindow;
+public class LoginWindow extends JPanel{
 
     private AdminLoginPanel adminLoginPage;
     private StudentLoginPanel studentLoginPage;
@@ -19,27 +16,20 @@ public class LoginWindow {
     /**
      * 初始化页面
      */
-    public LoginWindow(){  // 初始化界面
-        frame = new JFrame();
-        frame.setBounds(100, 100, 400, 300);
+    public LoginWindow(){
 
-        loginWindow = new JPanel();
-        loginWindow.setLayout(new CardLayout(0, 0));
-        loginWindow.setPreferredSize(new Dimension(400, 300));
-        loginWindow.setVisible(true);
+        this.setLayout(new CardLayout(0, 0));
+        this.setPreferredSize(new Dimension(400, 300));
+        this.setVisible(true);
 
         studentLoginPage = new StudentLoginPanel();
-        loginWindow.add(studentLoginPage.getStudentLoginPanel(), "studentLoginPage");
+        this.add(studentLoginPage, "studentLoginPage");
 
         adminLoginPage = new AdminLoginPanel();
-        loginWindow.add(adminLoginPage.getAdminLoginPanel(), "adminLoginPage");
+        this.add(adminLoginPage, "adminLoginPage");
 
         studentSignUpPage = new StudentSignUpPanel();
-        loginWindow.add(studentSignUpPage.getSignUpPanel(), "studentSignUpPage");
+        this.add(studentSignUpPage, "studentSignUpPage");
 
-        frame.add(loginWindow);
-        frame.pack();
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.setVisible(true);
     }
 }
