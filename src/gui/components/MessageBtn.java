@@ -20,7 +20,7 @@ public class MessageBtn extends JButton {
     /**
      * 初始化按钮
      */
-    public MessageBtn() throws IOException {
+    public MessageBtn(){
         super();
         setupIcon();
         setupUI();
@@ -29,9 +29,13 @@ public class MessageBtn extends JButton {
     /**
      * 初始化按钮图标
      */
-    private void setupIcon() throws IOException {
-        normalIcon = ImageIO.read(new File("icons/MessageBtnNormal.png"));
-        focusIcon = ImageIO.read(new File("icons/MessageBtnFocus.png"));
+    private void setupIcon(){
+        try {
+            normalIcon = ImageIO.read(new File("icons/MessageBtnNormal.png"));
+            focusIcon = ImageIO.read(new File("icons/MessageBtnFocus.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -42,6 +46,7 @@ public class MessageBtn extends JButton {
     public void paint(Graphics g) {
         Graphics2D g2d = (Graphics2D)g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
         if (isFocus) {
             g2d.drawImage(focusIcon, null, 0, 0);
         }

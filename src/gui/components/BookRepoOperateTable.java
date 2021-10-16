@@ -143,7 +143,7 @@ public class BookRepoOperateTable extends JTable {
 
             /**
              * 获取借阅按钮
-             \             * @return 按钮对象
+             * @return 按钮对象
              */
             public TableControlBtn getBorrowBtn() {
                 return borrowBtn;

@@ -35,7 +35,7 @@ public class Test {
                 }
 
                 for (Map.Entry<Object, Object> entry : UIManager.getLookAndFeelDefaults().entrySet()) {
-                    if ((entry.getKey().toString()).startsWith("PasswordField")) {
+                    if ((entry.getKey().toString()).startsWith("Label")) {
                         System.out.println(entry.getKey() + " = " + entry.getValue());
                     }
                 }

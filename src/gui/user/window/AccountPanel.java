@@ -2,47 +2,42 @@ package gui.user.window;
 
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
+import gui.components.AccountOpBtn;
+import gui.components.AccountPic;
+import gui.shared.LayoutColors;
 
 import javax.swing.*;
-import javax.swing.border.TitledBorder;
 import java.awt.*;
 
 /**
  * 账号板块类
  * @author Jackie
  */
-public class AccountPanel {
+public class AccountPanel extends JPanel{
 
-    private JPanel accountPanel;
-    private JLabel userPic;
-    private JButton userName;
+    private AccountPic accountPic;
+    private AccountOpBtn accountOpBtn;
 
     /**
      * 初始化界面
      */
     public AccountPanel(){
-        CellConstraints cc = new CellConstraints();
-        accountPanel = new JPanel();
-        accountPanel.setLayout(new FormLayout("fill:d:noGrow,left:10dlu:noGrow,fill:d:noGrow", "center:max(d;4px):noGrow"));
-        accountPanel.setPreferredSize(new Dimension(200, 50));
-        accountPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEmptyBorder(0, 10, 0, 10), null, TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
-        userPic = new JLabel();
-        userPic.setHorizontalAlignment(0);
-        userPic.setHorizontalTextPosition(0);
-        userPic.setPreferredSize(new Dimension(50, 50));
-        userPic.setText("Label");
-        accountPanel.add(userPic, cc.xy(1, 1, CellConstraints.CENTER, CellConstraints.DEFAULT));
-        userName = new JButton();
-        userName.setPreferredSize(new Dimension(100, 30));
-        userName.setText("Button");
-        accountPanel.add(userName, cc.xy(3, 1, CellConstraints.CENTER, CellConstraints.DEFAULT));
+        super();
+        setupUI();
     }
 
     /**
-     * 获取账号板块部件
-     * @return JPanel
+     * 初始化界面属性
      */
-    public JPanel getAccountPanel(){
-        return accountPanel;
+    private void setupUI(){
+        CellConstraints cc = new CellConstraints();
+        this.setLayout(new FormLayout("center:d:noGrow,center:d:noGrow", "center:d:noGrow"));
+        this.setPreferredSize(new Dimension(200, 50));
+        this.setOpaque(false);
+        accountPic = new AccountPic("pics/user.jpg");
+        this.add(accountPic, cc.xy(1, 1, CellConstraints.CENTER, CellConstraints.DEFAULT));
+        accountOpBtn = new AccountOpBtn("马浩同学");
+        this.add(accountOpBtn, cc.xy(2, 1, CellConstraints.CENTER, CellConstraints.DEFAULT));
     }
+
 }

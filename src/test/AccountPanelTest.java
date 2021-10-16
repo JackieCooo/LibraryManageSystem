@@ -272,7 +272,7 @@ public class AccountPanelTest {
                 this.setPreferredSize(new Dimension(200, 50));
                 accountPic = new AccountPic("pics/user.jpg");
                 this.add(accountPic, cc.xy(1, 1, CellConstraints.CENTER, CellConstraints.DEFAULT));
-                accountOpBtn = new AccountOpBtn("红红火火恍恍惚惚或或或或");
+                accountOpBtn = new AccountOpBtn("马浩同学");
                 this.add(accountOpBtn, cc.xy(2, 1, CellConstraints.CENTER, CellConstraints.DEFAULT));
             }
 

@@ -29,13 +29,12 @@ public class UserFrame extends JFrame {
     private void setupUI(){
         this.setBounds(100, 100, 900, 675);
         topPanel = new TopPanel();
+        topPanel.setParentPanel(this);
         this.add(topPanel, BorderLayout.NORTH);
         mainWindow = new MainWindow();
         this.add(mainWindow);
-        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setResizable(false);
         this.setUndecorated(true);
-        this.pack();
         this.setVisible(true);
     }
 

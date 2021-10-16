@@ -1,5 +1,8 @@
 package gui.components;
 
+import gui.shared.ParentAvailable;
+import gui.shared.TopPanel;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -9,8 +12,9 @@ import java.awt.event.MouseEvent;
  * 最小化按钮类
  * @author Jackie
  */
-public class MinimizeBtn extends JButton {
+public class MinimizeBtn extends JButton implements ParentAvailable<TopPanel> {
 
+    private TopPanel parent;
     private final int WIDTH = 20;
     private final int HEIGHT = 20;
     private boolean isFocus = false;
@@ -31,7 +35,7 @@ public class MinimizeBtn extends JButton {
     public void paint(Graphics g) {
         Graphics2D g2d = (Graphics2D)g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2d.setColor(new Color(88, 255, 228));
+        g2d.setColor(new Color(70, 203, 177));
         g2d.fillOval(0, 0, WIDTH, HEIGHT);
         if (isFocus) {
             g2d.setColor(Color.WHITE);
@@ -85,8 +89,26 @@ public class MinimizeBtn extends JButton {
              */
             @Override
             public void mouseClicked(MouseEvent e) {
-
+                getParentPanel().getParentPanel().setState(Frame.ICONIFIED);
             }
         });
+    }
+
+    /**
+     * 设置父级
+     * @param obj 父级对象
+     */
+    @Override
+    public void setParentPanel(TopPanel obj) {
+        this.parent = obj;
+    }
+
+    /**
+     * 获取父级
+     * @return 返回父级对象
+     */
+    @Override
+    public TopPanel getParentPanel() {
+        return this.parent;
     }
 }

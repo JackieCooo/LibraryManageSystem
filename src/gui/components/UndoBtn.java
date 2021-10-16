@@ -18,33 +18,10 @@ public class UndoBtn extends JButton {
     public UndoBtn() {
         super();
         setupUI();
+        setupListener();
     }
 
-    /**
-     * 重绘按钮样式
-     * @param g 画图对象
-     */
-    @Override
-    public void paint(Graphics g) {
-        Graphics2D g2d = (Graphics2D)g;
-        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2d.setColor(LayoutColors.DARKEST_BLUE);
-        g2d.fillOval(0, 0, WIDTH, HEIGHT);
-        g2d.setColor(Color.WHITE);
-        g2d.setStroke(new BasicStroke(2, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
-        g2d.drawLine(12, 8, 19, 15);
-        g2d.drawLine(12, 22, 19, 15);
-    }
-
-    /**
-     * 初始化按钮属性
-     */
-    private void setupUI(){
-        this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
-        this.setText(null);
-        this.setBorderPainted(false);
-        this.setContentAreaFilled(false);
-
+    private void setupListener(){
         this.addMouseListener(new MouseAdapter() {
 
             /**
@@ -75,5 +52,36 @@ public class UndoBtn extends JButton {
             }
 
         });
+    }
+
+    /**
+     * 初始化按钮属性
+     */
+    private void setupUI(){
+        this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
+        this.setText(null);
+        this.setBorderPainted(false);
+
+        UIDefaults btnDefaults = new UIDefaults();
+        btnDefaults.put("Button.backgroundPainter", (Painter<JComponent>)(g2d, c, w, h) -> {
+            g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            g2d.setColor(LayoutColors.DARKEST_BLUE);
+            g2d.fillOval(0, 0, WIDTH, HEIGHT);
+            g2d.setColor(Color.WHITE);
+            g2d.setStroke(new BasicStroke(2, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
+            g2d.drawLine(12, 8, 19, 15);
+            g2d.drawLine(12, 22, 19, 15);
+        });
+        btnDefaults.put("Button[Disabled].backgroundPainter", (Painter<JComponent>)(g2d, c, w, h) -> {
+            g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            g2d.setColor(LayoutColors.DARKEST_BLUE);
+            g2d.fillOval(0, 0, WIDTH, HEIGHT);
+            g2d.setColor(LayoutColors.GRAY);
+            g2d.setStroke(new BasicStroke(2, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
+            g2d.drawLine(12, 8, 19, 15);
+            g2d.drawLine(12, 22, 19, 15);
+        });
+        this.putClientProperty("Nimbus.Overrides", btnDefaults);
+        this.putClientProperty("Nimbus.Overrides.InheritDefaults", false);
     }
 }
