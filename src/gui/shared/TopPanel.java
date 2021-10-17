@@ -78,8 +78,10 @@ public class TopPanel extends JPanel implements ParentAvailable<UserFrame>{
         undoBtn = new UndoBtn();
         this.add(undoBtn, cc.xy(5, 1, CellConstraints.CENTER, CellConstraints.CENTER));
         accountPanel = new AccountPanel();
+        accountPanel.setParentPanel(this);
         this.add(accountPanel, cc.xy(7, 1));
         mailboxBtn = new MessageBtn();
+        mailboxBtn.setParentPanel(this);
         this.add(mailboxBtn, cc.xy(9, 1, CellConstraints.CENTER, CellConstraints.DEFAULT));
         settingBtn = new SettingBtn();
         this.add(settingBtn, cc.xy(11, 1, CellConstraints.CENTER, CellConstraints.DEFAULT));

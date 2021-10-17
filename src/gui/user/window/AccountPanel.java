@@ -5,6 +5,8 @@ import com.jgoodies.forms.layout.FormLayout;
 import gui.components.AccountOpBtn;
 import gui.components.AccountPic;
 import gui.shared.LayoutColors;
+import gui.shared.ParentAvailable;
+import gui.shared.TopPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,10 +15,11 @@ import java.awt.*;
  * 账号板块类
  * @author Jackie
  */
-public class AccountPanel extends JPanel{
+public class AccountPanel extends JPanel implements ParentAvailable<TopPanel> {
 
     private AccountPic accountPic;
     private AccountOpBtn accountOpBtn;
+    private TopPanel parent;
 
     /**
      * 初始化界面
@@ -24,6 +27,24 @@ public class AccountPanel extends JPanel{
     public AccountPanel(){
         super();
         setupUI();
+    }
+
+    /**
+     * 设置父级
+     * @param obj 父级对象
+     */
+    @Override
+    public void setParentPanel(TopPanel obj) {
+        parent = obj;
+    }
+
+    /**
+     * 获取父级
+     * @return 返回父级对象
+     */
+    @Override
+    public TopPanel getParentPanel() {
+        return parent;
     }
 
     /**
@@ -37,7 +58,7 @@ public class AccountPanel extends JPanel{
         accountPic = new AccountPic("pics/user.jpg");
         this.add(accountPic, cc.xy(1, 1, CellConstraints.CENTER, CellConstraints.DEFAULT));
         accountOpBtn = new AccountOpBtn("马浩同学");
+        accountOpBtn.setParentPanel(this);
         this.add(accountOpBtn, cc.xy(2, 1, CellConstraints.CENTER, CellConstraints.DEFAULT));
     }
-
 }

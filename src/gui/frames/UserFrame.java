@@ -27,7 +27,7 @@ public class UserFrame extends JFrame {
      * 初始化界面属性
      */
     private void setupUI(){
-        this.setBounds(100, 100, 900, 675);
+        this.setBounds(0, 0, 900, 675);
         topPanel = new TopPanel();
         topPanel.setParentPanel(this);
         this.add(topPanel, BorderLayout.NORTH);
@@ -35,6 +35,7 @@ public class UserFrame extends JFrame {
         this.add(mainWindow);
         this.setResizable(false);
         this.setUndecorated(true);
+        this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
 

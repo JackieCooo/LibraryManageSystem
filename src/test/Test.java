@@ -35,7 +35,7 @@ public class Test {
                 }
 
                 for (Map.Entry<Object, Object> entry : UIManager.getLookAndFeelDefaults().entrySet()) {
-                    if ((entry.getKey().toString()).startsWith("Label")) {
+                    if ((entry.getKey().toString()).startsWith("ScrollBar")) {
                         System.out.println(entry.getKey() + " = " + entry.getValue());
                     }
                 }
