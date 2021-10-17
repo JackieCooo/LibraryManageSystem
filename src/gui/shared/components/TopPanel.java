@@ -1,9 +1,11 @@
-package gui.shared;
+package gui.shared.components;
 
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 import gui.components.*;
 import gui.frames.UserFrame;
+import gui.shared.LayoutColors;
+import gui.shared.ParentAvailable;
 import gui.user.window.AccountPanel;
 
 import javax.swing.*;
@@ -17,7 +19,7 @@ import java.awt.event.MouseMotionAdapter;
  * 顶部板块类
  * @author Jackie
  */
-public class TopPanel extends JPanel implements ParentAvailable<UserFrame>{
+public class TopPanel extends JPanel implements ParentAvailable<UserFrame> {
 
     private Point originPoint = new Point();
     private UserFrame parent;

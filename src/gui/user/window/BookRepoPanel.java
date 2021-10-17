@@ -1,6 +1,6 @@
 package gui.user.window;
 
-import gui.shared.SearchPanel;
+import gui.shared.components.SearchPanel;
 
 import javax.swing.*;
 import java.awt.*;

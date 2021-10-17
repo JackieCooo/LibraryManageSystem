@@ -1,7 +1,6 @@
 package gui.admin.window;
 
-import com.jgoodies.forms.layout.FormLayout;
-import gui.shared.SearchPanel;
+import gui.shared.components.SearchPanel;
 
 import javax.swing.*;
 import java.awt.*;

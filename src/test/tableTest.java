@@ -577,16 +577,10 @@ class MyScrollPane extends JScrollPane {
     }
 
     /**
-     * 空实现，去掉边框
-     * @param g 图形对象
-     */
-    @Override
-    protected void paintBorder(Graphics g) {}
-
-    /**
      * 初始化界面属性
      */
     private void setupUI(){
+        this.setBorder(null);
         this.setOpaque(true);
         this.setBackground(Color.WHITE);
         this.setPreferredSize(new Dimension(880, 530));

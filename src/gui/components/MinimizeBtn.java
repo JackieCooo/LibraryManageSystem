@@ -1,7 +1,7 @@
 package gui.components;
 
 import gui.shared.ParentAvailable;
-import gui.shared.TopPanel;
+import gui.shared.components.TopPanel;
 
 import javax.swing.*;
 import java.awt.*;

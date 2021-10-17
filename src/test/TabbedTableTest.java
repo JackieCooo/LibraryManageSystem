@@ -7,7 +7,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.plaf.basic.BasicTabbedPaneUI;
 import java.awt.*;
 
-public class TappedTableTest {
+public class TabbedTableTest {
 
     public static void main(String[] args) {
 

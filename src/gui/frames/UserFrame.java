@@ -1,7 +1,7 @@
 package gui.frames;
 
 import gui.user.window.MainWindow;
-import gui.shared.TopPanel;
+import gui.shared.components.TopPanel;
 
 import javax.swing.*;
 import java.awt.*;

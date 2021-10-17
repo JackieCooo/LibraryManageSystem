@@ -1,4 +1,4 @@
-package gui.shared;
+package gui.shared.components;
 
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;

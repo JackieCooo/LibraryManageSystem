@@ -4,9 +4,8 @@ import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 import gui.components.AccountOpBtn;
 import gui.components.AccountPic;
-import gui.shared.LayoutColors;
 import gui.shared.ParentAvailable;
-import gui.shared.TopPanel;
+import gui.shared.components.TopPanel;
 
 import javax.swing.*;
 import java.awt.*;
