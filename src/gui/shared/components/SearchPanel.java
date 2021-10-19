@@ -2,6 +2,8 @@ package gui.shared.components;
 
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
+import gui.components.SearchBox;
+import gui.components.SearchBtn;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,8 +14,8 @@ import java.awt.*;
  */
 public class SearchPanel extends JPanel {
 
-    private JTextField searchBox;
-    private JButton searchBtn;
+    private SearchBox searchBox;
+    private SearchBtn searchBtn;
 
     /**
      * 初始化界面
@@ -29,11 +31,9 @@ public class SearchPanel extends JPanel {
     private void setupUI(){
         this.setLayout(new FormLayout("center:d:Grow,center:d:Grow", "center:d:noGrow"));
         CellConstraints cc = new CellConstraints();
-        searchBox = new JTextField();
-        searchBox.setPreferredSize(new Dimension(400, 40));
+        searchBox = new SearchBox();
         this.add(searchBox, cc.xy(1, 1, CellConstraints.RIGHT, CellConstraints.CENTER));
-        searchBtn = new JButton();
-        searchBtn.setPreferredSize(new Dimension(40, 40));
+        searchBtn = new SearchBtn();
         this.add(searchBtn, cc.xy(2, 1, CellConstraints.LEFT, CellConstraints.CENTER));
     }
 

@@ -12,7 +12,7 @@ import java.awt.*;
 public class BookRepoPanel extends JPanel {
 
     SearchPanel searchPanel;
-    OperateTable resultTable;
+    OpTablePanel resultTable;
 
     /**
      * 初始化界面
@@ -30,7 +30,7 @@ public class BookRepoPanel extends JPanel {
         searchPanel = new SearchPanel();
         searchPanel.setPreferredSize(new Dimension(900, 50));
         this.add(searchPanel, BorderLayout.NORTH);
-        resultTable = new OperateTable();
+        resultTable = new OpTablePanel();
         this.add(resultTable);
     }
 

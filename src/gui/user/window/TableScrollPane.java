@@ -1,6 +1,6 @@
 package gui.user.window;
 
-import gui.components.BookRepoOperateTable;
+import gui.components.BookRepoOpTable;
 
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicScrollBarUI;
@@ -13,7 +13,7 @@ import java.awt.event.MouseEvent;
  */
 public class TableScrollPane extends JScrollPane {
 
-    private BookRepoOperateTable table;
+    private BookRepoOpTable table;
 
     /**
      * 滚动条UI类
@@ -186,7 +186,7 @@ public class TableScrollPane extends JScrollPane {
         this.setPreferredSize(new Dimension(880, 530));
         this.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         this.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        table = new BookRepoOperateTable();
+        table = new BookRepoOpTable();
         this.setViewportView(table);
         this.getVerticalScrollBar().setUI(new TableScrollPane.MyScrollBarUI());
     }

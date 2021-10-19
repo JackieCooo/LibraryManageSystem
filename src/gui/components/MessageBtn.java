@@ -342,13 +342,6 @@ class MyScrollPane extends CustomScrollPane {
      */
     public MyScrollPane(){
         super(CustomScrollPane.VERTICAL, 300, 600);
-        setupUI();
-    }
-
-    /**
-     * 初始化界面属性
-     */
-    private void setupUI(){
         messagePanel = new MessagePanel();
         this.setViewportView(messagePanel);
     }

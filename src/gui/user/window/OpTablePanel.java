@@ -1,5 +1,8 @@
 package gui.user.window;
 
+import gui.components.BookRepoOpTable;
+import gui.shared.components.CustomScrollPane;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -7,18 +10,18 @@ import java.awt.*;
  * 结果表格类
  * @author Jackie
  */
-public class OperateTable extends JPanel {
+public class OpTablePanel extends JPanel {
 
     private final int WIDTH = 880;
     private final int HEIGHT = 530;
 
-    private JScrollPane scrollPane;
-    private JTable table;
+    private CustomScrollPane scrollPane;
+    private BookRepoOpTable table;
 
     /**
      * 初始化界面
      */
-    public OperateTable(){
+    public OpTablePanel(){
         super();
         setupUI();
     }
@@ -29,12 +32,9 @@ public class OperateTable extends JPanel {
     private void setupUI(){
         this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
 
-        scrollPane = new JScrollPane();
-        scrollPane.setPreferredSize(new Dimension(WIDTH, HEIGHT));
+        scrollPane = new CustomScrollPane(CustomScrollPane.VERTICAL, WIDTH, HEIGHT);
 
-        table = new JTable();
-        table.setPreferredSize(new Dimension(WIDTH, HEIGHT));
-        table.setPreferredScrollableViewportSize(new Dimension(WIDTH, HEIGHT));
+        table = new BookRepoOpTable();
 
         scrollPane.add(table);
 

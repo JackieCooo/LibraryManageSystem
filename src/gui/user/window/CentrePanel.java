@@ -8,24 +8,37 @@ import javax.swing.border.TitledBorder;
 import javax.swing.plaf.basic.BasicTabbedPaneUI;
 import java.awt.*;
 
-class MyScrollPane extends CustomScrollPane {
+/**
+ * 滚动面板内面板类
+ * @author Jackie
+ */
+class InsidePanel extends JPanel {
 
-    public MyScrollPane() {
-        super(CustomScrollPane.HORIZONTAL, 390, 290);
+    public InsidePanel(){
+        super();
         setupUI();
     }
 
     private void setupUI(){
-
+        this.setOpaque(true);
+        this.setBackground(Color.WHITE);
+        this.setLayout(new FlowLayout(FlowLayout.LEFT, 30, 30));
     }
 
 }
 
+/**
+ * 中间面板类
+ * @author Jackie
+ */
 public class CentrePanel extends JTabbedPane {
 
-    private JPanel recommendPage;
-    private JPanel bookChartPage;
-    private JPanel latestBookPage;
+    private CustomScrollPane recommendPanel;
+    private CustomScrollPane chartPanel;
+    private CustomScrollPane latestPanel;
+    private InsidePanel recommendPage;
+    private InsidePanel chartPage;
+    private InsidePanel latestPage;
 
     /**
      * 初始化界面
@@ -41,17 +54,28 @@ public class CentrePanel extends JTabbedPane {
     private void setupUI(){
         this.setPreferredSize(new Dimension(900, 325));
         this.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEmptyBorder(0, 10, 0, 10), null, TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
-        this.setFont(new Font("黑体", Font.BOLD, 18));
         this.setOpaque(true);
-        recommendPage = new JPanel();
-        recommendPage.add(new JLabel("label1"));
-        this.addTab("推荐", recommendPage);
-        bookChartPage = new JPanel();
-        bookChartPage.add(new JLabel("label2"));
-        this.addTab("排行榜", bookChartPage);
-        latestBookPage = new JPanel();
-        latestBookPage.add(new JLabel("label3"));
-        this.addTab("最新", latestBookPage);
+        this.setBackground(Color.WHITE);
+
+        recommendPanel = new CustomScrollPane(CustomScrollPane.HORIZONTAL, 900, 250);
+        recommendPage = new InsidePanel();
+        recommendPanel.setViewportView(recommendPage);
+        for (int i = 0; i < 10; i++) {
+            BookDisplay b = new BookDisplay(Integer.toString(i));
+            recommendPage.add(b);
+        }
+        this.add(recommendPanel, "推荐");
+
+        chartPanel = new CustomScrollPane(CustomScrollPane.HORIZONTAL, 900, 250);
+        chartPage = new InsidePanel();
+        chartPanel.setViewportView(chartPage);
+        this.add(chartPanel, "排行榜");
+
+        latestPanel = new CustomScrollPane(CustomScrollPane.HORIZONTAL, 900, 250);
+        latestPage = new InsidePanel();
+        latestPanel.setViewportView(latestPage);
+        this.add(latestPanel, "最新");
+
 
         // 定制选项卡窗口UI样式
         class TabbedPaneUI extends BasicTabbedPaneUI {

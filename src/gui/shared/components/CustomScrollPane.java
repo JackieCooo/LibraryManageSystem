@@ -1,5 +1,7 @@
 package gui.shared.components;
 
+import gui.shared.LayoutColors;
+
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 import java.awt.*;
@@ -11,10 +13,10 @@ import java.awt.event.MouseEvent;
  */
 public class CustomScrollPane extends JScrollPane {
 
-    protected final static int VERTICAL = 0;
-    protected final static int HORIZONTAL = 1;
-    protected final static int VERTICAL_AND_HORIZONTAL = 2;
-    protected final static int NONE = 3;
+    public final static int VERTICAL = 0;
+    public final static int HORIZONTAL = 1;
+    public final static int VERTICAL_AND_HORIZONTAL = 2;
+    public final static int NONE = 3;
 
     /**
      * 滚动条UI类
@@ -39,9 +41,9 @@ public class CustomScrollPane extends JScrollPane {
                 Rectangle r = getThumbBounds();
                 // 如果鼠标释放时，鼠标在滑块内，视为鼠标悬停；否则，视为鼠标未进入窗口
                 if (getThumbBounds().contains(e.getPoint())) {
-                    thumbColor = Color.GRAY;
+                    thumbColor = LayoutColors.LIGHT_GRAY;
                 } else {
-                    thumbColor = Color.LIGHT_GRAY;
+                    thumbColor = LayoutColors.LIGHTEST_GRAY;
                 }
                 scrollbar.repaint(r);
             }
@@ -53,7 +55,7 @@ public class CustomScrollPane extends JScrollPane {
             @Override
             public void mousePressed(MouseEvent e) {
 //                System.out.println("鼠标按下");
-                thumbColor = Color.DARK_GRAY;
+                thumbColor = LayoutColors.GRAY;
                 super.mousePressed(e);
             }
 
@@ -67,7 +69,7 @@ public class CustomScrollPane extends JScrollPane {
                 Rectangle r = getThumbBounds();
                 // 如果鼠标进入时不在滑块范围内，不变色
                 if (getThumbBounds().contains(e.getPoint())) {
-                    thumbColor = Color.GRAY;
+                    thumbColor = LayoutColors.LIGHT_GRAY;
                     scrollbar.repaint(r);
                 }
             }
@@ -82,7 +84,7 @@ public class CustomScrollPane extends JScrollPane {
                 super.mouseExited(e);
                 if (isDragging) return;  // 鼠标拖动时移出窗口不变颜色
                 Rectangle r = getThumbBounds();
-                thumbColor = Color.LIGHT_GRAY;
+                thumbColor = LayoutColors.LIGHTEST_GRAY;
                 scrollbar.repaint(r);
             }
         }
@@ -94,7 +96,7 @@ public class CustomScrollPane extends JScrollPane {
         protected void configureScrollBarColors() {
             super.configureScrollBarColors();
             trackColor = Color.WHITE;
-            thumbColor = Color.LIGHT_GRAY;
+            thumbColor = LayoutColors.LIGHTEST_GRAY;
             thumbHighlightColor = Color.WHITE;
             thumbLightShadowColor = Color.WHITE;
             thumbDarkShadowColor = Color.WHITE;

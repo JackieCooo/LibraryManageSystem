@@ -1,19 +1,98 @@
 package gui.components;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.table.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.Comparator;
 import java.util.Vector;
+
+/**
+ * 表格控制按钮类
+ * @author Jackie
+ */
+class TableBtn extends JButton {
+
+    private boolean hasBeenSet = false;  // 按钮是否被按下
+    private BufferedImage setIcon;
+    private BufferedImage unsetIcon;
+
+    /**
+     * 初始化按钮
+     * @param unsetIconUrl 未被按下按钮的图标路径
+     * @param setIconUrl 被按下按钮的图标路径
+     */
+    public TableBtn(String unsetIconUrl, String setIconUrl){
+        super();
+        setupIcons(unsetIconUrl, setIconUrl);
+        setupUI();
+    }
+
+    /**
+     * 初始化图标
+     */
+    private void setupIcons(String unsetIconUrl, String setIconUrl){
+        try {
+            setIcon = ImageIO.read(new File(setIconUrl));
+            unsetIcon = ImageIO.read(new File(unsetIconUrl));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 初始化按钮属性
+     */
+    private void setupUI(){
+        this.setPreferredSize(new Dimension(30, 30));
+        this.setText(null);
+        this.setBorderPainted(false);
+
+        UIDefaults btnDefaults = new UIDefaults();
+        btnDefaults.put("Button.backgroundPainter", (Painter<JComponent>)(g2d, c, w, h) -> {
+            g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+            if (hasBeenSet) {
+                g2d.drawImage(setIcon, 0, 0, null);
+            }
+            else{
+                g2d.drawImage(unsetIcon, 0, 0, null);
+            }
+        });
+        this.putClientProperty("Nimbus.Overrides", btnDefaults);
+        this.putClientProperty("Nimbus.Overrides.InheritDefaults", false);
+
+    }
+
+    /**
+     * 获取按钮状态
+     * @return true 被按下
+     *         false 未被按下
+     */
+    public boolean isHasBeenSet() {
+        return hasBeenSet;
+    }
+
+    /**
+     * 反转按钮状态并重绘
+     */
+    public void toggleStatus() {
+        this.hasBeenSet = !this.hasBeenSet;
+        repaint();
+    }
+}
 
 /**
  * 书库操作面板类
  * @author Jackie
  */
-public class BookRepoOperateTable extends JTable {
+public class BookRepoOpTable extends JTable {
 
 
     private int currentRow = -1;  // 记录鼠标当前悬停的行
@@ -23,7 +102,7 @@ public class BookRepoOperateTable extends JTable {
     /**
      * 初始化界面
      */
-    public BookRepoOperateTable(){
+    public BookRepoOpTable(){
         super();
         setupUI();
     }
@@ -114,8 +193,8 @@ public class BookRepoOperateTable extends JTable {
         // 定制控制面板
         abstract class MyControlPanel extends JPanel {
 
-            private TableControlBtn borrowBtn;
-            private TableControlBtn collectBtn;
+            private TableBtn borrowBtn;
+            private TableBtn collectBtn;
 
             /**
              * 初始化界面
@@ -134,10 +213,10 @@ public class BookRepoOperateTable extends JTable {
                 this.setPreferredSize(new Dimension(150, 30));
                 this.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 5));
 
-                collectBtn = new TableControlBtn("icons/Uncollected.png", "icons/Collected.png");
+                collectBtn = new TableBtn("icons/Uncollected.png", "icons/Collected.png");
                 this.add(collectBtn);
 
-                borrowBtn = new TableControlBtn("icons/Unborrowed.png", "icons/Borrowed.png");
+                borrowBtn = new TableBtn("icons/Unborrowed.png", "icons/Borrowed.png");
                 this.add(borrowBtn);
             }
 
@@ -145,7 +224,7 @@ public class BookRepoOperateTable extends JTable {
              * 获取借阅按钮
              * @return 按钮对象
              */
-            public TableControlBtn getBorrowBtn() {
+            public TableBtn getBorrowBtn() {
                 return borrowBtn;
             }
 
@@ -153,7 +232,7 @@ public class BookRepoOperateTable extends JTable {
              * 获取收藏按钮
              * @return 按钮对象
              */
-            public TableControlBtn getCollectBtn() {
+            public TableBtn getCollectBtn() {
                 return collectBtn;
             }
 
@@ -332,6 +411,7 @@ public class BookRepoOperateTable extends JTable {
         this.setFocusable(true);
         this.setOpaque(true);
         this.setShowGrid(false);
+        this.setPreferredSize(new Dimension(880, 530));
         this.setIntercellSpacing(new Dimension(0, 1));  // 设置只保留水平网格线
 
         // 定制鼠标事件
