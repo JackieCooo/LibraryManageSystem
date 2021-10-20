@@ -9,29 +9,30 @@ import javax.swing.plaf.basic.BasicTabbedPaneUI;
 import java.awt.*;
 
 /**
- * 滚动面板内面板类
- * @author Jackie
- */
-class InsidePanel extends JPanel {
-
-    public InsidePanel(){
-        super();
-        setupUI();
-    }
-
-    private void setupUI(){
-        this.setOpaque(true);
-        this.setBackground(Color.WHITE);
-        this.setLayout(new FlowLayout(FlowLayout.LEFT, 30, 30));
-    }
-
-}
-
-/**
  * 中间面板类
  * @author Jackie
  */
 public class CentrePanel extends JTabbedPane {
+
+    /**
+     * 滚动面板内面板类
+     * @author Jackie
+     */
+    class InsidePanel extends JPanel {
+
+        public InsidePanel(){
+            super();
+            setupUI();
+        }
+
+        private void setupUI(){
+            this.setOpaque(true);
+            this.setBackground(Color.WHITE);
+            this.setLayout(new FlowLayout(FlowLayout.LEFT, 30, 30));
+        }
+
+    }
+
 
     private CustomScrollPane recommendPanel;
     private CustomScrollPane chartPanel;

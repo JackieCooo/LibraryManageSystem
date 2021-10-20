@@ -1,6 +1,6 @@
 package gui.frames;
 
-import gui.user.window.MainWindow;
+import gui.user.window.MainPanel;
 import gui.shared.components.TopPanel;
 
 import javax.swing.*;
@@ -12,7 +12,7 @@ import java.awt.*;
  */
 public class UserFrame extends JFrame {
 
-    private MainWindow mainWindow;
+    private MainPanel mainWindow;
     private TopPanel topPanel;
 
     /**
@@ -24,6 +24,14 @@ public class UserFrame extends JFrame {
     }
 
     /**
+     * 获取主窗口
+     * @return 返回主窗口
+     */
+    public MainPanel getMainWindow() {
+        return mainWindow;
+    }
+
+    /**
      * 初始化界面属性
      */
     private void setupUI(){
@@ -31,7 +39,7 @@ public class UserFrame extends JFrame {
         topPanel = new TopPanel();
         topPanel.setParentPanel(this);
         this.add(topPanel, BorderLayout.NORTH);
-        mainWindow = new MainWindow();
+        mainWindow = new MainPanel();
         this.add(mainWindow);
         this.setResizable(false);
         this.setUndecorated(true);

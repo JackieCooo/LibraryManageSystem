@@ -56,7 +56,7 @@ public class SearchBtn extends JButton {
             g2d.setColor(LayoutColors.LIGHT_BLUE);
             g2d.fillRoundRect(0, 0, 40, 40, 20, 20);
             g2d.fillRect(0, 0, 10, 40);
-            g2d.drawImage(normalIcon, 0, 0, null);
+            g2d.drawImage(normalIcon, 10, 10, null);
         });
         btnDefaults.put("Button[MouseOver].backgroundPainter", (Painter<JComponent>)(g2d, c, w, h) -> {
             g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -64,7 +64,7 @@ public class SearchBtn extends JButton {
             g2d.setColor(LayoutColors.LIGHT_BLUE);
             g2d.fillRoundRect(0, 0, 40, 40, 20, 20);
             g2d.fillRect(0, 0, 10, 40);
-            g2d.drawImage(focusIcon, 0, 0, null);
+            g2d.drawImage(focusIcon, 10, 10, null);
         });
         this.putClientProperty("Nimbus.Overrides", btnDefaults);
         this.putClientProperty("Nimbus.Overrides.InheritDefaults", false);

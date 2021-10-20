@@ -33,10 +33,8 @@ public class OpTablePanel extends JPanel {
         this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
 
         scrollPane = new CustomScrollPane(CustomScrollPane.VERTICAL, WIDTH, HEIGHT);
-
         table = new BookRepoOpTable();
-
-        scrollPane.add(table);
+        scrollPane.setViewportView(table);
 
         this.add(scrollPane);
     }

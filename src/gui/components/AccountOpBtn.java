@@ -10,69 +10,74 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 /**
- * 用户消息按钮弹出窗口
+ * 用户账号操作按钮类
  * @author Jackie
  */
-class AccountOpPopupMenu extends JPopupMenu{
-
-    private JMenuItem checkoutBtn;
-
-    /**
-     * 初始化界面
-     */
-    public AccountOpPopupMenu(){
-        super();
-        setupUI();
-    }
-
-    /**
-     * 初始化界面属性
-     */
-    private void setupUI(){
-        this.setPreferredSize(new Dimension(100, 40));
-        this.setOpaque(true);
-        this.setBorderPainted(false);
-        this.setBackground(Color.WHITE);
-        checkoutBtn = new JMenuItem("登出");
-        checkoutBtn.setFont(new Font("微软雅黑", Font.PLAIN, 14));
-        checkoutBtn.setHorizontalAlignment(SwingConstants.CENTER);
-        checkoutBtn.setHorizontalTextPosition(SwingConstants.CENTER);
-        checkoutBtn.addMouseListener(new MouseAdapter() {
-
-            /**
-             * 设置鼠标点击后退回登录界面
-             * @param e 鼠标事件对象
-             */
-            @Override
-            public void mouseClicked(MouseEvent e) {
-
-            }
-
-            /**
-             * 设置鼠标悬停指针样式
-             * @param e 鼠标事件对象
-             */
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-            }
-
-            /**
-             * 设置鼠标非悬停指针样式
-             * @param e 鼠标事件对象
-             */
-            @Override
-            public void mouseExited(MouseEvent e) {
-                setCursor(Cursor.getDefaultCursor());
-            }
-
-        });
-        this.add(checkoutBtn);
-    }
-
-}
-
 public class AccountOpBtn extends JButton implements ParentAvailable<AccountPanel> {
+
+    /**
+     * 用户消息按钮弹出窗口
+     * @author Jackie
+     */
+    class AccountOpPopupMenu extends JPopupMenu{
+
+        private JMenuItem checkoutBtn;
+
+        /**
+         * 初始化界面
+         */
+        public AccountOpPopupMenu(){
+            super();
+            setupUI();
+        }
+
+        /**
+         * 初始化界面属性
+         */
+        private void setupUI(){
+            this.setPreferredSize(new Dimension(100, 40));
+            this.setOpaque(true);
+            this.setBorderPainted(false);
+            this.setBackground(Color.WHITE);
+            checkoutBtn = new JMenuItem("登出");
+            checkoutBtn.setFont(new Font("微软雅黑", Font.PLAIN, 14));
+            checkoutBtn.setHorizontalAlignment(SwingConstants.CENTER);
+            checkoutBtn.setHorizontalTextPosition(SwingConstants.CENTER);
+            checkoutBtn.addMouseListener(new MouseAdapter() {
+
+                /**
+                 * 设置鼠标点击后退回登录界面
+                 * @param e 鼠标事件对象
+                 */
+                @Override
+                public void mouseClicked(MouseEvent e) {
+
+                }
+
+                /**
+                 * 设置鼠标悬停指针样式
+                 * @param e 鼠标事件对象
+                 */
+                @Override
+                public void mouseEntered(MouseEvent e) {
+                    setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+                }
+
+                /**
+                 * 设置鼠标非悬停指针样式
+                 * @param e 鼠标事件对象
+                 */
+                @Override
+                public void mouseExited(MouseEvent e) {
+                    setCursor(Cursor.getDefaultCursor());
+                }
+
+            });
+            this.add(checkoutBtn);
+        }
+
+    }
+
 
     private final AccountOpPopupMenu popupMenu = new AccountOpPopupMenu();
     private AccountPanel parent;

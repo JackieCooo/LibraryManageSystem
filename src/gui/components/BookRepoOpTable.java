@@ -14,85 +14,85 @@ import java.util.Comparator;
 import java.util.Vector;
 
 /**
- * 表格控制按钮类
- * @author Jackie
- */
-class TableBtn extends JButton {
-
-    private boolean hasBeenSet = false;  // 按钮是否被按下
-    private BufferedImage setIcon;
-    private BufferedImage unsetIcon;
-
-    /**
-     * 初始化按钮
-     * @param unsetIconUrl 未被按下按钮的图标路径
-     * @param setIconUrl 被按下按钮的图标路径
-     */
-    public TableBtn(String unsetIconUrl, String setIconUrl){
-        super();
-        setupIcons(unsetIconUrl, setIconUrl);
-        setupUI();
-    }
-
-    /**
-     * 初始化图标
-     */
-    private void setupIcons(String unsetIconUrl, String setIconUrl){
-        try {
-            setIcon = ImageIO.read(new File(setIconUrl));
-            unsetIcon = ImageIO.read(new File(unsetIconUrl));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * 初始化按钮属性
-     */
-    private void setupUI(){
-        this.setPreferredSize(new Dimension(30, 30));
-        this.setText(null);
-        this.setBorderPainted(false);
-
-        UIDefaults btnDefaults = new UIDefaults();
-        btnDefaults.put("Button.backgroundPainter", (Painter<JComponent>)(g2d, c, w, h) -> {
-            g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-            if (hasBeenSet) {
-                g2d.drawImage(setIcon, 0, 0, null);
-            }
-            else{
-                g2d.drawImage(unsetIcon, 0, 0, null);
-            }
-        });
-        this.putClientProperty("Nimbus.Overrides", btnDefaults);
-        this.putClientProperty("Nimbus.Overrides.InheritDefaults", false);
-
-    }
-
-    /**
-     * 获取按钮状态
-     * @return true 被按下
-     *         false 未被按下
-     */
-    public boolean isHasBeenSet() {
-        return hasBeenSet;
-    }
-
-    /**
-     * 反转按钮状态并重绘
-     */
-    public void toggleStatus() {
-        this.hasBeenSet = !this.hasBeenSet;
-        repaint();
-    }
-}
-
-/**
  * 书库操作面板类
  * @author Jackie
  */
 public class BookRepoOpTable extends JTable {
+
+    /**
+     * 表格控制按钮类
+     * @author Jackie
+     */
+    class TableBtn extends JButton {
+
+        private boolean hasBeenSet = false;  // 按钮是否被按下
+        private BufferedImage setIcon;
+        private BufferedImage unsetIcon;
+
+        /**
+         * 初始化按钮
+         * @param unsetIconUrl 未被按下按钮的图标路径
+         * @param setIconUrl 被按下按钮的图标路径
+         */
+        public TableBtn(String unsetIconUrl, String setIconUrl){
+            super();
+            setupIcons(unsetIconUrl, setIconUrl);
+            setupUI();
+        }
+
+        /**
+         * 初始化图标
+         */
+        private void setupIcons(String unsetIconUrl, String setIconUrl){
+            try {
+                setIcon = ImageIO.read(new File(setIconUrl));
+                unsetIcon = ImageIO.read(new File(unsetIconUrl));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        /**
+         * 初始化按钮属性
+         */
+        private void setupUI(){
+            this.setPreferredSize(new Dimension(30, 30));
+            this.setText(null);
+            this.setBorderPainted(false);
+
+            UIDefaults btnDefaults = new UIDefaults();
+            btnDefaults.put("Button.backgroundPainter", (Painter<JComponent>)(g2d, c, w, h) -> {
+                g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+                if (hasBeenSet) {
+                    g2d.drawImage(setIcon, 0, 0, null);
+                }
+                else{
+                    g2d.drawImage(unsetIcon, 0, 0, null);
+                }
+            });
+            this.putClientProperty("Nimbus.Overrides", btnDefaults);
+            this.putClientProperty("Nimbus.Overrides.InheritDefaults", false);
+
+        }
+
+        /**
+         * 获取按钮状态
+         * @return true 被按下
+         *         false 未被按下
+         */
+        public boolean isHasBeenSet() {
+            return hasBeenSet;
+        }
+
+        /**
+         * 反转按钮状态并重绘
+         */
+        public void toggleStatus() {
+            this.hasBeenSet = !this.hasBeenSet;
+            repaint();
+        }
+    }
 
 
     private int currentRow = -1;  // 记录鼠标当前悬停的行

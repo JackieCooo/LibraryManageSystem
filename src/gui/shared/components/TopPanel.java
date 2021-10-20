@@ -74,6 +74,7 @@ public class TopPanel extends JPanel implements ParentAvailable<UserFrame> {
         this.setBackground(LayoutColors.DARK_BLUE);
         CellConstraints cc = new CellConstraints();
         logo = new Logo("icons/logo.png");
+        logo.setParentPanel(this);
         this.add(logo, cc.xy(1, 1, CellConstraints.CENTER, CellConstraints.CENTER));
         cancelBtn = new CancelBtn();
         this.add(cancelBtn, cc.xy(3, 1, CellConstraints.CENTER, CellConstraints.CENTER));

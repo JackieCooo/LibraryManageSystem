@@ -13,22 +13,25 @@ import java.awt.event.MouseEvent;
  */
 public class BottomBtn extends JButton {
 
+    private final int jumpIndex;
+
     /**
      * 初始化界面
      */
     public BottomBtn(){
-        super();
-        setupUI();
-        setupListener();
+        this(null, 0);
     }
 
     /**
      * 初始化界面
      * @param label 要在按钮上显示的文字
+     * @param index 此按钮跳转到的页码
      */
-    public BottomBtn(String label){
+    public BottomBtn(String label, int index){
         super(label);
+        this.jumpIndex = index;
         setupUI();
+        setupListener();
     }
 
     /**
@@ -38,12 +41,14 @@ public class BottomBtn extends JButton {
         this.addMouseListener(new MouseAdapter() {
 
             /**
-             * 鼠标点击执行搜索操作
+             * 鼠标点击执行页面跳转操作
              * @param e 鼠标事件对象
              */
             @Override
             public void mouseClicked(MouseEvent e) {
-
+                Container p = getParent().getParent().getParent();
+                p.getComponent(0).setVisible(false);
+                p.getComponent(jumpIndex).setVisible(true);
             }
 
             /**
@@ -72,6 +77,7 @@ public class BottomBtn extends JButton {
     private void setupUI(){
         this.setPreferredSize(new Dimension(150, 200));
         this.setFont(new Font("微软雅黑", Font.BOLD, 14));
+        this.setForeground(Color.WHITE);
 
         UIDefaults btnDefaults = new UIDefaults();
         btnDefaults.put("Button.backgroundPainter", (Painter<JComponent>)(g2d, c, w, h) -> {
