@@ -1,5 +1,6 @@
 package gui.components;
 
+import gui.shared.GlobalConstants;
 import gui.shared.ParentAvailable;
 import gui.shared.components.TopPanel;
 import gui.user.window.MainPanel;
@@ -71,6 +72,12 @@ public class Logo extends JLabel implements ParentAvailable<TopPanel> {
                     }
                 }
                 p.getComponent(0).setVisible(true);
+                // 清除所有前后页记录
+                GlobalConstants.nexPage.clear();
+                GlobalConstants.prePage.clear();
+                // 设置按钮为失效
+                getParentPanel().getNextPageBtn().setEnabled(false);
+                getParentPanel().getPrePageBtn().setEnabled(false);
             }
 
             /**
