@@ -3,6 +3,7 @@ package gui.components;
 import gui.shared.GlobalConstants;
 import gui.shared.LayoutColors;
 import gui.shared.ParentAvailable;
+import gui.shared.Updatable;
 import gui.shared.components.TopPanel;
 import gui.user.window.MainPanel;
 
@@ -15,7 +16,7 @@ import java.awt.event.MouseEvent;
  * 下一页按钮类
  * @author Jackie
  */
-public class NextPageBtn extends JButton implements ParentAvailable<TopPanel> {
+public class NextPageBtn extends JButton implements ParentAvailable<TopPanel>, Updatable {
 
     private TopPanel parent;
     private final int WIDTH = 30;
@@ -46,6 +47,14 @@ public class NextPageBtn extends JButton implements ParentAvailable<TopPanel> {
         super();
         setupUI();
         setupListener();
+    }
+
+    /**
+     * 按钮状态更新
+     */
+    @Override
+    public void stateUpdate() {
+        this.setEnabled(!GlobalConstants.nexPage.empty());
     }
 
     /**
@@ -85,10 +94,9 @@ public class NextPageBtn extends JButton implements ParentAvailable<TopPanel> {
                     GlobalConstants.prePage.push(GlobalConstants.curPage);
                     GlobalConstants.curPage = GlobalConstants.nexPage.peek();
                     GlobalConstants.nexPage.pop();
-                    if (GlobalConstants.nexPage.empty()) {
-                        setEnabled(false);
-                    }
                 }
+                stateUpdate();
+                getParentPanel().getPrePageBtn().stateUpdate();
             }
 
         });
@@ -117,7 +125,7 @@ public class NextPageBtn extends JButton implements ParentAvailable<TopPanel> {
             g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             g2d.setColor(LayoutColors.DARKEST_BLUE);
             g2d.fillOval(0, 0, WIDTH, HEIGHT);
-            g2d.setColor(LayoutColors.LIGHT_GRAY);
+            g2d.setColor(LayoutColors.GRAY);
             g2d.setStroke(new BasicStroke(2, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
             g2d.drawLine(12, 8, 19, 15);
             g2d.drawLine(12, 22, 19, 15);

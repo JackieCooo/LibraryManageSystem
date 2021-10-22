@@ -76,8 +76,8 @@ public class Logo extends JLabel implements ParentAvailable<TopPanel> {
                 GlobalConstants.nexPage.clear();
                 GlobalConstants.prePage.clear();
                 // 设置按钮为失效
-                getParentPanel().getNextPageBtn().setEnabled(false);
-                getParentPanel().getPrePageBtn().setEnabled(false);
+                getParentPanel().getNextPageBtn().stateUpdate();
+                getParentPanel().getPrePageBtn().stateUpdate();
             }
 
             /**

@@ -3,6 +3,7 @@ package gui.components;
 import gui.shared.GlobalConstants;
 import gui.shared.LayoutColors;
 import gui.shared.ParentAvailable;
+import gui.shared.Updatable;
 import gui.shared.components.TopPanel;
 import gui.user.window.MainPanel;
 
@@ -15,7 +16,7 @@ import java.awt.event.MouseEvent;
  * 上一页按钮类
  * @author Jackie
  */
-public class PrePageBtn extends JButton implements ParentAvailable<TopPanel> {
+public class PrePageBtn extends JButton implements ParentAvailable<TopPanel>, Updatable {
 
     private TopPanel parent;
     private final int WIDTH = 30;
@@ -37,6 +38,14 @@ public class PrePageBtn extends JButton implements ParentAvailable<TopPanel> {
     @Override
     public TopPanel getParentPanel() {
         return parent;
+    }
+
+    /**
+     * 按钮状态更新
+     */
+    @Override
+    public void stateUpdate() {
+        this.setEnabled(!GlobalConstants.prePage.empty());
     }
 
     /**
@@ -85,10 +94,9 @@ public class PrePageBtn extends JButton implements ParentAvailable<TopPanel> {
                     GlobalConstants.nexPage.push(GlobalConstants.curPage);
                     GlobalConstants.curPage = GlobalConstants.prePage.peek();
                     GlobalConstants.prePage.pop();
-                    if (GlobalConstants.prePage.empty()) {
-                        setEnabled(false);
-                    }
                 }
+                stateUpdate();
+                getParentPanel().getNextPageBtn().stateUpdate();
             }
 
         });

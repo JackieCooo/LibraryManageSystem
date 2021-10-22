@@ -12,7 +12,7 @@ import java.awt.*;
  */
 public class UserFrame extends JFrame {
 
-    private MainPanel mainWindow;
+    private MainPanel mainPanel;
     private TopPanel topPanel;
 
     /**
@@ -28,7 +28,15 @@ public class UserFrame extends JFrame {
      * @return 返回主窗口
      */
     public MainPanel getMainWindow() {
-        return mainWindow;
+        return mainPanel;
+    }
+
+    /**
+     * 获取顶部面板
+     * @return 返回顶部面板
+     */
+    public TopPanel getTopPanel() {
+        return topPanel;
     }
 
     /**
@@ -36,11 +44,15 @@ public class UserFrame extends JFrame {
      */
     private void setupUI(){
         this.setBounds(0, 0, 900, 675);
+
         topPanel = new TopPanel();
         topPanel.setParentPanel(this);
         this.add(topPanel, BorderLayout.NORTH);
-        mainWindow = new MainPanel();
-        this.add(mainWindow);
+
+        mainPanel = new MainPanel();
+        mainPanel.setParentPanel(this);
+        this.add(mainPanel);
+
         this.setResizable(false);
         this.setUndecorated(true);
         this.setLocationRelativeTo(null);

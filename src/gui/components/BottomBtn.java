@@ -1,6 +1,10 @@
 package gui.components;
 
+import gui.shared.GlobalConstants;
 import gui.shared.LayoutColors;
+import gui.shared.ParentAvailable;
+import gui.shared.components.TopPanel;
+import gui.user.window.BottomPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,9 +15,28 @@ import java.awt.event.MouseEvent;
  * 底部面板按钮类
  * @author Jackie
  */
-public class BottomBtn extends JButton {
+public class BottomBtn extends JButton implements ParentAvailable<BottomPanel> {
 
+    private BottomPanel parent;
     private final int jumpIndex;
+
+    /**
+     * 设置父级
+     * @param obj 父级对象
+     */
+    @Override
+    public void setParentPanel(BottomPanel obj) {
+        parent = obj;
+    }
+
+    /**
+     * 获取父级
+     * @return 返回父级对象
+     */
+    @Override
+    public BottomPanel getParentPanel() {
+        return parent;
+    }
 
     /**
      * 初始化界面
@@ -49,6 +72,11 @@ public class BottomBtn extends JButton {
                 Container p = getParent().getParent().getParent();
                 p.getComponent(0).setVisible(false);
                 p.getComponent(jumpIndex).setVisible(true);
+                // 更新按钮状态
+                GlobalConstants.pageChange(jumpIndex);
+                TopPanel b = getParentPanel().getParentPanel().getParentPanel().getParentPanel().getTopPanel();
+                b.getPrePageBtn().stateUpdate();
+                b.getNextPageBtn().stateUpdate();
             }
 
             /**

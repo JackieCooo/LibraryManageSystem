@@ -1,5 +1,7 @@
 package gui.user.window;
 
+import gui.shared.ParentAvailable;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -7,10 +9,29 @@ import java.awt.*;
  * 窗口首页类
  * @author Jackie
  */
-public class FrontPanel extends JPanel{
-    
+public class FrontPanel extends JPanel implements ParentAvailable<MainPanel> {
+
+    private MainPanel parent;
     private CentrePanel centrePanel;
     private BottomPanel bottomPanel;
+
+    /**
+     * 设置父级
+     * @param obj 父级对象
+     */
+    @Override
+    public void setParentPanel(MainPanel obj) {
+        parent = obj;
+    }
+
+    /**
+     * 获取父级
+     * @return 返回父级对象
+     */
+    @Override
+    public MainPanel getParentPanel() {
+        return parent;
+    }
 
     /**
      * 初始化界面
@@ -31,6 +52,7 @@ public class FrontPanel extends JPanel{
         this.add(centrePanel, BorderLayout.CENTER);
 
         bottomPanel = new BottomPanel();
+        bottomPanel.setParentPanel(this);
         this.add(bottomPanel, BorderLayout.SOUTH);
     }
 

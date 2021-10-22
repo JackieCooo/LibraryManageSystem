@@ -20,11 +20,37 @@ public class CentrePanel extends JTabbedPane {
      */
     class InsidePanel extends JPanel {
 
+        /**
+         * 初始化界面
+         */
         public InsidePanel(){
             super();
             setupUI();
         }
 
+        /**
+         * 追加一个展示对象（针对推荐、最新板块）
+         * @param picPath 图片路径
+         */
+        public void append(String picPath){
+            BookDisplay b = new BookDisplay(picPath);
+            this.add(b);
+        }
+
+        /**
+         * 追加一个展示对象（针对排行榜板块）
+         * @param picPath 图片路径
+         * @param rank 排行
+         * @param rankChange 排行变化
+         */
+        public void append(String picPath, int rank, int rankChange){
+            BookChartDisplay b = new BookChartDisplay(picPath, rank, rankChange);
+            this.add(b);
+        }
+
+        /**
+         * 初始化界面属性
+         */
         private void setupUI(){
             this.setOpaque(true);
             this.setBackground(Color.WHITE);
@@ -32,7 +58,6 @@ public class CentrePanel extends JTabbedPane {
         }
 
     }
-
 
     private CustomScrollPane recommendPanel;
     private CustomScrollPane chartPanel;
@@ -61,15 +86,19 @@ public class CentrePanel extends JTabbedPane {
         recommendPanel = new CustomScrollPane(CustomScrollPane.HORIZONTAL, 900, 250);
         recommendPage = new InsidePanel();
         recommendPanel.setViewportView(recommendPage);
+        // 内容测试
         for (int i = 0; i < 10; i++) {
-            BookDisplay b = new BookDisplay(Integer.toString(i));
-            recommendPage.add(b);
+            recommendPage.append("pics/test.png");
         }
         this.add(recommendPanel, "推荐");
 
         chartPanel = new CustomScrollPane(CustomScrollPane.HORIZONTAL, 900, 250);
         chartPage = new InsidePanel();
         chartPanel.setViewportView(chartPage);
+        // 内容测试
+        for (int i = 0; i < 10; i++) {
+            chartPage.append("pics/test.png", 1, 0);
+        }
         this.add(chartPanel, "排行榜");
 
         latestPanel = new CustomScrollPane(CustomScrollPane.HORIZONTAL, 900, 250);
