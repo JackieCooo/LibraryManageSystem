@@ -1,7 +1,5 @@
 package gui.shared.components;
 
-import gui.shared.LayoutColors;
-
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 import java.awt.*;
@@ -40,10 +38,11 @@ public class CustomScrollPane extends JScrollPane {
                 super.mouseReleased(e);
                 Rectangle r = getThumbBounds();
                 // 如果鼠标释放时，鼠标在滑块内，视为鼠标悬停；否则，视为鼠标未进入窗口
-                if (getThumbBounds().contains(e.getPoint())) {
-                    thumbColor = LayoutColors.LIGHT_GRAY;
-                } else {
-                    thumbColor = LayoutColors.LIGHTEST_GRAY;
+                if (getThumbBounds().contains(e.getPoint())){
+                    thumbColor = Color.GRAY;
+                }
+                else {
+                    thumbColor = Color.LIGHT_GRAY;
                 }
                 scrollbar.repaint(r);
             }
@@ -55,7 +54,7 @@ public class CustomScrollPane extends JScrollPane {
             @Override
             public void mousePressed(MouseEvent e) {
 //                System.out.println("鼠标按下");
-                thumbColor = LayoutColors.GRAY;
+                thumbColor = Color.DARK_GRAY;
                 super.mousePressed(e);
             }
 
@@ -68,8 +67,8 @@ public class CustomScrollPane extends JScrollPane {
 //                System.out.println("鼠标进入");
                 Rectangle r = getThumbBounds();
                 // 如果鼠标进入时不在滑块范围内，不变色
-                if (getThumbBounds().contains(e.getPoint())) {
-                    thumbColor = LayoutColors.LIGHT_GRAY;
+                if (getThumbBounds().contains(e.getPoint())){
+                    thumbColor = Color.GRAY;
                     scrollbar.repaint(r);
                 }
             }
@@ -84,7 +83,7 @@ public class CustomScrollPane extends JScrollPane {
                 super.mouseExited(e);
                 if (isDragging) return;  // 鼠标拖动时移出窗口不变颜色
                 Rectangle r = getThumbBounds();
-                thumbColor = LayoutColors.LIGHTEST_GRAY;
+                thumbColor = Color.LIGHT_GRAY;
                 scrollbar.repaint(r);
             }
         }
@@ -96,36 +95,10 @@ public class CustomScrollPane extends JScrollPane {
         protected void configureScrollBarColors() {
             super.configureScrollBarColors();
             trackColor = Color.WHITE;
-            thumbColor = LayoutColors.LIGHTEST_GRAY;
+            thumbColor = Color.LIGHT_GRAY;
             thumbHighlightColor = Color.WHITE;
             thumbLightShadowColor = Color.WHITE;
             thumbDarkShadowColor = Color.WHITE;
-        }
-
-        /**
-         * 重绘滑块
-         * @param g           图形类对象
-         * @param c           控件类对象
-         * @param thumbBounds 滑块矩形类
-         */
-        @Override
-        protected void paintThumb(Graphics g, JComponent c, Rectangle thumbBounds) {
-            if (thumbBounds.isEmpty() || !scrollbar.isEnabled()) {
-                return;
-            }
-
-            Graphics2D g2d = (Graphics2D) g;
-
-            int w = thumbBounds.width;
-            int h = thumbBounds.height;
-
-            g2d.translate(thumbBounds.x, thumbBounds.y);
-
-            g2d.setColor(thumbColor);
-            g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            g2d.fillRoundRect(0, 0, w - 1, h - 1, 10, 10);
-
-            g2d.translate(-thumbBounds.x, -thumbBounds.y);
         }
 
         /**
@@ -145,13 +118,53 @@ public class CustomScrollPane extends JScrollPane {
         }
 
         /**
-         * 初始化基本属性
+         * 获取滚动条大小
+         * @param c 组件对象
+         * @return 返回尺寸对象
          */
         @Override
-        protected void installDefaults() {
-            super.installDefaults();
+        public Dimension getPreferredSize(JComponent c) {
+            return (scrollbar.getOrientation() == JScrollBar.VERTICAL)
+                    ? new Dimension(10, 48)
+                    : new Dimension(48, 10);
+        }
 
-            scrollBarWidth = 10;
+        /**
+         * 重绘滑块
+         * @param g 图形类对象
+         * @param c 控件类对象
+         * @param thumbBounds 滑块矩形类
+         */
+        @Override
+        protected void paintThumb(Graphics g, JComponent c, Rectangle thumbBounds) {
+            if(thumbBounds.isEmpty() || !scrollbar.isEnabled()) {
+                return;
+            }
+
+            Graphics2D g2d = (Graphics2D)g;
+
+            int w = thumbBounds.width;
+            int h = thumbBounds.height;
+
+            g2d.translate(thumbBounds.x, thumbBounds.y);
+
+            g2d.setColor(thumbColor);
+            g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            g2d.fillRoundRect(0, 0, w - 1, h - 1, 10, 10);
+
+            g2d.translate(-thumbBounds.x, -thumbBounds.y);
+        }
+
+        /**
+         * 绘制滚动条轨道
+         * @param g 画笔对象
+         * @param c 组件对象
+         * @param trackBounds 轨道大小对象
+         */
+        @Override
+        protected void paintTrack(Graphics g, JComponent c, Rectangle trackBounds) {
+            g.setColor(trackColor);
+            g.fillRect(trackBounds.x, trackBounds.y, trackBounds.width, trackBounds.height);
         }
 
         /**
@@ -160,7 +173,7 @@ public class CustomScrollPane extends JScrollPane {
          */
         @Override
         protected TrackListener createTrackListener() {
-            return new CustomScrollPane.MyScrollBarUI.MyScrollBarListener();
+            return new MyScrollBarUI.MyScrollBarListener();
         }
     }
 

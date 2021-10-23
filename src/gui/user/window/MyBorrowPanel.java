@@ -1,5 +1,7 @@
 package gui.user.window;
 
+import gui.shared.components.CustomScrollPane;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -7,15 +9,15 @@ import java.awt.*;
  * 我的借阅窗口类
  * @author Jackie
  */
-public class MyBorrowPanel extends JScrollPane {
+public class MyBorrowPanel extends CustomScrollPane {
 
-    private JTable table;
+    private JPanel panel;
 
     /**
      * 初始化界面
      */
     public MyBorrowPanel(){
-        super();
+        super(CustomScrollPane.VERTICAL, 900, 600);
         setupUI();
     }
 
@@ -23,11 +25,11 @@ public class MyBorrowPanel extends JScrollPane {
      * 初始化界面属性
      */
     private void setupUI(){
-        this.setPreferredSize(new Dimension(900, 600));
-        table = new JTable();
-        table.setPreferredSize(new Dimension(900, 600));
-        table.setPreferredScrollableViewportSize(new Dimension(900, 600));
-        this.add(table);
+        panel = new JPanel();
+        panel.setOpaque(true);
+        panel.setBackground(Color.WHITE);
+        panel.setLayout(new FlowLayout(FlowLayout.LEFT, 30, 30));
+        this.setViewportView(panel);
     }
 
 }

@@ -53,6 +53,8 @@ public class BottomPanel extends JPanel implements ParentAvailable<FrontPanel> {
     private void setupUI(){
         this.setLayout(new FormLayout("fill:d:grow,left:10px:noGrow,fill:d:grow,left:10px:noGrow,fill:d:grow,left:10px:noGrow,fill:d:grow", "center:d:grow"));
         this.setPreferredSize(new Dimension(900, 275));
+        this.setOpaque(true);
+        this.setBackground(Color.WHITE);
         this.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10), null, TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
 
         CellConstraints cc = new CellConstraints();

@@ -411,7 +411,7 @@ public class BookRepoOpTable extends JTable {
         this.setFocusable(true);
         this.setOpaque(true);
         this.setShowGrid(false);
-        this.setPreferredSize(new Dimension(880, 530));
+        this.setBorder(null);
         this.setIntercellSpacing(new Dimension(0, 1));  // 设置只保留水平网格线
 
         // 定制鼠标事件
@@ -486,7 +486,7 @@ public class BookRepoOpTable extends JTable {
         this.getColumnModel().getColumn(2).setPreferredWidth(200);
         this.getColumnModel().getColumn(3).setPreferredWidth(180);
         this.getColumnModel().getColumn(4).setPreferredWidth(180);
-        this.getColumnModel().getColumn(5).setPreferredWidth(157);
+        this.getColumnModel().getColumn(5).setPreferredWidth(160);
 
         // 设置滚动面板视口大小（超过该大小的行数据，需要拖动滚动条才能看到）
         this.setPreferredScrollableViewportSize(new Dimension(880, 530));

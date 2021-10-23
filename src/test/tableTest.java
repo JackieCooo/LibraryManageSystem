@@ -513,6 +513,38 @@ class MyScrollPane extends JScrollPane {
         }
 
         /**
+         * 创建递减按钮
+         * @param orientation 滚动条方向
+         * @return 返回按钮对象
+         */
+        @Override
+        protected JButton createDecreaseButton(int orientation) {
+            return getEmptyBtn();
+        }
+
+        /**
+         * 创建递增按钮
+         * @param orientation 滚动条方向
+         * @return 返回按钮对象
+         */
+        @Override
+        protected JButton createIncreaseButton(int orientation) {
+            return getEmptyBtn();
+        }
+
+        /**
+         * 获取滚动条大小
+         * @param c 组件对象
+         * @return 返回尺寸对象
+         */
+        @Override
+        public Dimension getPreferredSize(JComponent c) {
+            return (scrollbar.getOrientation() == JScrollBar.VERTICAL)
+                    ? new Dimension(10, 48)
+                    : new Dimension(48, 10);
+        }
+
+        /**
          * 重绘滑块
          * @param g 图形类对象
          * @param c 控件类对象
@@ -533,35 +565,21 @@ class MyScrollPane extends JScrollPane {
 
             g2d.setColor(thumbColor);
             g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            g2d.fillRoundRect(0, 0, w - 1, h - 1, 10, 10);
+            g2d.fillRoundRect(0, 10, w - 1, h - 20, 10, 10);
 
             g2d.translate(-thumbBounds.x, -thumbBounds.y);
         }
 
         /**
-         * 初始化UI
-         * @param c 控件类
+         * 绘制滚动条轨道
+         * @param g 画笔对象
+         * @param c 组件对象
+         * @param trackBounds 轨道大小对象
          */
         @Override
-        public void installUI(JComponent c) {
-            super.installUI(c);
-
-            // 去掉按钮
-            scrollbar.remove(decrButton);
-            scrollbar.remove(incrButton);
-            scrollbar.setOpaque(true);
-            scrollbar.setBackground(Color.WHITE);
-            scrollbar.repaint();
-        }
-
-        /**
-         * 初始化基本属性
-         */
-        @Override
-        protected void installDefaults() {
-            super.installDefaults();
-
-            scrollBarWidth = 10;
+        protected void paintTrack(Graphics g, JComponent c, Rectangle trackBounds) {
+            g.setColor(trackColor);
+            g.fillRect(trackBounds.x, trackBounds.y, trackBounds.width, trackBounds.height);
         }
 
         /**
@@ -571,6 +589,18 @@ class MyScrollPane extends JScrollPane {
         @Override
         protected TrackListener createTrackListener() {
             return new MyScrollBarListener();
+        }
+
+        /**
+         * 返回一个空按钮对象
+         * @return 返回一个空按钮对象
+         */
+        private JButton getEmptyBtn(){
+            JButton button = new JButton();
+            button.setBorderPainted(false);
+            button.setContentAreaFilled(false);
+            button.setBorder(null);
+            return button;
         }
     }
 

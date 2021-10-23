@@ -6,6 +6,7 @@ import gui.shared.components.CustomScrollPane;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.basic.BasicScrollBarUI;
+import javax.swing.plaf.synth.SynthScrollBarUI;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -96,6 +97,9 @@ public class scrollPaneTest {
                     g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
                     g2d.fillRoundRect(0, 0, w, h, 10, 10);
                 });
+                barDefaults.put("ScrollBar.thumbHeight", 10);
+                barDefaults.put("ScrollBar.incrementButtonGap", 0);
+                barDefaults.put("ScrollBar.decrementButtonGap", 0);
                 this.getVerticalScrollBar().putClientProperty("Nimbus.Overrides", barDefaults);
                 this.getVerticalScrollBar().putClientProperty("Nimbus.Overrides.InheritDefaults", false);
             }

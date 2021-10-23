@@ -6,10 +6,14 @@ import gui.shared.ParentAvailable;
 import gui.shared.components.TopPanel;
 import gui.user.window.BottomPanel;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.plaf.basic.BasicButtonUI;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
 
 /**
  * 底部面板按钮类
@@ -17,6 +21,7 @@ import java.awt.event.MouseEvent;
  */
 public class BottomBtn extends JButton implements ParentAvailable<BottomPanel> {
 
+    private BufferedImage icon;
     private BottomPanel parent;
     private final int jumpIndex;
 
@@ -53,8 +58,23 @@ public class BottomBtn extends JButton implements ParentAvailable<BottomPanel> {
     public BottomBtn(String label, int index){
         super(label);
         this.jumpIndex = index;
+        setupIcon();
         setupUI();
         setupListener();
+    }
+
+    private void setupIcon(){
+        try {
+            switch (jumpIndex) {
+                case 1 -> icon = ImageIO.read(new File("icons/RepoBtn.png"));
+                case 2 -> icon = ImageIO.read(new File("icons/MyCollectBtn.png"));
+                case 3 -> icon = ImageIO.read(new File("icons/MyBorrowBtn.png"));
+                case 4 -> icon = ImageIO.read(new File("icons/MySpaceBtn.png"));
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -104,15 +124,18 @@ public class BottomBtn extends JButton implements ParentAvailable<BottomPanel> {
      */
     private void setupUI(){
         this.setPreferredSize(new Dimension(150, 200));
-        this.setFont(new Font("微软雅黑", Font.BOLD, 14));
+        this.setFont(new Font("微软雅黑", Font.BOLD, 18));
         this.setForeground(Color.WHITE);
 
         UIDefaults btnDefaults = new UIDefaults();
         btnDefaults.put("Button.backgroundPainter", (Painter<JComponent>)(g2d, c, w, h) -> {
             g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
             g2d.setColor(LayoutColors.BLUE);
             g2d.fillRoundRect(0, 0, 150, 200, 20, 20);
+            g2d.drawImage(icon, 35, 35, null);
         });
+        btnDefaults.put("Button.contentMargins", new Insets(100, 14, 6, 14));
         this.putClientProperty("Nimbus.Overrides", btnDefaults);
         this.putClientProperty("Nimbus.Overrides.InheritDefaults", false);
 
