@@ -1,9 +1,17 @@
 package test;
 
+import com.jgoodies.forms.layout.CellConstraints;
+import com.jgoodies.forms.layout.FormLayout;
 import gui.shared.LayoutColors;
+import gui.shared.components.CustomScrollPane;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.plaf.basic.BasicLabelUI;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -19,11 +27,80 @@ import java.io.IOException;
 class BookDisplay extends JButton {
 
     private BufferedImage img;
-    private BufferedImage unselectedIcon;
-    private BufferedImage selectedIcon;
-    private boolean isBtnSet = false;
+    private BufferedImage hoverCover;
+    private boolean isBtn1Set = false;
+    private boolean isBtn2Set = false;
+    private boolean isBtn3Hover = false;
     private final int WIDTH = 150;
     private final int HEIGHT = 200;
+
+    /**
+     * 文本框类
+     * @author Jackie
+     */
+    class InfoPanel extends JTextPane {
+
+        private StyledDocument doc;
+        private SimpleAttributeSet attributeSet;
+
+        public InfoPanel(){
+            super();
+            setupUI();
+        }
+
+        public void insert(String text){
+            try {
+                doc.insertString(doc.getLength(), text, attributeSet);
+            } catch (BadLocationException e) {
+                e.printStackTrace();
+            }
+        }
+
+        private void setupText(){
+            insert("Hello\n");
+        }
+
+        private void setupUI(){
+            doc = this.getStyledDocument();
+            attributeSet = new SimpleAttributeSet();
+            StyleConstants.setFontFamily(attributeSet, "微软雅黑");
+            StyleConstants.setFontSize(attributeSet, 14);
+            this.setLayout(new FormLayout("center:10px:noGrow,center:d:noGrow,center:10px:noGrow,center:d:noGrow,center:10px:noGrow", "center:10px:noGrow,center:d:noGrow,center:10px:noGrow"));
+            this.setOpaque(true);
+            this.setBackground(Color.WHITE);
+            this.setPreferredSize(new Dimension(300, 300));
+            this.setEditable(false);
+            setupText();
+        }
+
+    }
+
+    /**
+     * 弹出窗口类类
+     * @author Jackie
+     */
+    class PopupMenu extends JPopupMenu {
+
+        private InfoPanel infoPanel;
+
+        public PopupMenu(){
+            super();
+            setupUI();
+        }
+
+        private void setupUI(){
+            this.setPreferredSize(new Dimension(300, 300));
+            this.setOpaque(true);
+            this.setBackground(Color.WHITE);
+            this.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1, true));
+            infoPanel = new InfoPanel();
+
+            this.add(infoPanel);
+        }
+
+    }
+
+    private PopupMenu popupMenu = new PopupMenu();
 
     /**
      * 初始化界面
@@ -86,32 +163,32 @@ class BookDisplay extends JButton {
 
     /**
      * 创建鼠标悬停的样式
-     * @param unselectedIconPath 未收藏时的按钮图标路径
-     * @param selectedIconPath 收藏时的按钮图标路径
      */
-    private void createHoverIcons(final String unselectedIconPath, final String selectedIconPath){
+    private void createHoverIcons(){
         try {
-            BufferedImage unselectedImg = ImageIO.read(new File(unselectedIconPath));
-            unselectedIcon = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_ARGB);
-            Graphics2D g2d = unselectedIcon.createGraphics();
+            BufferedImage collectBtn;
+            BufferedImage borrowBtn;
+            BufferedImage infoBtn;
+
+            if (!isBtn1Set) collectBtn = ImageIO.read(new File("icons/Uncollected_50px.png"));
+            else collectBtn = ImageIO.read(new File("icons/Collected_50px.png"));
+
+            if (!isBtn2Set) borrowBtn = ImageIO.read(new File("icons/Unborrowed_50px.png"));
+            else borrowBtn = ImageIO.read(new File("icons/Borrowed_50px.png"));
+
+            if (!isBtn3Hover) infoBtn = ImageIO.read(new File("icons/InfoNormal_50px.png"));
+            else infoBtn = ImageIO.read(new File("icons/InfoFocus_50px.png"));
+
+            hoverCover = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_ARGB);
+            Graphics2D g2d = hoverCover.createGraphics();
             g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
             g2d.setColor(LayoutColors.LIGHT_GRAY);
             g2d.fillRoundRect(0, 0, WIDTH, HEIGHT, 15, 15);
-            g2d.drawImage(unselectedImg, 45, 70, null);
-            unselectedIcon = getAlphaImg(unselectedIcon, 205);
-
-            BufferedImage selectedImg = ImageIO.read(new File(selectedIconPath));
-            selectedIcon = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_ARGB);
-            g2d = selectedIcon.createGraphics();
-            g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-            g2d.setColor(LayoutColors.LIGHT_GRAY);
-            g2d.fillRoundRect(0, 0, WIDTH, HEIGHT, 15, 15);
-            g2d.drawImage(selectedImg, 45, 70, null);
-            g2d.dispose();
-            selectedIcon = getAlphaImg(selectedIcon, 205);
-
+            g2d.drawImage(collectBtn, 50, 10, null);
+            g2d.drawImage(borrowBtn, 50, 75, null);
+            g2d.drawImage(infoBtn, 50, 140, null);
+            hoverCover = getAlphaImg(hoverCover, 205);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -127,7 +204,7 @@ class BookDisplay extends JButton {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        createHoverIcons("icons/Uncollected_60px.png", "icons/Collected_60px.png");
+        createHoverIcons();
     }
 
     /**
@@ -142,29 +219,50 @@ class BookDisplay extends JButton {
              */
             @Override
             public void mouseClicked(MouseEvent e) {
-                isBtnSet = !isBtnSet;
+                Point p = e.getPoint();
+                if (p.x >= 50 && p.x <= 100 && p.y >= 10 && p.y <= 60){
+                    isBtn1Set = !isBtn1Set;
+                    createHoverIcons();
+                    repaint();
+                }
+                else if (p.x >= 50 && p.x <= 100 && p.y >= 75 && p.y <= 125) {
+                    isBtn2Set = !isBtn2Set;
+                    createHoverIcons();
+                    repaint();
+                }
             }
-
         });
 
         this.addMouseMotionListener(new MouseMotionAdapter() {
 
             /**
-             * 鼠标移动到收藏图标时改变指针样式
+             * 鼠标移动到图标时改变指针样式
              * @param e 鼠标事件对象
              */
             @Override
             public void mouseMoved(MouseEvent e) {
                 Point p = e.getPoint();
-                if (p.x >= 45 && p.x <= 105 && p.y >= 70 && p.y <= 130) {
+                if (p.x >= 50 && p.x <= 100 && ((p.y >= 10 && p.y <= 60) || (p.y >= 75 && p.y <= 125) || (p.y >= 140 && p.y <= 190))) {
                     setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
                 }
                 else {
                     setCursor(Cursor.getDefaultCursor());
                 }
+
+                // 指针指向信息按钮，显示书本信息
+                if (p.x >= 50 && p.x <= 100 && p.y >= 140 && p.y <= 190){
+                    isBtn3Hover = true;
+                    popupMenu.setInvoker(e.getComponent());
+                    popupMenu.setLocation(0, 0);
+                    popupMenu.setVisible(true);
+                }
+                else {
+                    isBtn3Hover = false;
+                    popupMenu.setVisible(false);
+                }
+                createHoverIcons();
                 repaint();
             }
-
         });
     }
 
@@ -186,8 +284,7 @@ class BookDisplay extends JButton {
             g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
             img = setRadius(img, 15);
             g2d.drawImage(img, 0, 0, null);
-            if (isBtnSet) g2d.drawImage(selectedIcon, 0, 0, null);
-            else g2d.drawImage(unselectedIcon, 0, 0, null);
+            g2d.drawImage(hoverCover, 0, 0, null);
         });
         this.putClientProperty("Nimbus.Overrides", btnDefaults);
         this.putClientProperty("Nimbus.Overrides.InheritDefaults", false);
