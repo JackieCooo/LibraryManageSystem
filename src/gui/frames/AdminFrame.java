@@ -1,7 +1,7 @@
 package gui.frames;
 
-import gui.admin.window.LeftSidePanel;
-import gui.admin.window.MainWindow;
+import gui.admin.panels.LeftSidePanel;
+import gui.admin.panels.MainWindow;
 import gui.shared.components.TopPanel;
 
 import javax.swing.*;

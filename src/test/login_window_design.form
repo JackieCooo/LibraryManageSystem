@@ -77,8 +77,8 @@
           </component>
           <grid id="50797" binding="btnSet1" layout-manager="FormLayout">
             <rowspec value="center:d:grow"/>
-            <colspec value="fill:103px:grow"/>
-            <colspec value="left:50px:noGrow"/>
+            <colspec value="center:d:grow"/>
+            <colspec value="center:50px:grow"/>
             <colspec value="fill:d:grow"/>
             <constraints>
               <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="3" anchor="1" fill="0" indent="0" use-parent-layout="false"/>

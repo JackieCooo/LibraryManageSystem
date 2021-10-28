@@ -1,6 +1,7 @@
 package gui.frames;
 
-import gui.login.window.LoginWindow;
+import gui.login.panels.LoginTopPanel;
+import gui.login.panels.MainPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,7 +12,8 @@ import java.awt.*;
  */
 public class LoginFrame extends JFrame {
 
-    private LoginWindow loginWindow;
+    private MainPanel mainPanel;
+    private LoginTopPanel topPanel;
 
     public LoginFrame(){
         super();
@@ -21,10 +23,15 @@ public class LoginFrame extends JFrame {
     private void setupUI(){
         this.setBounds(100, 100, 400, 300);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        this.setLayout(new CardLayout(0, 0));
+        this.setResizable(false);
+        this.setUndecorated(true);
 
-        loginWindow = new LoginWindow();
-        this.add(loginWindow);
+        topPanel = new LoginTopPanel();
+        this.add(topPanel, BorderLayout.NORTH);
+
+        mainPanel = new MainPanel();
+        this.add(mainPanel);
+
         this.setVisible(true);
     }
 

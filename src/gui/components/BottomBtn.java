@@ -4,11 +4,10 @@ import gui.shared.GlobalConstants;
 import gui.shared.LayoutColors;
 import gui.shared.ParentAvailable;
 import gui.shared.components.TopPanel;
-import gui.user.window.BottomPanel;
+import gui.user.panels.BottomPanel;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.plaf.basic.BasicButtonUI;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;

@@ -3,7 +3,7 @@ package gui.components;
 import gui.shared.GlobalConstants;
 import gui.shared.ParentAvailable;
 import gui.shared.components.TopPanel;
-import gui.user.window.MainPanel;
+import gui.user.panels.MainPanel;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;

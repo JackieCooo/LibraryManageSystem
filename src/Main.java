@@ -27,7 +27,7 @@ public class Main {
         }
 
 //        new AdminFrame();
-        new UserFrame();
-//        new LoginFrame();
+//        new UserFrame();
+        new LoginFrame();
     }
 }

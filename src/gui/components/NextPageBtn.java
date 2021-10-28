@@ -5,7 +5,7 @@ import gui.shared.LayoutColors;
 import gui.shared.ParentAvailable;
 import gui.shared.Updatable;
 import gui.shared.components.TopPanel;
-import gui.user.window.MainPanel;
+import gui.user.panels.MainPanel;
 
 import javax.swing.*;
 import java.awt.*;

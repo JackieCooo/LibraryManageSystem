@@ -35,7 +35,7 @@ public class Test {
                 }
 
                 for (Map.Entry<Object, Object> entry : UIManager.getLookAndFeelDefaults().entrySet()) {
-                    if ((entry.getKey().toString()).startsWith("ScrollBar")) {
+                    if ((entry.getKey().toString()).startsWith("ProgressBar")) {
                         System.out.println(entry.getKey() + " = " + entry.getValue());
                     }
                 }

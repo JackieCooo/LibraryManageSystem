@@ -147,7 +147,7 @@ public class login_window_design {
         passwordField.setText("1234");
         studentLoginPage.add(passwordField, cc.xy(1, 5, CellConstraints.CENTER, CellConstraints.DEFAULT));
         btnSet1 = new JPanel();
-        btnSet1.setLayout(new FormLayout("fill:103px:grow,left:50px:noGrow,fill:d:grow", "center:d:grow"));
+        btnSet1.setLayout(new FormLayout("center:d:grow,center:50px:grow,fill:d:grow", "center:d:grow"));
         studentLoginPage.add(btnSet1, cc.xy(1, 9, CellConstraints.CENTER, CellConstraints.TOP));
         studentSignInBtn = new JButton();
         studentSignInBtn.setHorizontalTextPosition(0);

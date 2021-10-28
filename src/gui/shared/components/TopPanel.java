@@ -6,7 +6,7 @@ import gui.components.*;
 import gui.frames.UserFrame;
 import gui.shared.LayoutColors;
 import gui.shared.ParentAvailable;
-import gui.user.window.AccountPanel;
+import gui.user.panels.AccountPanel;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
