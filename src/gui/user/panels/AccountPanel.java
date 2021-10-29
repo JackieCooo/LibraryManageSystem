@@ -2,10 +2,10 @@ package gui.user.panels;
 
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
-import gui.components.AccountOpBtn;
-import gui.components.AccountPic;
+import gui.shared.components.AccountOpBtn;
+import gui.shared.components.AccountPic;
 import gui.shared.ParentAvailable;
-import gui.shared.components.TopPanel;
+import gui.shared.panels.TopPanel;
 
 import javax.swing.*;
 import java.awt.*;

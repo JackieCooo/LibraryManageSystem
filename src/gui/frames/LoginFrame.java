@@ -1,6 +1,6 @@
 package gui.frames;
 
-import gui.login.panels.LoginTopPanel;
+import gui.login.panels.TopPanel;
 import gui.login.panels.MainPanel;
 
 import javax.swing.*;
@@ -13,7 +13,7 @@ import java.awt.*;
 public class LoginFrame extends JFrame {
 
     private MainPanel mainPanel;
-    private LoginTopPanel topPanel;
+    private TopPanel topPanel;
 
     public LoginFrame(){
         super();
@@ -26,7 +26,8 @@ public class LoginFrame extends JFrame {
         this.setResizable(false);
         this.setUndecorated(true);
 
-        topPanel = new LoginTopPanel();
+        topPanel = new TopPanel();
+        topPanel.setParentPanel(this);
         this.add(topPanel, BorderLayout.NORTH);
 
         mainPanel = new MainPanel();

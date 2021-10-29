@@ -1,6 +1,6 @@
 package gui.admin.panels;
 
-import gui.shared.components.SearchPanel;
+import gui.shared.panels.SearchPanel;
 
 import javax.swing.*;
 import java.awt.*;

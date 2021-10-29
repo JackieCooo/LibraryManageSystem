@@ -2,9 +2,9 @@ package gui.user.panels;
 
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
-import gui.components.BookRepoOpTable;
-import gui.shared.components.CustomScrollPane;
-import gui.shared.components.SearchPanel;
+import gui.user.components.BookRepoOpTable;
+import gui.shared.panels.CustomScrollPane;
+import gui.shared.panels.SearchPanel;
 
 import javax.swing.*;
 import java.awt.*;

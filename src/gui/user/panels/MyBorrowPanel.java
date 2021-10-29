@@ -1,6 +1,6 @@
 package gui.user.panels;
 
-import gui.shared.components.CustomScrollPane;
+import gui.shared.panels.CustomScrollPane;
 
 import javax.swing.*;
 import java.awt.*;

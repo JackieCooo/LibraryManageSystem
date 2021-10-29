@@ -2,7 +2,7 @@ package gui.frames;
 
 import gui.admin.panels.LeftSidePanel;
 import gui.admin.panels.MainWindow;
-import gui.shared.components.TopPanel;
+import gui.shared.panels.TopPanel;
 
 import javax.swing.*;
 import java.awt.*;

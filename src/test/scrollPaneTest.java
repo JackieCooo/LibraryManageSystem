@@ -1,16 +1,9 @@
 package test;
 
 import gui.shared.LayoutColors;
-import gui.shared.components.CustomScrollPane;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-import javax.swing.plaf.basic.BasicScrollBarUI;
-import javax.swing.plaf.synth.SynthScrollBarUI;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
 
 
 public class scrollPaneTest {

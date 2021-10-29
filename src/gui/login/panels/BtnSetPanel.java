@@ -2,10 +2,9 @@ package gui.login.panels;
 
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
-import gui.components.LoginPanelBtn;
+import gui.login.components.OpBtn;
 
 import javax.swing.*;
-import java.awt.*;
 
 /**
  * 按钮组合界面
@@ -13,8 +12,8 @@ import java.awt.*;
  */
 public class BtnSetPanel extends JPanel{
 
-    private LoginPanelBtn leftBtn;
-    private LoginPanelBtn rightBtn;
+    private OpBtn leftBtn;
+    private OpBtn rightBtn;
 
     /**
      * 构造函数说明
@@ -25,10 +24,10 @@ public class BtnSetPanel extends JPanel{
         this.setOpaque(false);
         CellConstraints cc = new CellConstraints();
         this.setLayout(new FormLayout("center:d:noGrow,center:50px:noGrow,center:d:noGrow", "center:d:grow"));
-        leftBtn = new LoginPanelBtn(100, 40, leftBtnName);
+        leftBtn = new OpBtn(leftBtnName);
         this.add(leftBtn, cc.xy(1, 1, CellConstraints.DEFAULT, CellConstraints.DEFAULT));
 
-        rightBtn = new LoginPanelBtn(100, 40, rightBtnName);
+        rightBtn = new OpBtn(rightBtnName);
         this.add(rightBtn, cc.xy(3, 1, CellConstraints.DEFAULT, CellConstraints.DEFAULT));
     }
 
@@ -36,7 +35,7 @@ public class BtnSetPanel extends JPanel{
      * 获取左按钮
      * @return JButton
      */
-    public LoginPanelBtn getLeftBtn() {
+    public OpBtn getLeftBtn() {
         return leftBtn;
     }
 
@@ -44,7 +43,7 @@ public class BtnSetPanel extends JPanel{
      * 获取右按钮
      * @return JButton
      */
-    public LoginPanelBtn getRightBtn() {
+    public OpBtn getRightBtn() {
         return rightBtn;
     }
 }

@@ -10,7 +10,7 @@ import java.awt.*;
 public class MainPanel extends JPanel{
 
     private AdminLoginPanel adminLoginPage;
-    private StudentLoginPanel studentLoginPage;
+    private UserLoginPanel studentLoginPage;
     private StudentSignUpPanel studentSignUpPage;
 
     /**
@@ -22,7 +22,7 @@ public class MainPanel extends JPanel{
         this.setOpaque(true);
         this.setBackground(Color.WHITE);
 
-        studentLoginPage = new StudentLoginPanel();
+        studentLoginPage = new UserLoginPanel();
         this.add(studentLoginPage, "studentLoginPage");  // 0
 
         adminLoginPage = new AdminLoginPanel();

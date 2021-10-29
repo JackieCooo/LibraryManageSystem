@@ -2,7 +2,7 @@ package gui.user.panels;
 
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
-import gui.components.BottomBtn;
+import gui.user.components.BottomBtn;
 import gui.shared.ParentAvailable;
 
 import javax.swing.*;

@@ -1,7 +1,7 @@
 package gui.user.panels;
 
 import gui.shared.LayoutColors;
-import gui.shared.components.CustomScrollPane;
+import gui.shared.panels.CustomScrollPane;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
