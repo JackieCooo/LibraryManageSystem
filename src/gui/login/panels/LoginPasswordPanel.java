@@ -7,6 +7,8 @@ import gui.shared.LayoutColors;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
@@ -19,12 +21,19 @@ import java.io.IOException;
  */
 class PasswordBox extends JPasswordField {
 
+    private String tipText = null;
+
     /**
      * 初始化界面
      */
-    public PasswordBox() {
+    public PasswordBox(String tipText) {
         super();
+        this.tipText = tipText;
         setupUI();
+    }
+
+    public boolean hasTipText(){
+        return tipText != null;
     }
 
     /**
@@ -34,6 +43,34 @@ class PasswordBox extends JPasswordField {
         this.setPreferredSize(new Dimension(220, 30));
         this.setFont(new Font("微软雅黑", Font.PLAIN, 14));
         this.setOpaque(false);
+
+        if (hasTipText()) {
+            this.setForeground(LayoutColors.GRAY);
+            this.setText(tipText);
+            this.setEchoChar('\0');
+            this.addFocusListener(new FocusListener() {
+
+                @Override
+                public void focusGained(FocusEvent e) {
+                    String tmp = new String(getPassword());
+                    if (tmp.equals(tipText)) {
+                        setText(null);
+                        setEchoChar('·');
+                        setForeground(Color.BLACK);
+                    }
+                }
+
+                @Override
+                public void focusLost(FocusEvent e) {
+                    String tmp = new String(getPassword());
+                    if (tmp.equals("")) {
+                        setEchoChar('\0');
+                        setForeground(LayoutColors.GRAY);
+                        setText(tipText);
+                    }
+                }
+            });
+        }
 
         UIDefaults boxDefaults = new UIDefaults();
         boxDefaults.put("PasswordField.backgroundPainter", (Painter<JComponent>) (g2d, c, w, h) -> {
@@ -174,7 +211,7 @@ public class PasswordPanel extends JPanel {
         this.setOpaque(false);
         CellConstraints cc = new CellConstraints();
 
-        passwordBox = new PasswordBox();
+        passwordBox = new PasswordBox("密码");
         this.add(passwordBox, cc.xy(1, 1, CellConstraints.CENTER, CellConstraints.DEFAULT));
 
         passwordBtn = new PasswordBtn(passwordBox);
