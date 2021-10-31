@@ -1,7 +1,7 @@
 package gui.frames;
 
 import gui.admin.panels.LeftSidePanel;
-import gui.admin.panels.MainWindow;
+import gui.admin.panels.MainPanel;
 import gui.shared.panels.TopPanel;
 
 import javax.swing.*;
@@ -13,7 +13,7 @@ import java.awt.*;
  */
 public class AdminFrame extends JFrame{
 
-    private MainWindow mainWindow;
+    private MainPanel mainPanel;
     private TopPanel topPanel;
     private LeftSidePanel leftSidePanel;
 
@@ -29,23 +29,27 @@ public class AdminFrame extends JFrame{
      * 初始化界面属性
      */
     private void setupUI(){
-        this.setBounds(100, 100, 900, 675);
-        topPanel = new TopPanel();
-        this.add(topPanel, BorderLayout.NORTH);
-        leftSidePanel = new LeftSidePanel();
-        this.add(leftSidePanel, BorderLayout.WEST);
-        leftSidePanel.setParentPanel(this);
-        mainWindow = new MainWindow();
-        this.add(mainWindow, BorderLayout.EAST);
+        this.setPreferredSize(new Dimension(900, 675));
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setResizable(false);
         this.setUndecorated(true);
-        this.pack();
+        this.setLocationRelativeTo(null);
+
+        topPanel = new TopPanel();
+        this.add(topPanel, BorderLayout.NORTH);
+
+        leftSidePanel = new LeftSidePanel();
+        leftSidePanel.setParentPanel(this);
+        this.add(leftSidePanel, BorderLayout.WEST);
+
+        mainPanel = new MainPanel();
+        this.add(mainPanel, BorderLayout.EAST);
+
         this.setVisible(true);
     }
 
     public JPanel getMainWindow(){
-        return mainWindow;
+        return mainPanel;
     }
 
 }

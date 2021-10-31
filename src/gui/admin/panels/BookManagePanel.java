@@ -1,5 +1,6 @@
 package gui.admin.panels;
 
+import gui.admin.components.OperateTable;
 import gui.shared.panels.SearchPanel;
 
 import javax.swing.*;
@@ -9,7 +10,7 @@ import java.awt.*;
  * 图书管理板块类
  * @author Jackie
  */
-public class BookManagePage extends JPanel {
+public class BookManagePanel extends JPanel {
 
     private SearchPanel searchPanel;
     private OperateTable operateTable;
@@ -17,7 +18,7 @@ public class BookManagePage extends JPanel {
     /**
      * 初始化界面
      */
-    public BookManagePage(){
+    public BookManagePanel(){
         super();
         setupUI();
     }

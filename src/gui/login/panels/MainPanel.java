@@ -10,8 +10,8 @@ import java.awt.*;
 public class MainPanel extends JPanel{
 
     private AdminLoginPanel adminLoginPage;
-    private UserLoginPanel studentLoginPage;
-    private StudentSignUpPanel studentSignUpPage;
+    private UserLoginPanel userLoginPage;
+    private UserSignUpPanel userSignUpPage;
 
     /**
      * 初始化页面
@@ -22,13 +22,14 @@ public class MainPanel extends JPanel{
         this.setOpaque(true);
         this.setBackground(Color.WHITE);
 
-        studentLoginPage = new UserLoginPanel();
-        this.add(studentLoginPage, "studentLoginPage");  // 0
+        userLoginPage = new UserLoginPanel();
+        this.add(userLoginPage, "studentLoginPage");  // 0
 
         adminLoginPage = new AdminLoginPanel();
         this.add(adminLoginPage, "adminLoginPage");  // 1
 
-        studentSignUpPage = new StudentSignUpPanel();
-        this.add(studentSignUpPage, "studentSignUpPage");  // 2
+        userSignUpPage = new UserSignUpPanel();
+        this.add(userSignUpPage, "studentSignUpPage");  // 2
+
     }
 }

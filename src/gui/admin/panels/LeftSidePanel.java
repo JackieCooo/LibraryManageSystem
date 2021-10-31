@@ -2,7 +2,9 @@ package gui.admin.panels;
 
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
+import gui.admin.components.LeftSideBtn;
 import gui.frames.AdminFrame;
+import gui.shared.LayoutColors;
 import gui.shared.ParentAvailable;
 
 import javax.swing.*;
@@ -31,7 +33,9 @@ public class LeftSidePanel extends JPanel implements ParentAvailable<AdminFrame>
      */
     private void setupUI(){
         this.setPreferredSize(new Dimension(200, 600));
-        this.setLayout(new FormLayout("fill:d:grow", "center:d:noGrow,center:30px:noGrow,center:d:noGrow"));
+        this.setLayout(new FormLayout("center:d:grow", "center:d:noGrow,center:30px:noGrow,center:d:noGrow"));
+        this.setOpaque(true);
+        this.setBackground(LayoutColors.DARK_BLUE);
         CellConstraints cc = new CellConstraints();
 
         frontPageBtn = new LeftSideBtn("首页");

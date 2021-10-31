@@ -9,12 +9,12 @@ import java.awt.*;
  * 首页板块类
  * @author Jackie
  */
-public class FrontPage extends JPanel {
+public class FrontPanel extends JPanel {
 
     /**
      * 初始化界面
      */
-    public FrontPage(){
+    public FrontPanel(){
         super();
         setupUI();
     }

@@ -2,28 +2,49 @@ package gui.login.panels;
 
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
+import gui.login.components.PasswordBox;
 
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * 注册密码面板类
+ * @author Jackie
+ */
 public class SignUpPasswordPanel extends JPanel{
 
-    private JLabel passwordLabel;
-    private JPasswordField passwordField;
+    private JLabel label;
+    private PasswordBox passwordBox;
 
-    public SignUpPasswordPanel(){
+    /**
+     * 初始化界面
+     * @param labelText 标签文本
+     * @param passwordBoxTipText 密码框提示文本
+     */
+    public SignUpPasswordPanel(String labelText, String passwordBoxTipText){
+        super();
+        setupUI(labelText, passwordBoxTipText);
+    }
+
+    /**
+     * 初始化界面属性
+     * @param labelText 标签文本
+     * @param passwordBoxTipText 密码框提示文本
+     */
+    private void setupUI(String labelText, String passwordBoxTipText){
         CellConstraints cc = new CellConstraints();
-        this.setLayout(new FormLayout("fill:d:noGrow,fill:10px:noGrow,fill:d:grow", "center:d:grow,center:d:noGrow"));
-        passwordLabel = new JLabel();
-        passwordLabel.setHorizontalAlignment(4);
-        passwordLabel.setHorizontalTextPosition(4);
-        passwordLabel.setPreferredSize(new Dimension(60, 30));
-        passwordLabel.setFont(new Font("微软雅黑", Font.PLAIN, 14));
-        passwordLabel.setText("密码");
-        this.add(passwordLabel, cc.xy(1, 2, CellConstraints.CENTER, CellConstraints.DEFAULT));
-        passwordField = new JPasswordField();
-        passwordField.setPreferredSize(new Dimension(250, 30));
-        this.add(passwordField, cc.xy(3, 2, CellConstraints.CENTER, CellConstraints.DEFAULT));
+        this.setOpaque(false);
+        this.setLayout(new FormLayout("center:d:noGrow,center:10px:noGrow,center:d:noGrow", "center:d:noGrow"));
+
+        label = new JLabel(labelText);
+        label.setHorizontalAlignment(SwingConstants.RIGHT);
+        label.setHorizontalTextPosition(SwingConstants.RIGHT);
+        label.setPreferredSize(new Dimension(60, 30));
+        label.setFont(new Font("微软雅黑", Font.PLAIN, 14));
+        this.add(label, cc.xy(1, 1, CellConstraints.CENTER, CellConstraints.DEFAULT));
+
+        passwordBox = new PasswordBox(passwordBoxTipText);
+        this.add(passwordBox, cc.xy(3, 1, CellConstraints.CENTER, CellConstraints.DEFAULT));
     }
 
 }

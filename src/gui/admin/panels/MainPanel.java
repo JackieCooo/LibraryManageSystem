@@ -10,16 +10,16 @@ import java.awt.*;
  * 管理端主窗口类
  * @author Jackie
  */
-public class MainWindow extends JPanel implements ParentAvailable<AdminFrame> {
+public class MainPanel extends JPanel implements ParentAvailable<AdminFrame> {
 
-    private AdminFrame parentPanel;
-    private FrontPage frontPage;
-    private BookManagePage bookManagePage;
+    private AdminFrame parent;
+    private FrontPanel frontPanel;
+    private BookManagePanel bookManagePanel;
 
     /**
      * 初始化界面
      */
-    public MainWindow(){
+    public MainPanel(){
         super();
         setupUI();
     }
@@ -30,21 +30,23 @@ public class MainWindow extends JPanel implements ParentAvailable<AdminFrame> {
     private void setupUI(){
         this.setLayout(new CardLayout());
         this.setPreferredSize(new Dimension(700, 600));
-        frontPage = new FrontPage();
-        this.add(frontPage, "frontPage");  // 0
-        bookManagePage = new BookManagePage();
-        this.add(bookManagePage, "bookManagePage");  // 1
+
+        frontPanel = new FrontPanel();
+        this.add(frontPanel, "frontPage");  // 0
+
+        bookManagePanel = new BookManagePanel();
+        this.add(bookManagePanel, "bookManagePage");  // 1
 
     }
 
     @Override
     public void setParentPanel(AdminFrame obj) {
-        this.parentPanel = obj;
+        parent = obj;
     }
 
     @Override
     public AdminFrame getParentPanel(){
-        return this.parentPanel;
+        return parent;
     }
 
 }

@@ -24,10 +24,10 @@ public class BtnSetPanel extends JPanel{
         this.setOpaque(false);
         CellConstraints cc = new CellConstraints();
         this.setLayout(new FormLayout("center:d:noGrow,center:50px:noGrow,center:d:noGrow", "center:d:grow"));
-        leftBtn = new OpBtn(leftBtnName);
+        leftBtn = new OpBtn(leftBtnName, 100, 40);
         this.add(leftBtn, cc.xy(1, 1, CellConstraints.DEFAULT, CellConstraints.DEFAULT));
 
-        rightBtn = new OpBtn(rightBtnName);
+        rightBtn = new OpBtn(rightBtnName, 100, 40);
         this.add(rightBtn, cc.xy(3, 1, CellConstraints.DEFAULT, CellConstraints.DEFAULT));
     }
 

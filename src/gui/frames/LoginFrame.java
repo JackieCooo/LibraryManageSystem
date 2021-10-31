@@ -21,10 +21,11 @@ public class LoginFrame extends JFrame {
     }
 
     private void setupUI(){
-        this.setBounds(100, 100, 400, 300);
+        this.setPreferredSize(new Dimension(400, 300));
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setResizable(false);
         this.setUndecorated(true);
+        this.setLocationRelativeTo(null);
 
         topPanel = new TopPanel();
         topPanel.setParentPanel(this);

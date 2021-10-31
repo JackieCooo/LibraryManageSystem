@@ -13,6 +13,10 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 
+/**
+ * 顶部面板类
+ * @author Jackie
+ */
 public class TopPanel extends JPanel implements ParentAvailable<LoginFrame> {
 
     private Point originPoint = new Point();
@@ -20,6 +24,9 @@ public class TopPanel extends JPanel implements ParentAvailable<LoginFrame> {
     private CloseBtn closeBtn;
     private MinimizeBtn minimizeBtn;
 
+    /**
+     * 初始化界面
+     */
     public TopPanel(){
         super();
         setupUI();
@@ -44,6 +51,9 @@ public class TopPanel extends JPanel implements ParentAvailable<LoginFrame> {
         return parent;
     }
 
+    /**
+     * 初始化监听器
+     */
     private void setupListener(){
         this.addMouseListener(new MouseAdapter() {
 
@@ -73,6 +83,9 @@ public class TopPanel extends JPanel implements ParentAvailable<LoginFrame> {
         });
     }
 
+    /**
+     * 初始化界面属性
+     */
     private void setupUI(){
         this.setPreferredSize(new Dimension(400, 30));
         this.setLayout(new FormLayout("center:d:grow,center:d:noGrow,center:10px:noGrow,center:d:noGrow,center:5px:noGrow", "center:d:grow"));

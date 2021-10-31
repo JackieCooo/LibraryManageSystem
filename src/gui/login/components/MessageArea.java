@@ -1,4 +1,4 @@
-package gui.login.panels;
+package gui.login.components;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,7 +12,7 @@ public class MessageArea extends JLabel {
     /**
      * 初始化类
      */
-    MessageArea(){
+    public MessageArea(){
         super();
         setupUI();
     }

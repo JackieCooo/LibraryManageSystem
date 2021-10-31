@@ -7,17 +7,32 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * 操作按钮类
+ * @author Jackie
+ */
 public class OpBtn extends JButton {
 
-    private final int WIDTH = 100;
-    private final int HEIGHT = 40;
+    private int WIDTH = 0;
+    private int HEIGHT = 0;
 
-    public OpBtn(String text){
+    /**
+     * 初始化界面
+     * @param text 显示文本
+     * @param width 宽度
+     * @param height 高度
+     */
+    public OpBtn(String text, int width, int height){
         super(text);
+        WIDTH = width;
+        HEIGHT = height;
         setupUI();
         setupListener();
     }
 
+    /**
+     * 初始化监听器
+     */
     private void setupListener(){
         this.addMouseListener(new MouseAdapter() {
 
@@ -41,6 +56,9 @@ public class OpBtn extends JButton {
         });
     }
 
+    /**
+     * 初始化界面属性
+     */
     private void setupUI(){
         this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
         this.setFont(new Font("微软雅黑", Font.PLAIN, 14));

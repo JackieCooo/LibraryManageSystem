@@ -3,6 +3,7 @@ package gui.login.panels;
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 import gui.login.components.BottomBtn;
+import gui.login.components.MessageArea;
 import gui.login.components.TextBox;
 
 import javax.swing.*;
@@ -17,7 +18,7 @@ import java.awt.event.MouseEvent;
 public class UserLoginPanel extends JPanel{
 
     private TextBox studentNumField;
-    private PasswordPanel passwordField;
+    private LoginPasswordPanel passwordField;
     private BtnSetPanel btnSet;
     private BottomBtn switch2AdminBtn;
     private MessageArea loginMessage;
@@ -27,14 +28,14 @@ public class UserLoginPanel extends JPanel{
      */
     public UserLoginPanel(){
         this.setLayout(new FormLayout("center:d:grow", "center:10px:noGrow,center:d:noGrow,center:10px:noGrow,center:d:noGrow,center:10px:noGrow,center:d:noGrow,top:d:grow,bottom:d:noGrow,center:10px:noGrow"));
-        this.setPreferredSize(new Dimension(400, 300));
+        this.setPreferredSize(new Dimension(400, 270));
         this.setOpaque(false);
         CellConstraints cc = new CellConstraints();
 
-        studentNumField = new TextBox("请输入账号");
+        studentNumField = new TextBox("账号");
         this.add(studentNumField, cc.xy(1, 2, CellConstraints.CENTER, CellConstraints.DEFAULT));
 
-        passwordField = new PasswordPanel();
+        passwordField = new LoginPasswordPanel();
         this.add(passwordField, cc.xy(1, 4, CellConstraints.CENTER, CellConstraints.DEFAULT));
 
         loginMessage = new MessageArea();
@@ -48,7 +49,7 @@ public class UserLoginPanel extends JPanel{
         });
         this.add(btnSet, cc.xy(1, 7, CellConstraints.CENTER, CellConstraints.TOP));
 
-        switch2AdminBtn = new BottomBtn("管理员登录");
+        switch2AdminBtn = new BottomBtn("管理员登录", 180, 45);
         switch2AdminBtn.addMouseListener(new MouseAdapter() {
             /**
              * 转到管理员登录界面

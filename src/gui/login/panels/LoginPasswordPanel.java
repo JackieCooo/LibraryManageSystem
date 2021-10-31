@@ -32,6 +32,11 @@ class PasswordBox extends JPasswordField {
         setupUI();
     }
 
+    /**
+     * 是否有提示文本
+     * @return true 有提示文本
+     *         false 无提示文本
+     */
     public boolean hasTipText(){
         return tipText != null;
     }
@@ -50,6 +55,10 @@ class PasswordBox extends JPasswordField {
             this.setEchoChar('\0');
             this.addFocusListener(new FocusListener() {
 
+                /**
+                 * 聚焦时清除提示文本
+                 * @param e 聚焦事件对象
+                 */
                 @Override
                 public void focusGained(FocusEvent e) {
                     String tmp = new String(getPassword());
@@ -60,6 +69,10 @@ class PasswordBox extends JPasswordField {
                     }
                 }
 
+                /**
+                 * 失焦时设置提示文本
+                 * @param e 聚焦事件对象
+                 */
                 @Override
                 public void focusLost(FocusEvent e) {
                     String tmp = new String(getPassword());
@@ -114,21 +127,37 @@ class PasswordBtn extends JButton {
     private void setupListener() {
         this.addMouseListener(new MouseAdapter() {
 
+            /**
+             * 按下鼠标显示原文本
+             * @param e 鼠标事件对象
+             */
             @Override
             public void mousePressed(MouseEvent e) {
                 invoker.setEchoChar('\0');
             }
 
+            /**
+             * 松开鼠标恢复密码隐藏
+             * @param e 鼠标事件对象
+             */
             @Override
             public void mouseReleased(MouseEvent e) {
                 invoker.setEchoChar('·');
             }
 
+            /**
+             * 鼠标进入改变指针样式
+             * @param e 鼠标事件对象
+             */
             @Override
             public void mouseEntered(MouseEvent e) {
                 setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             }
 
+            /**
+             * 鼠标退出改变鼠标样式
+             * @param e 鼠标事件对象
+             */
             @Override
             public void mouseExited(MouseEvent e) {
                 setCursor(Cursor.getDefaultCursor());
@@ -188,7 +217,7 @@ class PasswordBtn extends JButton {
  * 密码输入面板类
  * @author Jackie
  */
-public class PasswordPanel extends JPanel {
+public class LoginPasswordPanel extends JPanel {
 
 
     private PasswordBox passwordBox;
@@ -197,7 +226,7 @@ public class PasswordPanel extends JPanel {
     /**
      * 初始化界面
      */
-    public PasswordPanel() {
+    public LoginPasswordPanel() {
         super();
         setupUI();
     }
