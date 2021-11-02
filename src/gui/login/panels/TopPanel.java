@@ -5,7 +5,7 @@ import com.jgoodies.forms.layout.FormLayout;
 import gui.frames.LoginFrame;
 import gui.shared.ParentAvailable;
 import gui.shared.components.CloseBtn;
-import gui.shared.components.MinimizeBtn;
+import gui.user.components.MinimizeBtn;
 
 import javax.swing.*;
 import java.awt.*;

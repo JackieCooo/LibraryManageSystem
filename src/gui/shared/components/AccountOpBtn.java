@@ -1,8 +1,6 @@
 package gui.shared.components;
 
 import gui.shared.LayoutColors;
-import gui.shared.ParentAvailable;
-import gui.user.panels.AccountPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,7 +11,7 @@ import java.awt.event.MouseEvent;
  * 用户账号操作按钮类
  * @author Jackie
  */
-public class AccountOpBtn extends JButton implements ParentAvailable<AccountPanel> {
+public class AccountOpBtn extends JButton {
 
     /**
      * 用户消息按钮弹出窗口
@@ -80,7 +78,6 @@ public class AccountOpBtn extends JButton implements ParentAvailable<AccountPane
 
 
     private final AccountOpPopupMenu popupMenu = new AccountOpPopupMenu();
-    private AccountPanel parent;
 
     /**
      * 初始化界面
@@ -90,24 +87,6 @@ public class AccountOpBtn extends JButton implements ParentAvailable<AccountPane
         setupUI();
         setupText(userName);
         setupListener();
-    }
-
-    /**
-     * 设置父级
-     * @param obj 父级对象
-     */
-    @Override
-    public void setParentPanel(AccountPanel obj) {
-        parent = obj;
-    }
-
-    /**
-     * 获取父级
-     * @return 返回父级对象
-     */
-    @Override
-    public AccountPanel getParentPanel() {
-        return parent;
     }
 
     /**
@@ -122,7 +101,7 @@ public class AccountOpBtn extends JButton implements ParentAvailable<AccountPane
              */
             @Override
             public void mouseClicked(MouseEvent e) {
-                Point fp = getParentPanel().getParentPanel().getLocationOnScreen();  // 窗口绝对位置
+                Point fp = getParent().getParent().getLocationOnScreen();  // 窗口绝对位置
                 popupMenu.setInvoker(e.getComponent());
                 popupMenu.setLocation(fp.x + 560, fp.y + 75);
                 popupMenu.setVisible(true);

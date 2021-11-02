@@ -1,9 +1,9 @@
 package gui.user.components;
 
-import gui.shared.GlobalConstants;
+import gui.shared.Global;
 import gui.shared.LayoutColors;
 import gui.shared.ParentAvailable;
-import gui.shared.panels.TopPanel;
+import gui.user.panels.TopPanel;
 import gui.user.panels.BottomPanel;
 
 import javax.imageio.ImageIO;
@@ -92,7 +92,7 @@ public class BottomBtn extends JButton implements ParentAvailable<BottomPanel> {
                 p.getComponent(0).setVisible(false);
                 p.getComponent(jumpIndex).setVisible(true);
                 // 更新按钮状态
-                GlobalConstants.pageChange(jumpIndex);
+                Global.pageChange(jumpIndex);
                 TopPanel b = getParentPanel().getParentPanel().getParentPanel().getParentPanel().getTopPanel();
                 b.getPrePageBtn().stateUpdate();
                 b.getNextPageBtn().stateUpdate();

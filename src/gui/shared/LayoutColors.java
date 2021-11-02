@@ -2,6 +2,10 @@ package gui.shared;
 
 import java.awt.*;
 
+/**
+ * 界面颜色类
+ * @author Jackie
+ */
 public final class LayoutColors {
 
     public final static Color DARKEST_BLUE = new Color(65, 99, 188);

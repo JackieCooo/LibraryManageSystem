@@ -33,9 +33,9 @@ public class LeftSidePanel extends JPanel implements ParentAvailable<AdminFrame>
      */
     private void setupUI(){
         this.setPreferredSize(new Dimension(200, 600));
-        this.setLayout(new FormLayout("center:d:grow", "center:d:noGrow,center:30px:noGrow,center:d:noGrow"));
+        this.setLayout(new FormLayout("center:d:grow", "center:30px:noGrow,center:d:noGrow,center:30px:noGrow,center:d:noGrow"));
         this.setOpaque(true);
-        this.setBackground(LayoutColors.DARK_BLUE);
+        this.setBackground(LayoutColors.BLUE);
         CellConstraints cc = new CellConstraints();
 
         frontPageBtn = new LeftSideBtn("首页");
@@ -51,7 +51,7 @@ public class LeftSidePanel extends JPanel implements ParentAvailable<AdminFrame>
             }
             p.getComponent(0).setVisible(true);
         });
-        this.add(frontPageBtn, cc.xy(1, 1, CellConstraints.CENTER, CellConstraints.DEFAULT));
+        this.add(frontPageBtn, cc.xy(1, 2, CellConstraints.CENTER, CellConstraints.DEFAULT));
 
         bookManagePageBtn = new LeftSideBtn("图书管理");
         bookManagePageBtn.setParentPanel(this);
@@ -66,7 +66,7 @@ public class LeftSidePanel extends JPanel implements ParentAvailable<AdminFrame>
             }
             p.getComponent(1).setVisible(true);
         });
-        this.add(bookManagePageBtn, cc.xy(1, 3, CellConstraints.CENTER, CellConstraints.DEFAULT));
+        this.add(bookManagePageBtn, cc.xy(1, 4, CellConstraints.CENTER, CellConstraints.DEFAULT));
     }
 
 

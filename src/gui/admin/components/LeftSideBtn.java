@@ -36,10 +36,10 @@ public class LeftSideBtn extends JButton implements ParentAvailable<LeftSidePane
         btnDefaults.put("Button.backgroundPainter", (Painter<JComponent>)(g2d, c, w, h) -> {
             g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             if (isSet){
-                g2d.setColor(LayoutColors.DARKEST_BLUE);
+                g2d.setColor(LayoutColors.BLUE);
             }
             else {
-                g2d.setColor(LayoutColors.DARK_BLUE);
+                g2d.setColor(LayoutColors.LIGHT_BLUE);
             }
             g2d.fillRoundRect(0, 0, w, h, 10, 10);
         });

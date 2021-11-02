@@ -21,7 +21,7 @@ public class LoginFrame extends JFrame {
     }
 
     private void setupUI(){
-        this.setPreferredSize(new Dimension(400, 300));
+        this.setBounds(0, 0, 400, 300);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setResizable(false);
         this.setUndecorated(true);
