@@ -377,7 +377,7 @@ public class BookRepoOpTable extends JTable {
             }
         }
 
-        // 表格所有行数据
+        // 表格所有行数据（测试内容）
         Object[][] rowData = {
                 {1, "张三", 80, 80, 80, 0},
                 {2, "John", 70, 80, 90, 0},

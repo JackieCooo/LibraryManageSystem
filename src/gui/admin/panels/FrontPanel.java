@@ -23,7 +23,7 @@ public class FrontPanel extends JPanel {
      * 初始化界面属性
      */
     private void setupUI(){
-        this.setPreferredSize(new Dimension(700, 600));
+        this.setPreferredSize(new Dimension(750, 600));
         this.setLayout(new FormLayout("", ""));
     }
 

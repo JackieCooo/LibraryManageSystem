@@ -30,8 +30,7 @@ public class SearchPanel extends JPanel {
      */
     private void setupUI(){
         this.setPreferredSize(new Dimension(900, 50));
-        this.setOpaque(true);
-        this.setBackground(Color.WHITE);
+        this.setOpaque(false);
         this.setLayout(new FormLayout("center:d:Grow,center:d:Grow", "center:d:Grow"));
         CellConstraints cc = new CellConstraints();
 

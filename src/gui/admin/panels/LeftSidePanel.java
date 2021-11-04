@@ -32,7 +32,7 @@ public class LeftSidePanel extends JPanel implements ParentAvailable<AdminFrame>
      * 初始化界面属性
      */
     private void setupUI(){
-        this.setPreferredSize(new Dimension(200, 600));
+        this.setPreferredSize(new Dimension(150, 600));
         this.setLayout(new FormLayout("center:d:grow", "center:30px:noGrow,center:d:noGrow,center:30px:noGrow,center:d:noGrow"));
         this.setOpaque(true);
         this.setBackground(LayoutColors.BLUE);
@@ -40,7 +40,11 @@ public class LeftSidePanel extends JPanel implements ParentAvailable<AdminFrame>
 
         frontPageBtn = new LeftSideBtn("首页");
         frontPageBtn.setParentPanel(this);
+        frontPageBtn.setState(true);
         frontPageBtn.addActionListener(e -> {
+            frontPageBtn.setState(true);
+            bookManagePageBtn.setState(false);
+            repaint();
             JPanel p = frontPageBtn.getParentPanel().getParentPanel().getMainWindow();
             int n = p.getComponentCount();
             for (int i = 0; i < n; i++) {
@@ -56,6 +60,9 @@ public class LeftSidePanel extends JPanel implements ParentAvailable<AdminFrame>
         bookManagePageBtn = new LeftSideBtn("图书管理");
         bookManagePageBtn.setParentPanel(this);
         bookManagePageBtn.addActionListener(e -> {
+            bookManagePageBtn.setState(true);
+            frontPageBtn.setState(false);
+            repaint();
             JPanel p = bookManagePageBtn.getParentPanel().getParentPanel().getMainWindow();
             int n = p.getComponentCount();
             for (int i = 0; i < n; i++) {
@@ -72,7 +79,6 @@ public class LeftSidePanel extends JPanel implements ParentAvailable<AdminFrame>
 
     /**
      * 设置父级
-     *
      * @param obj 父级对象
      */
     @Override
@@ -82,7 +88,6 @@ public class LeftSidePanel extends JPanel implements ParentAvailable<AdminFrame>
 
     /**
      * 获取父级
-     *
      * @return 返回父级对象
      */
     @Override
