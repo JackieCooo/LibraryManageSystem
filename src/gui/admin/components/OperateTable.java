@@ -189,14 +189,15 @@ public class OperateTable extends JTable {
              */
             private void setupUI(){
                 this.setOpaque(true);
-                this.setPreferredSize(new Dimension(150, 30));
-                this.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 5));
+                this.setPreferredSize(new Dimension(colWidth[colWidth.length - 1], colHeight));
+                this.setLayout(new FormLayout("right:d:grow,center:20px:noGrow,left:d:grow", "center:d:grow"));
+                CellConstraints cc = new CellConstraints();
 
                 alterBtn = new TableBtn("icons/Alter_30px.png");
-                this.add(alterBtn);
+                this.add(alterBtn, cc.xy(1, 1));
 
                 deleteBtn = new TableBtn("icons/Delete_30px.png");
-                this.add(deleteBtn);
+                this.add(deleteBtn, cc.xy(3, 1));
             }
 
             /**
@@ -348,11 +349,17 @@ public class OperateTable extends JTable {
         // 定制控制面板的表头
         class OpHeaderRenderer extends JPanel implements TableCellRenderer {
 
+            /**
+             * 初始化界面
+             */
             public OpHeaderRenderer(){
                 super();
                 setupUI();
             }
 
+            /**
+             * 初始化界面属性
+             */
             private void setupUI(){
 
                 // 定制添加按钮
@@ -360,13 +367,18 @@ public class OperateTable extends JTable {
 
                     private BufferedImage btnIcon;
 
+                    /**
+                     * 初始化界面
+                     */
                     public OpBtn(){
                         super();
                         setupIcon();
                         setupUI();
-                        setupListener();
                     }
 
+                    /**
+                     * 初始化图标
+                     */
                     private void setupIcon(){
                         try {
                             btnIcon = ImageIO.read(new File("icons/Add_30px.png"));
@@ -375,30 +387,9 @@ public class OperateTable extends JTable {
                         }
                     }
 
-                    private void setupListener(){
-                        this.addMouseListener(new MouseAdapter() {
-                            /**
-                             * {@inheritDoc}
-                             *
-                             * @param e
-                             */
-                            @Override
-                            public void mouseEntered(MouseEvent e) {
-                                setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-                            }
-
-                            /**
-                             * {@inheritDoc}
-                             *
-                             * @param e
-                             */
-                            @Override
-                            public void mouseExited(MouseEvent e) {
-                                setCursor(Cursor.getDefaultCursor());
-                            }
-                        });
-                    }
-
+                    /**
+                     * 初始化界面属性
+                     */
                     private void setupUI(){
                         this.setPreferredSize(new Dimension(30, 30));
                         this.setText(null);
@@ -416,7 +407,7 @@ public class OperateTable extends JTable {
                 }
 
                 CellConstraints cc = new CellConstraints();
-                this.setLayout(new FormLayout("right:d:grow,center:10px:noGrow", "center:d:grow"));
+                this.setLayout(new FormLayout("right:d:grow,center:20px:noGrow", "center:d:grow"));
                 OpBtn opBtn = new OpBtn();
                 this.add(opBtn, cc.xy(1, 1));
             }
@@ -503,9 +494,16 @@ public class OperateTable extends JTable {
              */
             @Override
             public void mouseMoved(MouseEvent e) {
-                currentPoint = e.getPoint();
+                Point p = e.getPoint();
+                currentPoint = p;
                 currentRow = rowAtPoint(currentPoint);
-//                System.out.println("鼠标在第" + currentRow + "行");
+//                System.out.println("鼠标在" + currentPoint);
+                if ((p.x >= 600 && p.x <= 630) || (p.x >= 650 && p.x <= 680)) {
+                    setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+                }
+                else {
+                    setCursor(Cursor.getDefaultCursor());
+                }
                 repaint();
             }
         });
@@ -543,6 +541,38 @@ public class OperateTable extends JTable {
         }
         this.getTableHeader().setResizingAllowed(false);  // 设置不允许手动改变列宽
         this.getTableHeader().setReorderingAllowed(false);  // 设置不允许拖动重新排序各列
+        this.getTableHeader().addMouseListener(new MouseAdapter() {
+
+            /**
+             * 鼠标点击添加书籍信息
+             * @param e 鼠标事件对象
+             */
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                Point p = e.getPoint();
+                int i = columnAtPoint(p);
+                if (i == colWidth.length - 1 && p.x >= 680 && p.x <= 710 && p.y >= 5 && p.y <= 35){
+                    System.out.println("添加按钮按下");
+                }
+            }
+        });
+/*
+        this.getTableHeader().addMouseMotionListener(new MouseMotionAdapter() {
+            @Override
+            public void mouseMoved(MouseEvent e) {
+                Point p = e.getPoint();
+//                System.out.println("鼠标在" + p);
+                int i = columnAtPoint(p);
+//                System.out.println(i);
+                if (i == colWidth.length - 1 && p.x >= 680 && p.x <= 710 && p.y >= 5 && p.y <= 35){
+                    setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+                }
+                else {
+                    setCursor(Cursor.getDefaultCursor());
+                }
+            }
+        });
+*/
 
         // 设置行高
         this.setRowHeight(colHeight);

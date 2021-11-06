@@ -1,20 +1,21 @@
 package gui.admin.panels;
 
+import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 
 import javax.swing.*;
 import java.awt.*;
 
 /**
- * 首页板块类
+ * 信息卡片面板类
  * @author Jackie
  */
-public class FrontPanel extends JPanel {
+public class InfoCardPanel extends JPanel {
 
     /**
      * 初始化界面
      */
-    public FrontPanel(){
+    public InfoCardPanel(){
         super();
         setupUI();
     }
@@ -23,8 +24,9 @@ public class FrontPanel extends JPanel {
      * 初始化界面属性
      */
     private void setupUI(){
-        this.setPreferredSize(new Dimension(750, 600));
-        this.setLayout(new FormLayout("center:d:grow", "center:d:noGrow,center:d:noGrow"));
+        this.setPreferredSize(new Dimension(400, 200));
+        this.setLayout(new FormLayout("", ""));
+        CellConstraints cc = new CellConstraints();
     }
 
 }
