@@ -30,6 +30,8 @@ public class InfoCardTest {
 
         class InfoCard extends JLabel {
 
+            private final int WIDTH = 200;
+            private final int HEIGHT = 100;
             private BufferedImage cardIcon;
             private int value = 0;
 
@@ -67,7 +69,7 @@ public class InfoCardTest {
              * 初始化界面属性
              */
             private void setupUI(){
-                this.setPreferredSize(new Dimension(300, 150));
+                this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
                 this.setText("测试");
 
                 // 定制标签UI
@@ -83,13 +85,13 @@ public class InfoCardTest {
                         Graphics2D g2d = (Graphics2D)g;
                         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
                         g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-                        g2d.setColor(LayoutColors.BLUE);
-                        g2d.fillRoundRect(0, 0, 300, 150, 20, 20);
-                        g2d.drawImage(cardIcon, 40, 40, null);
+                        g2d.setPaint(new GradientPaint(0.0f, 50.0f, new Color(11, 186, 251), 200.0f, 50.0f, new Color(66, 133, 236)));
+                        g2d.fillRoundRect(0, 0, WIDTH, HEIGHT, 20, 20);
+                        g2d.drawImage(cardIcon, 20, 35, null);
                         g2d.setColor(Color.WHITE);
-                        g2d.setFont(new Font("黑体", Font.BOLD, 24));
-                        g2d.drawString(getText(), 100, 20);
-                        g2d.drawString(Integer.toString(value), 100, 100);
+                        g2d.setFont(new Font("黑体", Font.BOLD, 20));
+                        g2d.drawString(getText(), 80, 40);
+                        g2d.drawString(Integer.toString(value), 80, 75);
                     }
                 }
                 LabelUI ui = new LabelUI();
@@ -98,7 +100,7 @@ public class InfoCardTest {
 
         }
 
-        InfoCard infoCard = new InfoCard("icons/RepoBtn.png");
+        InfoCard infoCard = new InfoCard("icons/Books_30px.png");
         JPanel panel = new JPanel();
         panel.add(infoCard);
         frame.add(panel);

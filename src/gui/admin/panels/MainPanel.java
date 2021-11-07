@@ -15,6 +15,7 @@ public class MainPanel extends JPanel implements ParentAvailable<AdminFrame> {
     private AdminFrame parent;
     private FrontPanel frontPanel;
     private BookManagePanel bookManagePanel;
+    private SettingPanel settingPanel;
 
     /**
      * 初始化界面
@@ -39,8 +40,12 @@ public class MainPanel extends JPanel implements ParentAvailable<AdminFrame> {
         bookManagePanel = new BookManagePanel();
         this.add(bookManagePanel, "bookManagePage");  // 1
 
-        frontPanel.setVisible(false);
-        bookManagePanel.setVisible(true);
+        settingPanel = new SettingPanel();
+        this.add(settingPanel, "settingPanel");  // 2
+
+        frontPanel.setVisible(true);
+        bookManagePanel.setVisible(false);
+        settingPanel.setVisible(false);
     }
 
     /**
