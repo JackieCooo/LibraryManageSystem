@@ -7,11 +7,14 @@ import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.renderer.category.CategoryItemRendererState;
 import org.jfree.chart.renderer.category.LineAndShapeRenderer;
+import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.geom.Rectangle2D;
 
 public class LineChartTest {
 
@@ -78,9 +81,20 @@ public class LineChartTest {
                 ValueAxis valueAxis = new NumberAxis();
                 valueAxis.setTickLabelFont(new Font("微软雅黑", Font.PLAIN, 14));
 
+/*
                 LineAndShapeRenderer renderer = new LineAndShapeRenderer(true, false);
                 renderer.setSeriesPaint(0, Color.BLUE);
                 renderer.setSeriesStroke(0, new BasicStroke(5, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
+*/
+                class MyRenderer extends LineAndShapeRenderer {
+
+                    public MyRenderer() {
+                        super(true, false);
+                        this.setSeriesPaint(0, Color.BLUE);
+                        this.setSeriesStroke(0, new BasicStroke(5, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
+                    }
+                }
+                MyRenderer renderer = new MyRenderer();
 
                 CategoryPlot plot = new CategoryPlot(dataset, categoryAxis, valueAxis, renderer);
                 plot.setBackgroundPaint(Color.WHITE);

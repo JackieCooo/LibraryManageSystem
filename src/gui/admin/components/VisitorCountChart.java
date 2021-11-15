@@ -1,5 +1,6 @@
 package gui.admin.components;
 
+import gui.shared.LayoutColors;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.CategoryAxis;
@@ -12,6 +13,10 @@ import org.jfree.data.category.DefaultCategoryDataset;
 
 import java.awt.*;
 
+/**
+ * 访问量图表类
+ * @author Jackie
+ */
 public class VisitorCountChart extends ChartPanel {
 
     private static DefaultCategoryDataset dataset;
@@ -22,22 +27,36 @@ public class VisitorCountChart extends ChartPanel {
         setupChart();
     }
 
+    /**
+     * 初始化界面
+     * @param data 图表数据
+     */
     public VisitorCountChart(Object[][] data) {
         super(chart);
         this.setupUI();
         this.setData(data);
     }
 
+    /**
+     * 设置图表数据
+     * @param data 图表数据
+     */
     public void setData(Object[][] data){
         for(Object[] i : data){
             dataset.addValue((Integer)i[0], (String)i[1], (String)i[2]);
         }
     }
 
+    /**
+     * 初始化界面属性
+     */
     private void setupUI() {
         this.setPreferredSize(new Dimension(730, 200));
     }
 
+    /**
+     * 初始化图表数据
+     */
     private static void setupData() {
         dataset = new DefaultCategoryDataset();
 /*
@@ -56,6 +75,9 @@ public class VisitorCountChart extends ChartPanel {
 */
     }
 
+    /**
+     * 初始化图标
+     */
     private static void setupChart() {
         CategoryAxis categoryAxis = new CategoryAxis();
         categoryAxis.setTickLabelFont(new Font("微软雅黑", Font.PLAIN, 14));
@@ -64,8 +86,8 @@ public class VisitorCountChart extends ChartPanel {
         valueAxis.setTickLabelFont(new Font("微软雅黑", Font.PLAIN, 14));
 
         LineAndShapeRenderer renderer = new LineAndShapeRenderer(true, false);
-        renderer.setSeriesPaint(0, Color.BLUE);
-        renderer.setSeriesStroke(0, new BasicStroke(5, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
+        renderer.setSeriesPaint(0, LayoutColors.DARK_BLUE);
+        renderer.setSeriesStroke(0, new BasicStroke(4, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
 
         CategoryPlot plot = new CategoryPlot(dataset, categoryAxis, valueAxis, renderer);
         plot.setBackgroundPaint(Color.WHITE);

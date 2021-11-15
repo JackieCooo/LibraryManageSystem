@@ -20,24 +20,6 @@ import javax.swing.UIDefaults;
 import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 
-class F {
-    public void base(){
-        System.out.println("F");
-    }
-}
-
-class A extends F {
-    public void show(){
-        System.out.println("A");
-    }
-}
-
-class B extends F {
-    public void show(){
-        System.out.println("B");
-    }
-}
-
 public class Test {
     public static void main(String[] args) {
 /*
@@ -62,8 +44,11 @@ public class Test {
             }
         });
 */
-        F f = new F();
-        A a = (A)f;
-        a.show();
+        JFrame frame = new JFrame();
+        frame.setBounds(100, 100, 400, 300);
+        frame.setUndecorated(true);
+        frame.setOpacity(0.5f);
+        frame.setBackground(Color.BLUE);
+        frame.setVisible(true);
     }
 }
