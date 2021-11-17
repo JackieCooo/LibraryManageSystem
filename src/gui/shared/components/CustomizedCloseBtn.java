@@ -6,10 +6,10 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 /**
- * 关闭按钮类
+ * 自定义关闭按钮类
  * @author Jackie
  */
-public class CloseBtn extends JButton {
+public class CustomizedCloseBtn extends JButton {
 
     private final int WIDTH = 20;
     private final int HEIGHT = 20;
@@ -17,7 +17,7 @@ public class CloseBtn extends JButton {
     /**
      * 初始化按钮
      */
-    public CloseBtn() {
+    public CustomizedCloseBtn() {
         super();
         setupUI();
         setupListener();
@@ -26,7 +26,7 @@ public class CloseBtn extends JButton {
     /**
      * 初始化监听器
      */
-    private void setupListener(){
+    protected void setupListener(){
         this.addMouseListener(new MouseAdapter() {
 
             /**

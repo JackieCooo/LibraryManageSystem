@@ -4,7 +4,7 @@ import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 import gui.frames.LoginFrame;
 import gui.shared.ParentAvailable;
-import gui.shared.components.CloseBtn;
+import gui.shared.components.CustomizedCloseBtn;
 import gui.user.components.MinimizeBtn;
 
 import javax.swing.*;
@@ -21,7 +21,7 @@ public class TopPanel extends JPanel implements ParentAvailable<LoginFrame> {
 
     private Point originPoint = new Point();
     private LoginFrame parent;
-    private CloseBtn closeBtn;
+    private CustomizedCloseBtn closeBtn;
     private MinimizeBtn minimizeBtn;
 
     /**
@@ -93,7 +93,7 @@ public class TopPanel extends JPanel implements ParentAvailable<LoginFrame> {
         this.setBackground(Color.WHITE);
         CellConstraints cc = new CellConstraints();
 
-        closeBtn = new CloseBtn();
+        closeBtn = new CustomizedCloseBtn();
         this.add(closeBtn, cc.xy(4, 1, CellConstraints.CENTER, CellConstraints.CENTER));
 
         minimizeBtn = new MinimizeBtn();

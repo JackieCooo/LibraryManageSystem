@@ -29,7 +29,7 @@ public class TopPanel extends JPanel implements ParentAvailable<AdminFrame> {
     private Logo logo;
     private SettingBtn settingBtn;
     private MinimizeBtn minimiseBtn;
-    private CloseBtn closeBtn;
+    private CustomizedCloseBtn closeBtn;
     private AccountPanel accountPanel;
 
     /**
@@ -93,7 +93,7 @@ public class TopPanel extends JPanel implements ParentAvailable<AdminFrame> {
         minimiseBtn = new MinimizeBtn();
         minimiseBtn.setParentPanel(this);
         this.add(minimiseBtn, cc.xy(6, 1, CellConstraints.DEFAULT, CellConstraints.CENTER));
-        closeBtn = new CloseBtn();
+        closeBtn = new CustomizedCloseBtn();
         this.add(closeBtn, cc.xy(8, 1, CellConstraints.DEFAULT, CellConstraints.CENTER));
     }
 

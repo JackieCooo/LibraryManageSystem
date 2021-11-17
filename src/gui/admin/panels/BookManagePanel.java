@@ -1,6 +1,7 @@
 package gui.admin.panels;
 
 import gui.admin.components.OperateTable;
+import gui.frames.AddBookFrame;
 import gui.shared.panels.CustomScrollPane;
 import gui.shared.panels.SearchPanel;
 
@@ -16,6 +17,7 @@ public class BookManagePanel extends JPanel {
     private SearchPanel searchPanel;
     private OperateTable operateTable;
     private CustomScrollPane scrollPane;
+    private AddBookFrame addBookFrame;
 
     /**
      * 初始化界面

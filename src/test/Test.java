@@ -1,5 +1,7 @@
 package test;
 
+import gui.frames.AddBookFrame;
+
 import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -9,16 +11,7 @@ import java.awt.Insets;
 import java.awt.RenderingHints;
 import java.util.Map;
 
-import javax.swing.BorderFactory;
-import javax.swing.JComponent;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.Painter;
-import javax.swing.SwingUtilities;
-import javax.swing.UIDefaults;
-import javax.swing.UIManager;
-import javax.swing.WindowConstants;
+import javax.swing.*;
 
 public class Test {
     public static void main(String[] args) {
@@ -46,9 +39,13 @@ public class Test {
 */
         JFrame frame = new JFrame();
         frame.setBounds(100, 100, 400, 300);
-        frame.setUndecorated(true);
-        frame.setOpacity(0.5f);
-        frame.setBackground(Color.BLUE);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        AddBookFrame win = new AddBookFrame();
+        JButton btn = new JButton();
+        btn.addActionListener(e -> {
+            win.setVisible(true);
+        });
+        frame.add(btn);
         frame.setVisible(true);
     }
 }
