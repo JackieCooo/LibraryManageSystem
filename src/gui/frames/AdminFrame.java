@@ -35,6 +35,8 @@ public class AdminFrame extends JFrame{
         this.setUndecorated(true);
         this.setLocationRelativeTo(null);
 
+
+
         topPanel = new TopPanel();
         topPanel.setParentPanel(this);
         this.add(topPanel, BorderLayout.NORTH);

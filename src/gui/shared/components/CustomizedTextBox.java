@@ -1,4 +1,4 @@
-package gui.login.components;
+package gui.shared.components;
 
 import gui.shared.LayoutColors;
 
@@ -11,19 +11,32 @@ import java.awt.event.FocusListener;
  * 文本输入框类
  * @author Jackie
  */
-public class TextBox extends JTextField {
+public class CustomizedTextBox extends JTextField {
 
-    private final int WIDTH = 250;
-    private final int HEIGHT = 30;
+    private int WIDTH = 250;
+    private int HEIGHT = 30;
     private String tipText = null;
 
     /**
      * 初始化界面
      * @param tipText 提示文本
      */
-    public TextBox(String tipText){
+    public CustomizedTextBox(String tipText){
         super();
         this.tipText = tipText;
+        setupUI();
+    }
+
+    /**
+     * 初始化界面
+     * @param width 宽
+     * @param height 高
+     */
+    public CustomizedTextBox(int width, int height){
+        super();
+        this.tipText = null;
+        this.WIDTH = width;
+        this.HEIGHT = height;
         setupUI();
     }
 

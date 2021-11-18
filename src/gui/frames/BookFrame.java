@@ -1,21 +1,33 @@
 package gui.frames;
 
-import gui.admin.panels.AddBookPanel;
-import gui.admin.panels.DialogTopPanel;
+import gui.admin.panels.BookPanel;
+import gui.admin.panels.BottomPanel;
+import gui.admin.panels.CentralPanel;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class AddBookFrame extends JDialog {
+/**
+ * 书本窗口类
+ * @author Jackie
+ */
+public class BookFrame extends JDialog {
 
-    private DialogTopPanel topPanel;
-    private AddBookPanel addBookPanel;
+    private CentralPanel centralPanel;
 
-    public AddBookFrame(JFrame owner, boolean model){
+    /**
+     * 初始化界面
+     * @param owner 窗口的父级
+     * @param model 窗口模式
+     */
+    public BookFrame(JFrame owner, boolean model){
         super(owner, model);
         setupUI();
     }
 
+    /**
+     * 初始化界面属性
+     */
     private void setupUI(){
         this.setBounds(0, 0, 500, 400);
         this.setLocationRelativeTo(null);
@@ -23,11 +35,9 @@ public class AddBookFrame extends JDialog {
         this.setResizable(false);
         this.setVisible(false);
 
-        topPanel = new DialogTopPanel();
-        this.add(topPanel, BorderLayout.NORTH);
-
-        addBookPanel = new AddBookPanel();
-        this.add(addBookPanel);
+        centralPanel = new CentralPanel();
+        centralPanel.setParentPanel(this);
+        this.add(centralPanel);
     }
 
 }

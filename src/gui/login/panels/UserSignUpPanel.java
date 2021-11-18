@@ -4,7 +4,7 @@ import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 import gui.login.components.BottomBtn;
 import gui.login.components.MessageArea;
-import gui.login.components.OpBtn;
+import gui.shared.components.CustomizedOpBtn;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,7 +17,7 @@ import java.awt.event.MouseEvent;
  */
 public class UserSignUpPanel extends JPanel{
 
-    private OpBtn signUpBtn;
+    private CustomizedOpBtn signUpBtn;
     private JLabel signUpLabel;
     private BottomBtn signUp2Login;
     private MessageArea signUpMessage;
@@ -52,7 +52,7 @@ public class UserSignUpPanel extends JPanel{
         signUpMessage = new MessageArea();
         this.add(signUpMessage, cc.xy(1, 8, CellConstraints.CENTER, CellConstraints.DEFAULT));
 
-        signUpBtn = new OpBtn("注册", 250, 40);
+        signUpBtn = new CustomizedOpBtn("注册", 250, 40);
         this.add(signUpBtn, cc.xy(1, 9, CellConstraints.CENTER, CellConstraints.TOP));
 
         signUp2Login = new BottomBtn("前往登录", 250, 40);

@@ -1,4 +1,4 @@
-package gui.login.components;
+package gui.shared.components;
 
 import gui.shared.LayoutColors;
 
@@ -11,7 +11,7 @@ import java.awt.event.MouseEvent;
  * 操作按钮类
  * @author Jackie
  */
-public class OpBtn extends JButton {
+public class CustomizedOpBtn extends JButton {
 
     private int WIDTH = 0;
     private int HEIGHT = 0;
@@ -22,7 +22,7 @@ public class OpBtn extends JButton {
      * @param width 宽度
      * @param height 高度
      */
-    public OpBtn(String text, int width, int height){
+    public CustomizedOpBtn(String text, int width, int height){
         super(text);
         WIDTH = width;
         HEIGHT = height;

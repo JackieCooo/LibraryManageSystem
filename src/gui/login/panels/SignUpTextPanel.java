@@ -2,7 +2,7 @@ package gui.login.panels;
 
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
-import gui.login.components.TextBox;
+import gui.shared.components.CustomizedTextBox;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,7 +13,7 @@ import java.awt.*;
  */
 public class SignUpTextPanel extends JPanel{
 
-    private TextBox textBox;
+    private CustomizedTextBox textBox;
     private JLabel label;
 
     /**
@@ -43,7 +43,7 @@ public class SignUpTextPanel extends JPanel{
         label.setFont(new Font("微软雅黑", Font.PLAIN, 14));
         this.add(label, cc.xy(1, 1, CellConstraints.CENTER, CellConstraints.DEFAULT));
 
-        textBox = new TextBox(textBoxTipText);
+        textBox = new CustomizedTextBox(textBoxTipText);
         this.add(textBox, cc.xy(3, 1, CellConstraints.CENTER, CellConstraints.DEFAULT));
 
     }

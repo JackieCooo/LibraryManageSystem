@@ -1,7 +1,7 @@
 package gui.admin.panels;
 
 import gui.admin.components.OperateTable;
-import gui.frames.AddBookFrame;
+import gui.shared.ParentAvailable;
 import gui.shared.panels.CustomScrollPane;
 import gui.shared.panels.SearchPanel;
 
@@ -12,12 +12,12 @@ import java.awt.*;
  * 图书管理板块类
  * @author Jackie
  */
-public class BookManagePanel extends JPanel {
+public class BookManagePanel extends JPanel implements ParentAvailable<MainPanel> {
 
     private SearchPanel searchPanel;
     private OperateTable operateTable;
     private CustomScrollPane scrollPane;
-    private AddBookFrame addBookFrame;
+    private MainPanel parent;
 
     /**
      * 初始化界面
@@ -41,8 +41,26 @@ public class BookManagePanel extends JPanel {
 
         scrollPane = new CustomScrollPane(CustomScrollPane.VERTICAL, 730, 520);
         operateTable = new OperateTable();
+        operateTable.setParentPanel(this);
         scrollPane.setViewportView(operateTable);
         this.add(scrollPane);
     }
 
+    /**
+     * 设置父级
+     * @param obj 父级对象
+     */
+    @Override
+    public void setParentPanel(MainPanel obj) {
+        parent = obj;
+    }
+
+    /**
+     * 获取父级
+     * @return 返回父级对象
+     */
+    @Override
+    public MainPanel getParentPanel() {
+        return parent;
+    }
 }

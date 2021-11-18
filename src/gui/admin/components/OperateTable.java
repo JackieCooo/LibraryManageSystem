@@ -2,6 +2,9 @@ package gui.admin.components;
 
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
+import gui.admin.panels.BookManagePanel;
+import gui.frames.BookFrame;
+import gui.shared.ParentAvailable;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -20,7 +23,26 @@ import java.util.Vector;
  * 管理端操作表格类
  * @author Jackie
  */
-public class OperateTable extends JTable {
+public class OperateTable extends JTable implements ParentAvailable<BookManagePanel> {
+
+
+    /**
+     * 设置父级
+     * @param obj 父级对象
+     */
+    @Override
+    public void setParentPanel(BookManagePanel obj) {
+        parent = obj;
+    }
+
+    /**
+     * 获取父级
+     * @return 返回父级对象
+     */
+    @Override
+    public BookManagePanel getParentPanel() {
+        return parent;
+    }
 
     /**
      * 表格控制按钮类
@@ -77,6 +99,7 @@ public class OperateTable extends JTable {
     private final Color focusColor = Color.LIGHT_GRAY;  // 鼠标悬停颜色
     private final int[] colWidth = {50, 100, 150, 100, 150, 180};  // 每列的列宽
     private final int colHeight = 40;  // 每列的列高
+    private BookManagePanel parent;  // 父级
 
     /**
      * 初始化界面
@@ -246,6 +269,7 @@ public class OperateTable extends JTable {
                         void setupListener() {
                             this.getAlterBtn().addActionListener(e -> {
 //                                System.out.println("借阅按钮按下");
+                                new BookFrame(getParentPanel().getParentPanel().getParentPanel(), true).setVisible(true);
                                 stopCellEditing();
                             });
                             this.getDeleteBtn().addActionListener(e -> {
@@ -550,21 +574,19 @@ public class OperateTable extends JTable {
             @Override
             public void mouseClicked(MouseEvent e) {
                 Point p = e.getPoint();
-                int i = columnAtPoint(p);
-                if (i == colWidth.length - 1 && p.x >= 680 && p.x <= 710 && p.y >= 5 && p.y <= 35){
-                    System.out.println("添加按钮按下");
+                if (p.x >= 680 && p.x <= 710 && p.y >= 5 && p.y <= 35){
+//                    System.out.println("添加按钮按下");
+                    new BookFrame(getParentPanel().getParentPanel().getParentPanel(), true).setVisible(true);
                 }
             }
         });
-/*
+
         this.getTableHeader().addMouseMotionListener(new MouseMotionAdapter() {
             @Override
             public void mouseMoved(MouseEvent e) {
                 Point p = e.getPoint();
 //                System.out.println("鼠标在" + p);
-                int i = columnAtPoint(p);
-//                System.out.println(i);
-                if (i == colWidth.length - 1 && p.x >= 680 && p.x <= 710 && p.y >= 5 && p.y <= 35){
+                if (p.x >= 680 && p.x <= 710 && p.y >= 5 && p.y <= 35){
                     setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
                 }
                 else {
@@ -572,7 +594,6 @@ public class OperateTable extends JTable {
                 }
             }
         });
-*/
 
         // 设置行高
         this.setRowHeight(colHeight);

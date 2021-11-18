@@ -4,7 +4,7 @@ import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 import gui.login.components.BottomBtn;
 import gui.login.components.MessageArea;
-import gui.login.components.TextBox;
+import gui.shared.components.CustomizedTextBox;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,7 +17,7 @@ import java.awt.event.MouseEvent;
  */
 public class UserLoginPanel extends JPanel{
 
-    private TextBox studentNumField;
+    private CustomizedTextBox studentNumField;
     private LoginPasswordPanel passwordField;
     private BtnSetPanel btnSet;
     private BottomBtn switch2AdminBtn;
@@ -32,7 +32,7 @@ public class UserLoginPanel extends JPanel{
         this.setOpaque(false);
         CellConstraints cc = new CellConstraints();
 
-        studentNumField = new TextBox("账号");
+        studentNumField = new CustomizedTextBox("账号");
         this.add(studentNumField, cc.xy(1, 2, CellConstraints.CENTER, CellConstraints.DEFAULT));
 
         passwordField = new LoginPasswordPanel();

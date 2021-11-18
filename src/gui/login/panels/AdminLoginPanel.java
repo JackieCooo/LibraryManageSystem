@@ -4,10 +4,9 @@ import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 import gui.login.components.MessageArea;
 import gui.login.components.PasswordBox;
-import gui.login.components.TextBox;
+import gui.shared.components.CustomizedTextBox;
 
 import javax.swing.*;
-import javax.swing.border.TitledBorder;
 import java.awt.*;
 
 /**
@@ -17,7 +16,7 @@ import java.awt.*;
 public class AdminLoginPanel extends JPanel{
     
     private JLabel adminLoginLabel;
-    private TextBox adminNumField;
+    private CustomizedTextBox adminNumField;
     private PasswordBox adminPasswordField;
     private BtnSetPanel adminSignInBtnSet;
     private MessageArea adminLoginMessage;
@@ -43,7 +42,7 @@ public class AdminLoginPanel extends JPanel{
         adminLoginLabel.setFont(new Font("黑体", Font.BOLD, 24));
         this.add(adminLoginLabel, cc.xy(1, 1, CellConstraints.CENTER, CellConstraints.DEFAULT));
 
-        adminNumField = new TextBox("管理员用户名");
+        adminNumField = new CustomizedTextBox("管理员用户名");
         this.add(adminNumField, cc.xy(1, 3, CellConstraints.CENTER, CellConstraints.DEFAULT));
 
         adminPasswordField = new PasswordBox("密码");
