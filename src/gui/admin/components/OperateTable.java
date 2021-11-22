@@ -274,6 +274,7 @@ public class OperateTable extends JTable implements ParentAvailable<BookManagePa
                             });
                             this.getDeleteBtn().addActionListener(e -> {
 //                                System.out.println("收藏按钮按下");
+                                int res = JOptionPane.showConfirmDialog(getParentPanel(), "确认要删除吗？", "确认", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                                 stopCellEditing();
                             });
                         }

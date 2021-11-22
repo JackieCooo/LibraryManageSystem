@@ -7,6 +7,7 @@ import javax.swing.*;
 public class Test {
     public static void main(String[] args) {
 
+/*
         for (UIManager.LookAndFeelInfo laf : UIManager.getInstalledLookAndFeels()) {
             if ("Nimbus".equals(laf.getName())) {
                 try {
@@ -16,6 +17,7 @@ public class Test {
                 }
             }
         }
+*/
 
 /*
         for (Map.Entry<Object, Object> entry : UIManager.getLookAndFeelDefaults().entrySet()) {
