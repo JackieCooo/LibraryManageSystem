@@ -1,5 +1,7 @@
 package test;
 
+import database.BookInfoPackage;
+
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.sql.*;
@@ -69,27 +71,25 @@ public class DatabaseTest {
 
         class JdbcQuery {
 
-            final class LoginRes {
-                public static final int ERROR = 0;
-                public static final int OK = 1;
-                public static final int USER_NOT_EXIST = 2;
-                public static final int PASSWORD_FAILED = 3;
+            enum LoginRes {
+                ERROR,
+                OK,
+                USER_NOT_EXIST,
+                PASSWORD_FAILED
             }
 
-            public static int getAdmin(String name, String password){
-                String sql1 = "select * from library_system.users where name = ?";
-                String sql2 = "select * from library_system.users where name = ? and password = ?";
-                int res;
+            public static LoginRes getAdmin(String name, String password){
+                LoginRes res;
                 Connection conn = null;
                 PreparedStatement st = null;
                 ResultSet rs = null;
                 try{
                     conn = JdbcUtils.getConnection();
-                    st = conn.prepareStatement(sql1);
+                    st = conn.prepareStatement("select * from library_system.users where name = ?");
                     st.setString(1, name);
                     rs = st.executeQuery();
                     if(rs.next()){
-                        st = conn.prepareStatement(sql2);
+                        st = conn.prepareStatement("select * from library_system.users where name = ? and password = ?");
                         st.setString(1, name);
                         st.setString(2, password);
                         rs = st.executeQuery();
@@ -117,20 +117,18 @@ public class DatabaseTest {
                 return res;
             }
 
-            public static int getStudent(int id, String password){
-                String sql1 = "select * from library_system.student_info where id = ?";
-                String sql2 = "select * from library_system.student_info where id = ? and password = ?";
-                int res;
+            public static LoginRes getStudent(int id, String password){
+                LoginRes res;
                 Connection conn = null;
                 PreparedStatement st = null;
                 ResultSet rs = null;
                 try{
                     conn = JdbcUtils.getConnection();
-                    st = conn.prepareStatement(sql1);
+                    st = conn.prepareStatement("select * from library_system.student_info where id = ?");
                     st.setInt(1, id);
                     rs = st.executeQuery();
                     if(rs.next()){
-                        st = conn.prepareStatement(sql2);
+                        st = conn.prepareStatement("select * from library_system.student_info where id = ? and password = ?");
                         st.setInt(1, id);
                         st.setString(2, password);
                         rs = st.executeQuery();
@@ -160,7 +158,84 @@ public class DatabaseTest {
 
         }
 
+        class JdbcAlter {
+
+            enum AlterRes {
+                ERROR,
+                OK,
+                BOOK_NOT_EXIST
+            }
+
+            public static AlterRes updateBookInfo(String id, BookInfoPackage pack){
+                AlterRes res;
+                Connection conn = null;
+                PreparedStatement st = null;
+                ResultSet rs = null;
+
+                try{
+                    conn = JdbcUtils.getConnection();
+                    st = conn.prepareStatement("select * from library_system.books where id = ?");
+                    st.setString(1, id);
+                    rs = st.executeQuery();
+                    if (rs.next()) {  // 找到这本书
+                        String oldId = rs.getString("id");
+                        if (pack.getId() != null) {
+                            st = conn.prepareStatement("update library_system.books set id = ? where id = ?");
+                            st.setString(1, pack.getId());
+                            st.setString(2, oldId);
+                            st.executeQuery();
+                        }
+                        if (pack.getAuthor() != null) {
+                            st = conn.prepareStatement("update library_system.books set author = ? where id = ?");
+                            st.setString(1, pack.getAuthor());
+                            st.setString(2, oldId);
+                            st.executeQuery();
+                        }
+                        if (pack.getName() != null) {
+                            st = conn.prepareStatement("update library_system.books set name = ? where id = ?");
+                            st.setString(1, pack.getName());
+                            st.setString(2, oldId);
+                            st.executeQuery();
+                        }
+                        if (pack.getPublisher() != null) {
+                            st = conn.prepareStatement("update library_system.books set publisher = ? where id = ?");
+                            st.setString(1, pack.getPublisher());
+                            st.setString(2, oldId);
+                            st.executeQuery();
+                        }
+                        if (pack.getFront() != null) {
+                            st = conn.prepareStatement("update library_system.books set front = ? where id = ?");
+                            st.setBinaryStream(1, pack.getFront());
+                            st.setString(2, oldId);
+                            st.executeQuery();
+                        }
+                        res = AlterRes.OK;
+                    }
+                    else {
+                        res = AlterRes.BOOK_NOT_EXIST;
+                    }
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                    res = AlterRes.ERROR;
+                }
+                finally{
+                    JdbcUtils.release(conn, st, rs);
+                }
+                return res;
+            }
+
+            public static void addBookInfo(){
+
+            }
+
+            public static void deleteBookInfo(){
+
+            }
+
+        }
+
 //        JdbcQuery.getAdmin("admin", "12345678");
-        JdbcQuery.getStudent(1001, "12345678");
+//        JdbcQuery.getStudent(1001, "12345678");
     }
 }
